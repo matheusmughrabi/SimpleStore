@@ -26,12 +26,6 @@ namespace SimpleStore.ConsoleUI
     {
         static void Main(string[] args)
         {
-            ICategoryService categoryService = ServicesSimpleFactory.CreateCategoryService();
-            List<CategoryModel> categories = categoryService.GetCategories();
-
-            IProductsService productsService = ServicesSimpleFactory.CreateProductsService();
-            List<ProductModel> productsInCategory = productsService.GetProductsByCategory(2);
-
             // TODO - Dependency Injection Container
             IAuthenticationService authenticationService = ServicesSimpleFactory.CreateAuthenticationService();
             IAccountsService accountsService = ServicesSimpleFactory.CreateAccountsService();
