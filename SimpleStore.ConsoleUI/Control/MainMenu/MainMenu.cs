@@ -4,6 +4,7 @@ using SimpleStore.ConsoleUI.Factories;
 using SimpleStore.ConsoleUI.Factories.MenusFactories;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
+using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
 
@@ -16,10 +17,12 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
         private AccountMenu _accountMenu;
         private UserModel _currentUser;
         private AccountModel _account;
+        private IUserLogger _userLogger;
 
-        public MainMenu(RootMenuFactory rootMenuFactory, UserModel currentUser)
+        public MainMenu(RootMenuFactory rootMenuFactory, IUserLogger userLogger)
         {
-            _currentUser = currentUser;          
+            _userLogger = userLogger;
+            _currentUser = _userLogger.CurrentUser;
             _rootMenuFactory = rootMenuFactory;
             GetAccount();
         }

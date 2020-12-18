@@ -32,7 +32,7 @@ namespace SimpleStore.ConsoleUI
             builder.RegisterType<RegisterMenuFactory>().AsSelf();
             builder.RegisterType<MainMenuFactory>().AsSelf();
 
-            builder.RegisterType<UserLogger>().As<IUserLogger>();
+            builder.RegisterType<UserLogger>().As<IUserLogger>().SingleInstance();
             builder.RegisterType<UserRegistrator>().As<IUserRegistrator>();
 
             builder.RegisterType<UserModel>().AsSelf();
