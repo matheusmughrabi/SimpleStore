@@ -33,7 +33,7 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
             switch (chosenStoreType)
             {
                 case "1":
-                    _beardStoreCatalogMenu = new BeardStoreCatalogMenu();
+                    _beardStoreCatalogMenu = new BeardStoreCatalogMenu(_account);
                     break;
                 case "2":
                     _accountMenu = new AccountMenu(_account);

@@ -2,6 +2,7 @@
 using SimpleStore.Domain.Products.Categories;
 using SimpleStore.Domain.Products.ProductsModel;
 using SimpleStore.Domain.Services.ProductsServices;
+using SimpleStore.Domain.UsersAccounts.AccountsModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,12 +11,14 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
 {
     public class BeardStoreCatalogMenu
     {
+        private AccountModel _account;
         private BeardStoreProductsMenu _beardStoreProductsMenu;
         private List<CategoryModel> _categories;
         private ICategoryService _categoryService;
 
-        public BeardStoreCatalogMenu()
+        public BeardStoreCatalogMenu(AccountModel account)
         {
+            _account = account;
             _categoryService = ServicesSimpleFactory.CreateCategoryService();
             _categories = _categoryService.GetCategories();
         }
@@ -26,14 +29,9 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
             Console.WriteLine("0 - Exit store");
 
             string selectedCategory = Console.ReadLine();
-            bool isValidCategory = ValidatesSelectedCategory(selectedCategory);
-            if (isValidCategory)
-            {
-                Console.WriteLine("Press enter to continuer (this is the isValidCategory if)");
-                Console.ReadLine();
-            }
+            bool stayInBeardStoreCatalogMenu = ValidatesSelectedCategory(selectedCategory);
 
-            return isValidCategory;
+            return stayInBeardStoreCatalogMenu;
         }
 
         private void DisplayBeardStoreCatalogMenuMessages()
@@ -56,8 +54,14 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
 
             if (parsedSelectedCategory >= 1 && parsedSelectedCategory <= _categories.Count && isInteger)
             {
-                _beardStoreProductsMenu = new BeardStoreProductsMenu(_categories[parsedSelectedCategory - 1]);
-                _beardStoreProductsMenu.RunBeardStoreProductMenu();
+                _beardStoreProductsMenu = new BeardStoreProductsMenu(_account, _categories[parsedSelectedCategory - 1]);
+
+                bool samePizzaStore = true;
+                while (samePizzaStore)
+                {
+                    samePizzaStore = _beardStoreProductsMenu.RunBeardStoreProductMenu();
+                }
+
                 return true;
             }
             else if (parsedSelectedCategory == 0 && isInteger)
