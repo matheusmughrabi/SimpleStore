@@ -1,23 +1,22 @@
 ﻿using SimpleStore.ConsoleUI.Control.AuthenticationMenu;
+using SimpleStore.ConsoleUI.Factories.MenusFactories;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using System;
 
 namespace SimpleStore.ConsoleUI.Control.InitialMenu
 {
-    public class InitialMenu
+    public class InitialMenu : BaseMenu
     {
-        private BaseAuthenticatorMenu _authenticatorMenu;      
-        private IUserLogger _userLogger;
-        private IUserRegistrator _userRegistrator;
+        private BaseMenu _authenticatorMenu;      
+        private RootMenuFactory _rootMenuFactory;
 
-        public InitialMenu(IUserLogger userLogger, IUserRegistrator userRegistrator)
+        public InitialMenu(RootMenuFactory rootMenuFactory)
         {
-            _userLogger = userLogger;
-            _userRegistrator = userRegistrator;
+            _rootMenuFactory = rootMenuFactory;
         }
 
-        public bool RunInitialMenu()
+        public override bool RunMenu()
         {
             DisplayInitialMenuMessages();
             string selectedOption = Console.ReadLine();
@@ -27,10 +26,10 @@ namespace SimpleStore.ConsoleUI.Control.InitialMenu
                 case "0":
                     return false;
                 case "1":
-                    _authenticatorMenu = new LoginMenu(_userLogger);
+                    _authenticatorMenu = _rootMenuFactory.CreateMenu(MenuType.LoginMenu);
                     break;
                 case "2":
-                    _authenticatorMenu = new RegisterMenu(_userRegistrator);
+                    _authenticatorMenu = _rootMenuFactory.CreateMenu(MenuType.RegisterMenu);
                     break;
                 default:
                     DisplayInvalidOptionMessage();
@@ -40,7 +39,7 @@ namespace SimpleStore.ConsoleUI.Control.InitialMenu
             bool sameAuthenticatorMenu = true;
             while (sameAuthenticatorMenu)
             {
-                sameAuthenticatorMenu = _authenticatorMenu.RunAuthenticatorMenu();
+                sameAuthenticatorMenu = _authenticatorMenu.RunMenu();
             }
 
             return true;

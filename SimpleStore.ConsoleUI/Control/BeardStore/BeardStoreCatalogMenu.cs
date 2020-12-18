@@ -1,15 +1,13 @@
 ﻿using SimpleStore.ConsoleUI.Factories;
 using SimpleStore.Domain.Products.Categories;
-using SimpleStore.Domain.Products.ProductsModel;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.Control.BeardStore
 {
-    public class BeardStoreCatalogMenu
+    public class BeardStoreCatalogMenu : BaseMenu
     {
         private AccountModel _account;
         private BeardStoreProductsMenu _beardStoreProductsMenu;
@@ -23,7 +21,7 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
             _categories = _categoryService.GetCategories();
         }
 
-        public bool RunBeardStoreCatalogMenu()
+        public override bool RunMenu()
         {
             DisplayBeardStoreCatalogMenuMessages();
             Console.WriteLine("0 - Exit store");
@@ -56,10 +54,10 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
             {
                 _beardStoreProductsMenu = new BeardStoreProductsMenu(_account, _categories[parsedSelectedCategory - 1]);
 
-                bool samePizzaStore = true;
-                while (samePizzaStore)
+                bool sameCategory = true;
+                while (sameCategory)
                 {
-                    samePizzaStore = _beardStoreProductsMenu.RunBeardStoreProductMenu();
+                    sameCategory = _beardStoreProductsMenu.RunMenu();
                 }
 
                 return true;

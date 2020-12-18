@@ -1,28 +1,31 @@
 ﻿using SimpleStore.ConsoleUI.Control.BeardStore;
-using SimpleStore.ConsoleUI.Control.ChooseStoreMenu;
 using SimpleStore.ConsoleUI.Control.ProfileMenu;
 using SimpleStore.ConsoleUI.Factories;
+using SimpleStore.ConsoleUI.Factories.MenusFactories;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
+using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
 
 namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
 {
-    public class MainMenu
+    public class MainMenu : BaseMenu
     {
+        private RootMenuFactory _rootMenuFactory;
         private BeardStoreCatalogMenu _beardStoreCatalogMenu;
         private AccountMenu _accountMenu;
         private UserModel _currentUser;
         private AccountModel _account;
 
-        public MainMenu(UserModel currentUser)
+        public MainMenu(RootMenuFactory rootMenuFactory, IUserLogger userLogger)
         {
-            _currentUser = currentUser;
+            _currentUser = userLogger.CurrentUser;
+            _rootMenuFactory = rootMenuFactory;
             GetAccount();
         }
 
-        public bool RunStoreTypesMenu()
+        public override bool RunMenu()
 
         {
             DisplayStoreTypeMessage();
@@ -40,7 +43,7 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
                     bool continueInAccountMenu = true;
                     while (continueInAccountMenu)
                     {
-                        continueInAccountMenu = _accountMenu.RunAccountMenu();
+                        continueInAccountMenu = _accountMenu.RunMenu();
                     }
                     return true;
                 case "0":
@@ -53,7 +56,7 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
             bool sameStoreType = true;
             while (sameStoreType)
             {
-                sameStoreType = _beardStoreCatalogMenu.RunBeardStoreCatalogMenu();
+                sameStoreType = _beardStoreCatalogMenu.RunMenu();
             }
             
             return true;

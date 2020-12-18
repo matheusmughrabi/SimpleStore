@@ -1,23 +1,26 @@
 ﻿using SimpleStore.ConsoleUI.Control.StoreTypesMenu;
+using SimpleStore.ConsoleUI.Factories.MenusFactories;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
 
 namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
 {
-    public class LoginMenu : BaseAuthenticatorMenu
+    public class LoginMenu : BaseMenu
     {
+        RootMenuFactory _rootMenuFactory;
         private UserModel _loginUser = new UserModel();
         private IUserLogger _userLogger;
-        private MainMenu _mainMenu;
+        private BaseMenu _mainMenu;
         private UserModel _currentUser;
 
-        public LoginMenu(IUserLogger userLogger)
+        public LoginMenu(RootMenuFactory rootMenuFactory, IUserLogger userLogger)
         {
             _userLogger = userLogger;
+            _rootMenuFactory = rootMenuFactory;
         }
 
-        public override bool RunAuthenticatorMenu()
+        public override bool RunMenu()
         {
             DisplayReturnPossibility();
 
@@ -43,13 +46,13 @@ namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
             {
                 _currentUser = _userLogger.CurrentUser;
 
-                _mainMenu = new MainMenu(_currentUser);
+                _mainMenu = _rootMenuFactory.CreateMenu(MenuType.MainMenu);
                 SuccessfulRegistrationMessage();
 
                 bool stayLoggedIn = true;
                 while (stayLoggedIn)
                 {
-                    stayLoggedIn = _mainMenu.RunStoreTypesMenu();
+                    stayLoggedIn = _mainMenu.RunMenu();
                 }             
             }
             else

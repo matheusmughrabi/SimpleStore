@@ -9,7 +9,7 @@ using System.Text;
 
 namespace SimpleStore.ConsoleUI.Control.ProfileMenu
 {
-    public class AccountMenu
+    public class AccountMenu : BaseMenu
     {
         private AccountModel _account;
         private AccountsLogic _accountLogic;
@@ -21,7 +21,7 @@ namespace SimpleStore.ConsoleUI.Control.ProfileMenu
             _accountLogic = new AccountsLogic(_account, accountService);
         }
 
-        public bool RunAccountMenu()
+        public override bool RunMenu()
         {
             AccountMenuMessage();
             string selectedOption = Console.ReadLine();

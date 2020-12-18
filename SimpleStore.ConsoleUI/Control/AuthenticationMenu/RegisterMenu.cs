@@ -1,4 +1,5 @@
-﻿using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
+﻿using SimpleStore.ConsoleUI.Factories.MenusFactories;
+using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration;
@@ -9,17 +10,19 @@ using System.Text;
 
 namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
 {
-    public class RegisterMenu : BaseAuthenticatorMenu
+    public class RegisterMenu : BaseMenu
     {
+        private RootMenuFactory _rootMenuFactory;
         private UserModel _newUser = new UserModel();
         private IUserRegistrator _userRegistrator;
 
-        public RegisterMenu(IUserRegistrator userRegistrator)
+        public RegisterMenu(RootMenuFactory rootMenuFactory, IUserRegistrator userRegistrator)
         {
             _userRegistrator = userRegistrator;
+            _rootMenuFactory = rootMenuFactory;
         }
 
-        public override bool RunAuthenticatorMenu()
+        public override bool RunMenu()
         {
             DisplayReturnPossibility();
             string selectedOption = Console.ReadLine();

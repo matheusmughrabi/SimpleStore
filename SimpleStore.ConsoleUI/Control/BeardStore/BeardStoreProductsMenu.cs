@@ -7,11 +7,10 @@ using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.Control.BeardStore
 {
-    public class BeardStoreProductsMenu
+    public class BeardStoreProductsMenu : BaseMenu
     {
         private AccountModel _account;
         private CategoryModel _category;
@@ -30,13 +29,15 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
             _accountLogic = new AccountsLogic(_account, accountService);
         }
 
-        public bool RunBeardStoreProductMenu()
+        public override bool RunMenu()
         {
             DisplayBeardStoreProductsMenuMessages();
             Console.WriteLine("0 - Exit");
 
-            string selectedProduct = Console.ReadLine();
-            bool stayInProductsMenu = OrderSelectedProduct(selectedProduct);
+            string selectedProductInput = Console.ReadLine();
+            bool stayInProductsMenu = OrderSelectedProduct(selectedProductInput);
+
+            
 
             return stayInProductsMenu;
         }
@@ -77,6 +78,7 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
                 Console.WriteLine($"Your balance after the purchase is: {_account.Balance}");
                 Console.WriteLine("Press 'Enter' to continue");
                 Console.ReadLine();
+
                 return true;
             }
             else if (parsedSelectedProduct == 0 && isInteger)
