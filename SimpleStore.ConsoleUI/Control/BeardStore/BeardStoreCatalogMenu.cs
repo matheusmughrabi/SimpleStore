@@ -10,6 +10,7 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
 {
     public class BeardStoreCatalogMenu
     {
+        private BeardStoreProductsMenu _beardStoreProductsMenu;
         private List<CategoryModel> _categories;
         private ICategoryService _categoryService;
 
@@ -55,6 +56,8 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
 
             if (parsedSelectedCategory >= 1 && parsedSelectedCategory <= _categories.Count && isInteger)
             {
+                _beardStoreProductsMenu = new BeardStoreProductsMenu(_categories[parsedSelectedCategory - 1]);
+                _beardStoreProductsMenu.RunBeardStoreProductMenu();
                 return true;
             }
             else if (parsedSelectedCategory == 0 && isInteger)
