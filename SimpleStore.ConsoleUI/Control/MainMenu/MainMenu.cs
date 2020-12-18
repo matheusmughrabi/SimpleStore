@@ -1,4 +1,5 @@
-﻿using SimpleStore.ConsoleUI.Control.ChooseStoreMenu;
+﻿using SimpleStore.ConsoleUI.Control.BeardStore;
+using SimpleStore.ConsoleUI.Control.ChooseStoreMenu;
 using SimpleStore.ConsoleUI.Control.ProfileMenu;
 using SimpleStore.ConsoleUI.Factories;
 using SimpleStore.Domain.Services.AccountServices;
@@ -10,7 +11,7 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
 {
     public class MainMenu
     {
-        private BaseSelectStoreMenu _chooseStoreMenu;
+        private BeardStoreCatalogMenu _beardStoreCatalogMenu;
         private AccountMenu _accountMenu;
         private UserModel _currentUser;
         private AccountModel _account;
@@ -32,13 +33,9 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
             switch (chosenStoreType)
             {
                 case "1":
-                    _chooseStoreMenu = new SelectPizzaStoreMenu(_account);
+                    _beardStoreCatalogMenu = new BeardStoreCatalogMenu(_account);
                     break;
                 case "2":
-                    throw new NotImplementedException();
-                case "0":
-                    return false;
-                case "01":
                     _accountMenu = new AccountMenu(_account);
                     bool continueInAccountMenu = true;
                     while (continueInAccountMenu)
@@ -46,6 +43,8 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
                         continueInAccountMenu = _accountMenu.RunAccountMenu();
                     }
                     return true;
+                case "0":
+                    return false;                    
                 default:
                     InvalidOptionMessage();
                     return true;
@@ -54,7 +53,7 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
             bool sameStoreType = true;
             while (sameStoreType)
             {
-                sameStoreType = _chooseStoreMenu.RunMainMenu();
+                sameStoreType = _beardStoreCatalogMenu.RunBeardStoreCatalogMenu();
             }
             
             return true;
@@ -70,10 +69,9 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
         {
             Console.Clear();
             Console.WriteLine($"Hello { _account.User.FullName }, your balance is { _account.Balance }");
-            Console.WriteLine("Choose a store type");
-            Console.WriteLine("1 - Pizza Stores");
-            Console.WriteLine("2 - Beard Products Stores");
-            Console.WriteLine("01 - Check your account");
+            Console.WriteLine("Choose an option");
+            Console.WriteLine("1 - Check Beard Store catalog");
+            Console.WriteLine("2 - Check your account");
             Console.WriteLine("0 - Logout");
             
         }
