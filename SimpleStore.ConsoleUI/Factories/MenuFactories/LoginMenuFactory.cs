@@ -1,4 +1,5 @@
 ﻿using SimpleStore.ConsoleUI.Control.AuthenticationMenu;
+using SimpleStore.ConsoleUI.Factories.MenusFactories;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace SimpleStore.ConsoleUI.Factories.MenuFactories
 {
-    public class LoginMenuFactory
+    public class LoginMenuFactory : IMenuFactory<LoginMenu>
     {
         private IUserLogger _userLogger;
 
@@ -15,9 +16,9 @@ namespace SimpleStore.ConsoleUI.Factories.MenuFactories
             _userLogger = userLogger;
         }
 
-        public LoginMenu CreateMenu()
+        public LoginMenu CreateMenu(RootMenuFactory rootMenuFactory)
         {
-            return new LoginMenu(_userLogger);
+            return new LoginMenu(rootMenuFactory, _userLogger);
         }
     }
 }

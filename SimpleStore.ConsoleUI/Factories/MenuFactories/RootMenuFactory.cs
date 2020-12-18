@@ -10,11 +10,13 @@ namespace SimpleStore.ConsoleUI.Factories.MenusFactories
     {
         private readonly LoginMenuFactory _loginMenuFactory;
         private readonly RegisterMenuFactory _registerMenuFactory;
+        private readonly MainMenuFactory _mainMenuFactory;
 
-        public RootMenuFactory(LoginMenuFactory loginMenuFactory, RegisterMenuFactory registerMenuFactory)
+        public RootMenuFactory(LoginMenuFactory loginMenuFactory, RegisterMenuFactory registerMenuFactory, MainMenuFactory mainMenuFactory)
         {
             _loginMenuFactory = loginMenuFactory;
             _registerMenuFactory = registerMenuFactory;
+            _mainMenuFactory = mainMenuFactory;
         }
 
         public BaseMenu CreateMenu(MenuType menuType)
@@ -22,9 +24,11 @@ namespace SimpleStore.ConsoleUI.Factories.MenusFactories
             switch (menuType)
             {
                 case MenuType.LoginMenu:
-                    return _loginMenuFactory.CreateMenu();
+                    return _loginMenuFactory.CreateMenu(this);
                 case MenuType.RegisterMenu:
-                    return _registerMenuFactory.CreateMenu();
+                    return _registerMenuFactory.CreateMenu(this);
+                case MenuType.MainMenu:
+                    return _mainMenuFactory.CreateMenu(this);
                 default:
                     throw new ArgumentException("The MenuType does not have a Menu.", "menuType");
             }

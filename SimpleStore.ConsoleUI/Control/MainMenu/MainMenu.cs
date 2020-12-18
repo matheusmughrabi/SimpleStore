@@ -1,6 +1,7 @@
 ﻿using SimpleStore.ConsoleUI.Control.BeardStore;
 using SimpleStore.ConsoleUI.Control.ProfileMenu;
 using SimpleStore.ConsoleUI.Factories;
+using SimpleStore.ConsoleUI.Factories.MenusFactories;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
 using SimpleStore.Domain.UsersAuthenticator.Users;
@@ -10,14 +11,16 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
 {
     public class MainMenu : BaseMenu
     {
+        private RootMenuFactory _rootMenuFactory;
         private BeardStoreCatalogMenu _beardStoreCatalogMenu;
         private AccountMenu _accountMenu;
         private UserModel _currentUser;
         private AccountModel _account;
 
-        public MainMenu(UserModel currentUser)
+        public MainMenu(RootMenuFactory rootMenuFactory, UserModel currentUser)
         {
-            _currentUser = currentUser;
+            _currentUser = currentUser;          
+            _rootMenuFactory = rootMenuFactory;
             GetAccount();
         }
 

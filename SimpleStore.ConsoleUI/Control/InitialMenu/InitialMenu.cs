@@ -9,14 +9,10 @@ namespace SimpleStore.ConsoleUI.Control.InitialMenu
     public class InitialMenu : BaseMenu
     {
         private BaseMenu _authenticatorMenu;      
-        private IUserLogger _userLogger;
-        private IUserRegistrator _userRegistrator;
         private RootMenuFactory _rootMenuFactory;
 
-        public InitialMenu(IUserLogger userLogger, IUserRegistrator userRegistrator, RootMenuFactory rootMenuFactory)
+        public InitialMenu(RootMenuFactory rootMenuFactory)
         {
-            _userLogger = userLogger;
-            _userRegistrator = userRegistrator;
             _rootMenuFactory = rootMenuFactory;
         }
 
