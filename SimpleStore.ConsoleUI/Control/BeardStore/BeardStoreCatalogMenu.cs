@@ -1,12 +1,9 @@
-﻿using SimpleStore.ConsoleUI.Control.Validators;
-using SimpleStore.ConsoleUI.Factories;
+﻿using SimpleStore.ConsoleUI.Factories;
 using SimpleStore.Domain.Products.Categories;
-using SimpleStore.Domain.Products.ProductsModel;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.Control.BeardStore
 {

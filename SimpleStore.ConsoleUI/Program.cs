@@ -1,10 +1,16 @@
-﻿using SimpleStore.ConsoleUI.Control.InitialMenu;
+﻿using Autofac;
+using SimpleStore.ConsoleUI.Control.InitialMenu;
 using SimpleStore.ConsoleUI.Factories;
+using SimpleStore.DataAccessLayer.Connections;
+using SimpleStore.DataAccessLayer.Services.AccountsServices;
+using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
+using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration;
+using System;
 
 namespace SimpleStore.ConsoleUI
 {
@@ -12,20 +18,18 @@ namespace SimpleStore.ConsoleUI
     {
         static void Main(string[] args)
         {
-            // TODO - Dependency Injection Container
-            IAuthenticationService authenticationService = ServicesSimpleFactory.CreateAuthenticationService();
-            IAccountsService accountsService = ServicesSimpleFactory.CreateAccountsService();
-            IUserLogger userLogger = new UserLogger(authenticationService);
-            IUserRegistrator userRegistrator = new UserRegistrator(authenticationService, accountsService);
+            IContainer container = new ServicesInjector().CreateContainer();
 
-            InitialMenu initialMenu = new InitialMenu(userLogger, userRegistrator);
-
-            bool isActive = true;
-            while (isActive)
+            using (var scope = container.BeginLifetimeScope())
             {
-                isActive = initialMenu.RunInitialMenu();
-            }
+                var initialMenu = scope.Resolve<InitialMenu>();
+
+                bool isActive = true;
+                while (isActive)
+                {
+                    isActive = initialMenu.RunInitialMenu();
+                }
+            } 
         }
     }
-
 }

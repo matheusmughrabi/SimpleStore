@@ -7,7 +7,6 @@ using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.Control.BeardStore
 {
