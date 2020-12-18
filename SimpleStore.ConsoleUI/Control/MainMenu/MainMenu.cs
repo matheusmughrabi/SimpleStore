@@ -8,7 +8,7 @@ using System;
 
 namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
 {
-    public class MainMenu
+    public class MainMenu : BaseMenu
     {
         private BeardStoreCatalogMenu _beardStoreCatalogMenu;
         private AccountMenu _accountMenu;
@@ -21,7 +21,7 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
             GetAccount();
         }
 
-        public bool RunStoreTypesMenu()
+        public override bool RunMenu()
 
         {
             DisplayStoreTypeMessage();
@@ -39,7 +39,7 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
                     bool continueInAccountMenu = true;
                     while (continueInAccountMenu)
                     {
-                        continueInAccountMenu = _accountMenu.RunAccountMenu();
+                        continueInAccountMenu = _accountMenu.RunMenu();
                     }
                     return true;
                 case "0":
@@ -52,7 +52,7 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
             bool sameStoreType = true;
             while (sameStoreType)
             {
-                sameStoreType = _beardStoreCatalogMenu.RunBeardStoreCatalogMenu();
+                sameStoreType = _beardStoreCatalogMenu.RunMenu();
             }
             
             return true;

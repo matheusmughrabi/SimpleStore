@@ -5,7 +5,7 @@ using System;
 
 namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
 {
-    public class LoginMenu : BaseAuthenticatorMenu
+    public class LoginMenu : BaseMenu
     {
         private UserModel _loginUser = new UserModel();
         private IUserLogger _userLogger;
@@ -17,7 +17,7 @@ namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
             _userLogger = userLogger;
         }
 
-        public override bool RunAuthenticatorMenu()
+        public override bool RunMenu()
         {
             DisplayReturnPossibility();
 
@@ -49,7 +49,7 @@ namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
                 bool stayLoggedIn = true;
                 while (stayLoggedIn)
                 {
-                    stayLoggedIn = _mainMenu.RunStoreTypesMenu();
+                    stayLoggedIn = _mainMenu.RunMenu();
                 }             
             }
             else

@@ -1,6 +1,8 @@
 ﻿using Autofac;
+using SimpleStore.ConsoleUI.Control;
 using SimpleStore.ConsoleUI.Control.InitialMenu;
 using SimpleStore.ConsoleUI.Factories;
+using SimpleStore.ConsoleUI.Factories.MenusFactories;
 using SimpleStore.DataAccessLayer.Connections;
 using SimpleStore.DataAccessLayer.Services.AccountsServices;
 using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
@@ -18,7 +20,7 @@ namespace SimpleStore.ConsoleUI
     {
         static void Main(string[] args)
         {
-            IContainer container = new ServicesInjector().CreateContainer();
+            IContainer container = new DependencyInjector().CreateContainer();
 
             using (var scope = container.BeginLifetimeScope())
             {
@@ -27,7 +29,7 @@ namespace SimpleStore.ConsoleUI
                 bool isActive = true;
                 while (isActive)
                 {
-                    isActive = initialMenu.RunInitialMenu();
+                    isActive = initialMenu.RunMenu();
                 }
             } 
         }

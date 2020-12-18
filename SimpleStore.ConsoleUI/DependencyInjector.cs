@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleStore.ConsoleUI.Control.InitialMenu;
+using SimpleStore.ConsoleUI.Factories.MenuFactories;
+using SimpleStore.ConsoleUI.Factories.MenusFactories;
 using SimpleStore.DataAccessLayer.Connections;
 using SimpleStore.DataAccessLayer.Services.AccountsServices;
 using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
@@ -14,20 +16,8 @@ using System;
 
 namespace SimpleStore.ConsoleUI
 {
-    public class ServicesInjector
+    public class DependencyInjector
     {
-        public IServiceProvider CreateServiceProvider()
-        {
-            IServiceCollection services = new ServiceCollection();
-
-            services.AddSingleton<IUserLogger, UserLogger>();
-            services.AddSingleton<IUserRegistrator, UserRegistrator>();
-
-            services.AddScoped<InitialMenu>();
-
-            return services.BuildServiceProvider();
-        }
-
         public IContainer CreateContainer()
         {
             var builder = new ContainerBuilder();
@@ -35,6 +25,10 @@ namespace SimpleStore.ConsoleUI
             builder.RegisterType<SqlServerConnection>().As<IConnection>();
             builder.RegisterType<SqlServerAutenticationService>().As<IAuthenticationService>();
             builder.RegisterType<SqlServerAccountsService>().As<IAccountsService>();
+
+            builder.RegisterType<RootMenuFactory>().AsSelf();
+            builder.RegisterType<LoginMenuFactory>().AsSelf();
+            builder.RegisterType<RegisterMenuFactory>().AsSelf();
 
             builder.RegisterType<UserLogger>().As<IUserLogger>();
             builder.RegisterType<UserRegistrator>().As<IUserRegistrator>();

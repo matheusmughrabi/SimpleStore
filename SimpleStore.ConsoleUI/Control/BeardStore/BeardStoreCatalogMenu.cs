@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace SimpleStore.ConsoleUI.Control.BeardStore
 {
-    public class BeardStoreCatalogMenu
+    public class BeardStoreCatalogMenu : BaseMenu
     {
         private AccountModel _account;
         private BeardStoreProductsMenu _beardStoreProductsMenu;
@@ -21,7 +21,7 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
             _categories = _categoryService.GetCategories();
         }
 
-        public bool RunBeardStoreCatalogMenu()
+        public override bool RunMenu()
         {
             DisplayBeardStoreCatalogMenuMessages();
             Console.WriteLine("0 - Exit store");
@@ -57,7 +57,7 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
                 bool sameCategory = true;
                 while (sameCategory)
                 {
-                    sameCategory = _beardStoreProductsMenu.RunBeardStoreProductMenu();
+                    sameCategory = _beardStoreProductsMenu.RunMenu();
                 }
 
                 return true;
