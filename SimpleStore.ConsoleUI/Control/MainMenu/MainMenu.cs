@@ -17,12 +17,10 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
         private AccountMenu _accountMenu;
         private UserModel _currentUser;
         private AccountModel _account;
-        private IUserLogger _userLogger;
 
         public MainMenu(RootMenuFactory rootMenuFactory, IUserLogger userLogger)
         {
-            _userLogger = userLogger;
-            _currentUser = _userLogger.CurrentUser;
+            _currentUser = userLogger.CurrentUser;
             _rootMenuFactory = rootMenuFactory;
             GetAccount();
         }
