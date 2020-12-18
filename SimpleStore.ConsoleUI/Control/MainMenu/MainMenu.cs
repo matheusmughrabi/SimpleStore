@@ -1,5 +1,4 @@
 ﻿using SimpleStore.ConsoleUI.Control.BeardStore;
-using SimpleStore.ConsoleUI.Control.ChooseStoreMenu;
 using SimpleStore.ConsoleUI.Control.ProfileMenu;
 using SimpleStore.ConsoleUI.Factories;
 using SimpleStore.Domain.Services.AccountServices;

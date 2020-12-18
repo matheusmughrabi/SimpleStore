@@ -35,8 +35,10 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
             DisplayBeardStoreProductsMenuMessages();
             Console.WriteLine("0 - Exit");
 
-            string selectedProduct = Console.ReadLine();
-            bool stayInProductsMenu = OrderSelectedProduct(selectedProduct);
+            string selectedProductInput = Console.ReadLine();
+            bool stayInProductsMenu = OrderSelectedProduct(selectedProductInput);
+
+            
 
             return stayInProductsMenu;
         }
@@ -77,6 +79,7 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
                 Console.WriteLine($"Your balance after the purchase is: {_account.Balance}");
                 Console.WriteLine("Press 'Enter' to continue");
                 Console.ReadLine();
+
                 return true;
             }
             else if (parsedSelectedProduct == 0 && isInteger)
