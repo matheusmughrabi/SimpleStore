@@ -4,6 +4,7 @@ using SimpleStore.DataAccessLayer.Connections;
 using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
 using SimpleStore.DataAccessLayer.Services.PizzasServices;
 using SimpleStore.DataAccessLayer.Services.PizzaStoreServices;
+using SimpleStore.Domain.Products.Categories;
 using SimpleStore.Domain.Products.Models.Pizzas;
 using SimpleStore.Domain.Products.ProductsModel;
 using SimpleStore.Domain.Services;
@@ -25,8 +26,11 @@ namespace SimpleStore.ConsoleUI
     {
         static void Main(string[] args)
         {
+            ICategoryService categoryService = ServicesSimpleFactory.CreateCategoryService();
+            List<CategoryModel> categories = categoryService.GetCategories();
+
             IProductsService productsService = ServicesSimpleFactory.CreateProductsService();
-            List<ProductModel> products = productsService.GetProducts();
+            List<ProductModel> productsInCategory = productsService.GetProductsByCategory(2);
 
             // TODO - Dependency Injection Container
             IAuthenticationService authenticationService = ServicesSimpleFactory.CreateAuthenticationService();

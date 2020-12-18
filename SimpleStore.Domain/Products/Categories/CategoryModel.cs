@@ -7,7 +7,7 @@ namespace SimpleStore.Domain.Products.Categories
 {
     public class CategoryModel : BaseModel
     {
-        public string Name { get; set; }
-        public CategoryModel ParentCategory { get; set; }
+        public string CategoryName { get; set; }
+        public int? ParentCategoryId { get; set; }
     }
 }

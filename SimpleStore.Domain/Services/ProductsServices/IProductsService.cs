@@ -8,5 +8,6 @@ namespace SimpleStore.Domain.Services.ProductsServices
     public interface IProductsService
     {
         List<ProductModel> GetProducts();
+        List<ProductModel> GetProductsByCategory(int categoryId);
     }
 }

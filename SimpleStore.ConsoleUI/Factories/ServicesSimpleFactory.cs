@@ -44,5 +44,10 @@ namespace SimpleStore.ConsoleUI.Factories
         {
             return new SqlServerProductsService(_connection);
         }
+
+        public static ICategoryService CreateCategoryService()
+        {
+            return new SqlServerCategoryService(_connection);
+        }
     }
 }

@@ -13,5 +13,12 @@ namespace SimpleStore.DataAccessLayer.Helpers
                 return reader.GetDateTime(colIndex);
             return null;
         }
+
+        public static int? SafeGetInt(this SqlDataReader reader, int colIndex)
+        {
+            if (!reader.IsDBNull(colIndex))
+                return reader.GetInt32(colIndex);
+            return null;
+        }
     }
 }
