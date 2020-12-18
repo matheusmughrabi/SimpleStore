@@ -15,6 +15,6 @@ namespace SimpleStore.Domain.Products.ProductsModel
         public decimal RegularPrice { get; set; }
         public decimal DiscountedPrice { get; set; }
         public string Description { get; set; }
-        public ProductStatusModel ProductStatusId { get; set; }
+        public ProductStatusModel ProductStatus { get; set; }
     }
 }

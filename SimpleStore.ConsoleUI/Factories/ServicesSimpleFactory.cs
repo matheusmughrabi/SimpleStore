@@ -3,11 +3,13 @@ using SimpleStore.DataAccessLayer.Services.AccountsServices;
 using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
 using SimpleStore.DataAccessLayer.Services.PizzasServices;
 using SimpleStore.DataAccessLayer.Services.PizzaStoreServices;
+using SimpleStore.DataAccessLayer.Services.ProductsServices;
 using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.Services.IPizzaStoreServices;
 using SimpleStore.Domain.Services.PizzasServices;
+using SimpleStore.Domain.Services.ProductsServices;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -36,6 +38,11 @@ namespace SimpleStore.ConsoleUI.Factories
         public static IAccountsService CreateAccountsService()
         {
             return new SqlServerAccountsService(_connection);
+        }
+
+        public static IProductsService CreateProductsService()
+        {
+            return new SqlServerProductsService(_connection);
         }
     }
 }
