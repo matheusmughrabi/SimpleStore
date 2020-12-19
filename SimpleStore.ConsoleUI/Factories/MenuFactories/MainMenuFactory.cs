@@ -20,7 +20,7 @@ namespace SimpleStore.ConsoleUI.Factories.MenuFactories
 
         public MainMenu CreateMenu(RootMenuFactory rootMenuFactory)
         {
-            return new MainMenu(rootMenuFactory, _userLogger);
+            throw new NotImplementedException();
         }
     }
 }

@@ -12,14 +12,12 @@ namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
 {
     public class RegisterMenu : BaseMenu
     {
-        private RootMenuFactory _rootMenuFactory;
         private UserModel _newUser = new UserModel();
         private IUserRegistrator _userRegistrator;
 
-        public RegisterMenu(RootMenuFactory rootMenuFactory, IUserRegistrator userRegistrator)
+        public RegisterMenu(IUserRegistrator userRegistrator)
         {
             _userRegistrator = userRegistrator;
-            _rootMenuFactory = rootMenuFactory;
         }
 
         public override bool RunMenu()

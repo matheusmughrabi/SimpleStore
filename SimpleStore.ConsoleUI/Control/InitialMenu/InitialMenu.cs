@@ -1,4 +1,5 @@
 ﻿using SimpleStore.ConsoleUI.Control.AuthenticationMenu;
+using SimpleStore.ConsoleUI.Factories;
 using SimpleStore.ConsoleUI.Factories.MenusFactories;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
@@ -9,11 +10,13 @@ namespace SimpleStore.ConsoleUI.Control.InitialMenu
     public class InitialMenu : BaseMenu
     {
         private BaseMenu _authenticatorMenu;      
-        private RootMenuFactory _rootMenuFactory;
+        private IUserLogger _userLogger;
+        private IUserRegistrator _userRegistrator;
 
-        public InitialMenu(RootMenuFactory rootMenuFactory)
+        public InitialMenu(IUserLogger userLogger, IUserRegistrator userRegistrator)
         {
-            _rootMenuFactory = rootMenuFactory;
+            _userLogger = userLogger;
+            _userRegistrator = userRegistrator;
         }
 
         public override bool RunMenu()
@@ -26,10 +29,10 @@ namespace SimpleStore.ConsoleUI.Control.InitialMenu
                 case "0":
                     return false;
                 case "1":
-                    _authenticatorMenu = _rootMenuFactory.CreateMenu(MenuType.LoginMenu);
+                    _authenticatorMenu = MenuSimpleFactories.CreateLoginMenu(_userLogger);
                     break;
                 case "2":
-                    _authenticatorMenu = _rootMenuFactory.CreateMenu(MenuType.RegisterMenu);
+                    _authenticatorMenu = MenuSimpleFactories.CreateRegisterMenu(_userRegistrator);
                     break;
                 default:
                     DisplayInvalidOptionMessage();

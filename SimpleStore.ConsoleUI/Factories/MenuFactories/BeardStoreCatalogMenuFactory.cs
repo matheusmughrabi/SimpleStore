@@ -19,7 +19,7 @@ namespace SimpleStore.ConsoleUI.Factories.MenuFactories
 
         public BeardStoreCatalogMenu CreateMenu(RootMenuFactory rootMenuFactory)
         {
-            return new BeardStoreCatalogMenu(rootMenuFactory, _userLogger);
+            throw new NotImplementedException();
         }
     }
 }

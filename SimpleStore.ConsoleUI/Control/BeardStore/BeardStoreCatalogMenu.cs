@@ -11,18 +11,14 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
 {
     public class BeardStoreCatalogMenu : BaseMenu
     {
-        RootMenuFactory _rootMenuFactory;
-        private IUserLogger _userLogger;
         private AccountModel _account;
         private BeardStoreProductsMenu _beardStoreProductsMenu;
         private List<CategoryModel> _categories;
         private ICategoryService _categoryService;
 
-        public BeardStoreCatalogMenu(RootMenuFactory rootMenuFactory, IUserLogger userLogger)
+        public BeardStoreCatalogMenu(AccountModel account)
         {
-            _rootMenuFactory = rootMenuFactory;
-            _userLogger = userLogger;
-            _account = userLogger.CurrentUserAccount;
+            _account = account;
             _categoryService = ServicesSimpleFactory.CreateCategoryService();
             _categories = _categoryService.GetCategories();
         }
@@ -58,7 +54,7 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
 
             if (parsedSelectedCategory >= 1 && parsedSelectedCategory <= _categories.Count && isInteger)
             {
-                _beardStoreProductsMenu = new BeardStoreProductsMenu(_account, _categories[parsedSelectedCategory - 1]);
+                _beardStoreProductsMenu = MenuSimpleFactories.CreateBeardStoreProductsMenu(_account, _categories[parsedSelectedCategory - 1]);
 
                 bool sameCategory = true;
                 while (sameCategory)

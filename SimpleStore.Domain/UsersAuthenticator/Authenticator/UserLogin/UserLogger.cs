@@ -17,12 +17,10 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
         private List<UserModel> _registeredUsers;
         private UserModel _user;
         public UserModel CurrentUser { get; private set; }
-        public AccountModel CurrentUserAccount { get; private set; }
 
-        public UserLogger(IAuthenticationService authenticationService, IAccountsService accountsService)
+        public UserLogger(IAuthenticationService authenticationService)
         {
             _authenticationService = authenticationService;
-            _accountsService = accountsService;
             _passwordHasher = new PasswordHasher();
         }
 
@@ -40,7 +38,6 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
                 if (isUsernamePasswordCorrect)
                 {
                     CurrentUser = _user;
-                    CurrentUserAccount = _accountsService.GetAccountByUserId(_user.Id);
                 }
             }
 
