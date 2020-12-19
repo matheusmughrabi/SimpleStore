@@ -1,9 +1,7 @@
 ﻿using SimpleStore.ConsoleUI.Factories;
-using SimpleStore.ConsoleUI.Factories.MenusFactories;
 using SimpleStore.Domain.Products.Categories;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
-using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using System;
 using System.Collections.Generic;
 

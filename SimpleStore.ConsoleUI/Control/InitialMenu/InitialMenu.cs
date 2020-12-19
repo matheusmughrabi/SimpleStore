@@ -1,6 +1,4 @@
-﻿using SimpleStore.ConsoleUI.Control.AuthenticationMenu;
-using SimpleStore.ConsoleUI.Factories;
-using SimpleStore.ConsoleUI.Factories.MenusFactories;
+﻿using SimpleStore.ConsoleUI.Factories;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using System;

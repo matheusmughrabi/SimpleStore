@@ -1,6 +1,4 @@
-﻿using SimpleStore.ConsoleUI.Control.StoreTypesMenu;
-using SimpleStore.ConsoleUI.Factories;
-using SimpleStore.ConsoleUI.Factories.MenusFactories;
+﻿using SimpleStore.ConsoleUI.Factories;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;

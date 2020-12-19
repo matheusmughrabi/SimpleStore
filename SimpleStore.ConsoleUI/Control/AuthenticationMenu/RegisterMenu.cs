@@ -1,12 +1,6 @@
-﻿using SimpleStore.ConsoleUI.Factories.MenusFactories;
-using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
-using SimpleStore.Domain.Services.AuthenticationServices;
-using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
-using SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration;
+﻿using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
 {
