@@ -1,5 +1,4 @@
-﻿using SimpleStore.ConsoleUI.Control.StoreTypesMenu;
-using SimpleStore.ConsoleUI.Factories.MenusFactories;
+﻿using SimpleStore.ConsoleUI.Factories;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
@@ -8,16 +7,14 @@ namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
 {
     public class LoginMenu : BaseMenu
     {
-        RootMenuFactory _rootMenuFactory;
         private UserModel _loginUser = new UserModel();
         private IUserLogger _userLogger;
         private BaseMenu _mainMenu;
         private UserModel _currentUser;
 
-        public LoginMenu(RootMenuFactory rootMenuFactory, IUserLogger userLogger)
+        public LoginMenu(IUserLogger userLogger)
         {
             _userLogger = userLogger;
-            _rootMenuFactory = rootMenuFactory;
         }
 
         public override bool RunMenu()
@@ -46,8 +43,9 @@ namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
             {
                 _currentUser = _userLogger.CurrentUser;
 
-                _mainMenu = _rootMenuFactory.CreateMenu(MenuType.MainMenu);
-                SuccessfulRegistrationMessage();
+                //_mainMenu = _rootMenuFactory.CreateMenu(MenuType.MainMenu);
+                _mainMenu = MenuSimpleFactories.CreateMainMenu(_userLogger);
+                SuccessfulLoginMessage();
 
                 bool stayLoggedIn = true;
                 while (stayLoggedIn)
@@ -95,7 +93,7 @@ namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
             Console.ReadLine();
         }
 
-        public void SuccessfulRegistrationMessage()
+        public void SuccessfulLoginMessage()
         {
             Console.WriteLine("You are now logged in! Press 'Enter' to go to the Main Menu'");
             Console.ReadLine();
