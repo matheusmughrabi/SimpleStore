@@ -1,13 +1,13 @@
-﻿using SimpleStore.ConsoleUI.Control.AuthenticationMenu;
+﻿using SimpleStore.ConsoleUI.Factories;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using System;
 
 namespace SimpleStore.ConsoleUI.Control.InitialMenu
 {
-    public class InitialMenu
+    public class InitialMenu : BaseMenu
     {
-        private BaseAuthenticatorMenu _authenticatorMenu;      
+        private BaseMenu _authenticatorMenu;      
         private IUserLogger _userLogger;
         private IUserRegistrator _userRegistrator;
 
@@ -17,7 +17,7 @@ namespace SimpleStore.ConsoleUI.Control.InitialMenu
             _userRegistrator = userRegistrator;
         }
 
-        public bool RunInitialMenu()
+        public override bool RunMenu()
         {
             DisplayInitialMenuMessages();
             string selectedOption = Console.ReadLine();
@@ -27,10 +27,10 @@ namespace SimpleStore.ConsoleUI.Control.InitialMenu
                 case "0":
                     return false;
                 case "1":
-                    _authenticatorMenu = new LoginMenu(_userLogger);
+                    _authenticatorMenu = MenuSimpleFactories.CreateLoginMenu(_userLogger);
                     break;
                 case "2":
-                    _authenticatorMenu = new RegisterMenu(_userRegistrator);
+                    _authenticatorMenu = MenuSimpleFactories.CreateRegisterMenu(_userRegistrator);
                     break;
                 default:
                     DisplayInvalidOptionMessage();
@@ -40,7 +40,7 @@ namespace SimpleStore.ConsoleUI.Control.InitialMenu
             bool sameAuthenticatorMenu = true;
             while (sameAuthenticatorMenu)
             {
-                sameAuthenticatorMenu = _authenticatorMenu.RunAuthenticatorMenu();
+                sameAuthenticatorMenu = _authenticatorMenu.RunMenu();
             }
 
             return true;

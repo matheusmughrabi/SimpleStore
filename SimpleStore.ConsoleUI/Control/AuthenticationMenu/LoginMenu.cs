@@ -1,15 +1,15 @@
-﻿using SimpleStore.ConsoleUI.Control.StoreTypesMenu;
+﻿using SimpleStore.ConsoleUI.Factories;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
 
 namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
 {
-    public class LoginMenu : BaseAuthenticatorMenu
+    public class LoginMenu : BaseMenu
     {
         private UserModel _loginUser = new UserModel();
         private IUserLogger _userLogger;
-        private MainMenu _mainMenu;
+        private BaseMenu _mainMenu;
         private UserModel _currentUser;
 
         public LoginMenu(IUserLogger userLogger)
@@ -17,7 +17,7 @@ namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
             _userLogger = userLogger;
         }
 
-        public override bool RunAuthenticatorMenu()
+        public override bool RunMenu()
         {
             DisplayReturnPossibility();
 
@@ -43,13 +43,14 @@ namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
             {
                 _currentUser = _userLogger.CurrentUser;
 
-                _mainMenu = new MainMenu(_currentUser);
-                SuccessfulRegistrationMessage();
+                //_mainMenu = _rootMenuFactory.CreateMenu(MenuType.MainMenu);
+                _mainMenu = MenuSimpleFactories.CreateMainMenu(_userLogger);
+                SuccessfulLoginMessage();
 
                 bool stayLoggedIn = true;
                 while (stayLoggedIn)
                 {
-                    stayLoggedIn = _mainMenu.RunStoreTypesMenu();
+                    stayLoggedIn = _mainMenu.RunMenu();
                 }             
             }
             else
@@ -92,7 +93,7 @@ namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
             Console.ReadLine();
         }
 
-        public void SuccessfulRegistrationMessage()
+        public void SuccessfulLoginMessage()
         {
             Console.WriteLine("You are now logged in! Press 'Enter' to go to the Main Menu'");
             Console.ReadLine();

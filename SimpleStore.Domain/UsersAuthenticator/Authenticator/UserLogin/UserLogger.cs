@@ -4,12 +4,15 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SimpleStore.Domain.UsersAccounts.AccountsModel;
+using SimpleStore.Domain.Services.AccountServices;
 
 namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
 {
     public class UserLogger : IUserLogger
     {
         private IAuthenticationService _authenticationService;
+        private IAccountsService _accountsService;
         private IPasswordHasher _passwordHasher;
         private List<UserModel> _registeredUsers;
         private UserModel _user;

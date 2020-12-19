@@ -1,28 +1,27 @@
-﻿using SimpleStore.ConsoleUI.Control.BeardStore;
-using SimpleStore.ConsoleUI.Control.ChooseStoreMenu;
-using SimpleStore.ConsoleUI.Control.ProfileMenu;
+﻿using SimpleStore.ConsoleUI.Control.ProfileMenu;
 using SimpleStore.ConsoleUI.Factories;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
+using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
 
 namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
 {
-    public class MainMenu
+    public class MainMenu : BaseMenu
     {
-        private BeardStoreCatalogMenu _beardStoreCatalogMenu;
+        private BaseMenu _beardStoreCatalogMenu;
         private AccountMenu _accountMenu;
         private UserModel _currentUser;
         private AccountModel _account;
 
-        public MainMenu(UserModel currentUser)
+        public MainMenu(IUserLogger userLogger)
         {
-            _currentUser = currentUser;
+            _currentUser = userLogger.CurrentUser;
             GetAccount();
         }
 
-        public bool RunStoreTypesMenu()
+        public override bool RunMenu()
 
         {
             DisplayStoreTypeMessage();
@@ -33,14 +32,14 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
             switch (chosenStoreType)
             {
                 case "1":
-                    _beardStoreCatalogMenu = new BeardStoreCatalogMenu(_account);
+                    _beardStoreCatalogMenu = MenuSimpleFactories.CreateBeardStoreCatalogMenu(_account);
                     break;
                 case "2":
                     _accountMenu = new AccountMenu(_account);
                     bool continueInAccountMenu = true;
                     while (continueInAccountMenu)
                     {
-                        continueInAccountMenu = _accountMenu.RunAccountMenu();
+                        continueInAccountMenu = _accountMenu.RunMenu();
                     }
                     return true;
                 case "0":
@@ -53,7 +52,7 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
             bool sameStoreType = true;
             while (sameStoreType)
             {
-                sameStoreType = _beardStoreCatalogMenu.RunBeardStoreCatalogMenu();
+                sameStoreType = _beardStoreCatalogMenu.RunMenu();
             }
             
             return true;

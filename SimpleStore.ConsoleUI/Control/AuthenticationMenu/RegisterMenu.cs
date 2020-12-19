@@ -1,15 +1,10 @@
-﻿using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
-using SimpleStore.Domain.Services.AuthenticationServices;
-using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
-using SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration;
+﻿using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
 {
-    public class RegisterMenu : BaseAuthenticatorMenu
+    public class RegisterMenu : BaseMenu
     {
         private UserModel _newUser = new UserModel();
         private IUserRegistrator _userRegistrator;
@@ -19,7 +14,7 @@ namespace SimpleStore.ConsoleUI.Control.AuthenticationMenu
             _userRegistrator = userRegistrator;
         }
 
-        public override bool RunAuthenticatorMenu()
+        public override bool RunMenu()
         {
             DisplayReturnPossibility();
             string selectedOption = Console.ReadLine();
