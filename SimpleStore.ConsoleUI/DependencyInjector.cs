@@ -9,6 +9,7 @@ using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
 using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
+using SimpleStore.Domain.UsersAccounts.AccountsModel;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration;
@@ -31,6 +32,7 @@ namespace SimpleStore.ConsoleUI
             builder.RegisterType<LoginMenuFactory>().AsSelf();
             builder.RegisterType<RegisterMenuFactory>().AsSelf();
             builder.RegisterType<MainMenuFactory>().AsSelf();
+            builder.RegisterType<BeardStoreCatalogMenuFactory>().AsSelf();
 
             builder.RegisterType<UserLogger>().As<IUserLogger>().SingleInstance();
             builder.RegisterType<UserRegistrator>().As<IUserRegistrator>();

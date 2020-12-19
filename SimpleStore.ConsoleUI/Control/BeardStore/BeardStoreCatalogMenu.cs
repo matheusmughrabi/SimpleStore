@@ -1,7 +1,9 @@
 ﻿using SimpleStore.ConsoleUI.Factories;
+using SimpleStore.ConsoleUI.Factories.MenusFactories;
 using SimpleStore.Domain.Products.Categories;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
+using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using System;
 using System.Collections.Generic;
 
@@ -9,14 +11,18 @@ namespace SimpleStore.ConsoleUI.Control.BeardStore
 {
     public class BeardStoreCatalogMenu : BaseMenu
     {
+        RootMenuFactory _rootMenuFactory;
+        private IUserLogger _userLogger;
         private AccountModel _account;
         private BeardStoreProductsMenu _beardStoreProductsMenu;
         private List<CategoryModel> _categories;
         private ICategoryService _categoryService;
 
-        public BeardStoreCatalogMenu(AccountModel account)
+        public BeardStoreCatalogMenu(RootMenuFactory rootMenuFactory, IUserLogger userLogger)
         {
-            _account = account;
+            _rootMenuFactory = rootMenuFactory;
+            _userLogger = userLogger;
+            _account = userLogger.CurrentUserAccount;
             _categoryService = ServicesSimpleFactory.CreateCategoryService();
             _categories = _categoryService.GetCategories();
         }

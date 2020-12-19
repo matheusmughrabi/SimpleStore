@@ -4,20 +4,25 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SimpleStore.Domain.UsersAccounts.AccountsModel;
+using SimpleStore.Domain.Services.AccountServices;
 
 namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
 {
     public class UserLogger : IUserLogger
     {
         private IAuthenticationService _authenticationService;
+        private IAccountsService _accountsService;
         private IPasswordHasher _passwordHasher;
         private List<UserModel> _registeredUsers;
         private UserModel _user;
         public UserModel CurrentUser { get; private set; }
+        public AccountModel CurrentUserAccount { get; private set; }
 
-        public UserLogger(IAuthenticationService authenticationService)
+        public UserLogger(IAuthenticationService authenticationService, IAccountsService accountsService)
         {
             _authenticationService = authenticationService;
+            _accountsService = accountsService;
             _passwordHasher = new PasswordHasher();
         }
 
@@ -35,6 +40,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
                 if (isUsernamePasswordCorrect)
                 {
                     CurrentUser = _user;
+                    CurrentUserAccount = _accountsService.GetAccountByUserId(_user.Id);
                 }
             }
 

@@ -13,7 +13,7 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
     public class MainMenu : BaseMenu
     {
         private RootMenuFactory _rootMenuFactory;
-        private BeardStoreCatalogMenu _beardStoreCatalogMenu;
+        private BaseMenu _beardStoreCatalogMenu;
         private AccountMenu _accountMenu;
         private UserModel _currentUser;
         private AccountModel _account;
@@ -36,7 +36,7 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
             switch (chosenStoreType)
             {
                 case "1":
-                    _beardStoreCatalogMenu = new BeardStoreCatalogMenu(_account);
+                    _beardStoreCatalogMenu = _rootMenuFactory.CreateMenu(MenuType.BeardStoreCatalogMenu);
                     break;
                 case "2":
                     _accountMenu = new AccountMenu(_account);
