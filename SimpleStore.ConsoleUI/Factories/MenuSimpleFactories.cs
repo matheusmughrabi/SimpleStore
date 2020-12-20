@@ -1,13 +1,11 @@
-﻿using SimpleStore.ConsoleUI.Control.AuthenticationMenu;
+﻿
+using SimpleStore.ConsoleUI.Control.AuthenticationMenu;
 using SimpleStore.ConsoleUI.Control.BeardStore;
 using SimpleStore.ConsoleUI.Control.StoreTypesMenu;
 using SimpleStore.Domain.Products.Categories;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.Factories
 {

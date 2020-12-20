@@ -22,7 +22,6 @@ namespace SimpleStore.ConsoleUI.Control.StoreTypesMenu
         }
 
         public override bool RunMenu()
-
         {
             DisplayStoreTypeMessage();
 
