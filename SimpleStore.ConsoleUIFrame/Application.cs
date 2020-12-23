@@ -1,9 +1,12 @@
 ﻿using SimpleStore.ConsoleUIFrame.MenuFrame;
 using SimpleStore.ConsoleUIFrame.Menus;
+using SimpleStore.Domain.Products.Categories;
+using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Users;
+using System.Collections.Generic;
 
 namespace SimpleStore.ConsoleUIFrame
 {
@@ -11,12 +14,17 @@ namespace SimpleStore.ConsoleUIFrame
     {
         private IUserLogger _userLogger;
         private IUserRegistrator _userRegistrator;
+        private ICategoryService _categoryService;
+        private IProductsService _productService;
         private AccountsLogic _accountsLogic;
 
-        public Application(IUserLogger userLogger, IUserRegistrator userRegistrator, AccountsLogic accountsLogic)
+        public Application(IUserLogger userLogger, IUserRegistrator userRegistrator, ICategoryService categoryService, 
+            IProductsService productService, AccountsLogic accountsLogic)
         {
             _userLogger = userLogger;
             _userRegistrator = userRegistrator;
+            _categoryService = categoryService;
+            _productService = productService;
             _accountsLogic = accountsLogic;
         }
 
@@ -63,7 +71,20 @@ namespace SimpleStore.ConsoleUIFrame
             makeWithdrawalMenu.SetRenavigateMenu(accountMenu);
             makeWithdrawalMenu.Func = new MakeWithdrawalLogic(_accountsLogic).MakeWithdrawal;
 
-            storeCategoriesMenu.AddChildMenu(storeProductsMenu);
+            List<CategoryModel> categories = _categoryService.GetCategories();
+            List<ActionMenu> productMenus = new List<ActionMenu>();
+            foreach (var category in categories)
+            {
+                ActionMenu productMenu = new ActionMenu($"{category.CategoryName} Menu", storeCategoriesMenu);
+                productMenus.Add(productMenu);
+                storeCategoriesMenu.AddChildMenu(productMenu);
+
+                productMenu.AddTextBox("Select Product");
+                productMenu.Func = new BuyProductLogic(_accountsLogic, category, _productService).BuyProduct;
+            }
+
+
+            //storeCategoriesMenu.AddChildMenu(storeProductsMenu);
 
             initialMenu.Run();
         }
