@@ -59,6 +59,10 @@ namespace SimpleStore.ConsoleUIFrame
             makeDepositMenu.SetRenavigateMenu(accountMenu);
             makeDepositMenu.Func = new MakeDepositLogic(_accountsLogic).MakeDeposit;
 
+            makeWithdrawalMenu.AddTextBox("Withdrawal Amount");
+            makeWithdrawalMenu.SetRenavigateMenu(accountMenu);
+            makeWithdrawalMenu.Func = new MakeWithdrawalLogic(_accountsLogic).MakeWithdrawal;
+
             storeCategoriesMenu.AddChildMenu(storeProductsMenu);
 
             initialMenu.Run();
