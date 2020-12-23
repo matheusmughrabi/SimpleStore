@@ -65,7 +65,7 @@ namespace SimpleStore.ConsoleUIFrame.MenuFrame
 
         private void PrintTextBoxes()
         {
-            
+            textBoxInputs = new List<string>();
             foreach (var textBox in _textBoxes)
             {
                 Console.Write($"{ textBox }: ");
@@ -74,8 +74,7 @@ namespace SimpleStore.ConsoleUIFrame.MenuFrame
         }
 
         private void GetTextBoxInput()
-        {
-            textBoxInputs = new List<string>();
+        {  
             textBoxInputs.Add(Console.ReadLine());
         }
     }

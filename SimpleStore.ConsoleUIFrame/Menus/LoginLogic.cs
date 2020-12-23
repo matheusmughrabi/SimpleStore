@@ -1,5 +1,5 @@
-﻿using SimpleStore.ConsoleUIFrame.BusinessLogic.Login;
-using SimpleStore.ConsoleUIFrame.MenuFrame;
+﻿using SimpleStore.ConsoleUIFrame.MenuFrame;
+using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,7 +18,7 @@ namespace SimpleStore.ConsoleUIFrame.Menus
 
         public bool Login(List<string> inputs)
         {
-            bool isLogginSuccessful = _userLogger.LoginUser(inputs[0]);
+            bool isLogginSuccessful = _userLogger.LoginUser(inputs[0], inputs[1]);
 
             if (isLogginSuccessful)
             {
