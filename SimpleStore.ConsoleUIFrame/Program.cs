@@ -16,7 +16,10 @@ namespace SimpleStore.ConsoleUIFrame
             var registerMenu = new ActionMenu("Register Menu", initialMenu);
             var mainMenu = new NavigatorMenu("Main Menu", loginMenu);
             var accountMenu = new NavigatorMenu("Account Menu", mainMenu);
-            var makeDepositMenu = new ActionMenu("Make Deposit Menu", mainMenu);
+            var makeDepositMenu = new ActionMenu("Make Deposit Menu", accountMenu);
+            var makeWithdrawalMenu = new ActionMenu("Make Withdrawal Menu", accountMenu);
+            var storeCategoriesMenu = new NavigatorMenu("Store Categories Menu", mainMenu);
+            var storeProductsMenu = new ActionMenu("Store Products Menu", mainMenu);
 
             initialMenu.AddChildMenu(loginMenu);
             initialMenu.AddChildMenu(registerMenu);
@@ -29,8 +32,12 @@ namespace SimpleStore.ConsoleUIFrame
             registerMenu.AddTextBox("password");
 
             mainMenu.AddChildMenu(accountMenu);
+            mainMenu.AddChildMenu(storeCategoriesMenu);
 
             accountMenu.AddChildMenu(makeDepositMenu);
+            accountMenu.AddChildMenu(makeWithdrawalMenu);
+
+            storeCategoriesMenu.AddChildMenu(storeProductsMenu);
 
             initialMenu.Run();
         }
