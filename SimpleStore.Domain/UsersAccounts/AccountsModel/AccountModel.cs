@@ -10,5 +10,10 @@ namespace SimpleStore.Domain.UsersAccounts.AccountsModel
         public int Id { get; set; }
         public UserModel User { get; set; }
         public decimal Balance { get; set; }
+
+        public AccountModel(UserModel user)
+        {
+            User = user;
+        }
     }
 }

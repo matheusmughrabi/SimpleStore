@@ -1,13 +1,9 @@
 ﻿using SimpleStore.ConsoleUIFrame.MenuFrame;
 using SimpleStore.ConsoleUIFrame.Menus;
-using SimpleStore.DataAccessLayer.Connections;
-using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
+using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Users;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUIFrame
 {
@@ -15,11 +11,13 @@ namespace SimpleStore.ConsoleUIFrame
     {
         private IUserLogger _userLogger;
         private IUserRegistrator _userRegistrator;
+        private AccountsLogic _accountsLogic;
 
-        public Application(IUserLogger userLogger, IUserRegistrator userRegistrator)
+        public Application(IUserLogger userLogger, IUserRegistrator userRegistrator, AccountsLogic accountsLogic)
         {
             _userLogger = userLogger;
             _userRegistrator = userRegistrator;
+            _accountsLogic = accountsLogic;
         }
 
         public void RunApp()
@@ -52,9 +50,14 @@ namespace SimpleStore.ConsoleUIFrame
 
             mainMenu.AddChildMenu(accountMenu);
             mainMenu.AddChildMenu(storeCategoriesMenu);
+            mainMenu.AddTextBlock($"{ UserLogger.CurrentAccount.User.FirstName } your balance is { UserLogger.CurrentAccount.Balance }$");
 
             accountMenu.AddChildMenu(makeDepositMenu);
             accountMenu.AddChildMenu(makeWithdrawalMenu);
+
+            makeDepositMenu.AddTextBox("Deposit Amount");
+            makeDepositMenu.SetRenavigateMenu(accountMenu);
+            makeDepositMenu.Func = new MakeDepositLogic(_accountsLogic).MakeDeposit;
 
             storeCategoriesMenu.AddChildMenu(storeProductsMenu);
 

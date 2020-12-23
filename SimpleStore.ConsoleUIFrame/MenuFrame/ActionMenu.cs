@@ -58,6 +58,7 @@ namespace SimpleStore.ConsoleUIFrame.MenuFrame
             Console.Clear();
             Console.WriteLine(_separator);
             PrintMenuHeader();
+            PrintTextBlocks();
             Console.WriteLine();
             PrintTextBoxes();
             Console.WriteLine(_separator);

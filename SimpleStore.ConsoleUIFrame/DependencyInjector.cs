@@ -5,6 +5,8 @@ using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
 using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
+using SimpleStore.Domain.UsersAccounts.AccountsLogic;
+using SimpleStore.Domain.UsersAccounts.AccountsModel;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration;
@@ -25,7 +27,10 @@ namespace SimpleStore.ConsoleUIFrame
             builder.RegisterType<UserLogger>().As<IUserLogger>().SingleInstance();
             builder.RegisterType<UserRegistrator>().As<IUserRegistrator>();
 
-            builder.RegisterType<UserModel>().AsSelf();
+            builder.RegisterType<UserModel>().AsSelf().SingleInstance();
+            builder.RegisterType<AccountModel>().AsSelf().SingleInstance();
+
+            builder.RegisterType<AccountsLogic>().AsSelf();
 
             builder.RegisterType<Application>().AsSelf();
 
