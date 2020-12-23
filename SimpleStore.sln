@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStore.DataAccessLayer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStore.Domain", "SimpleStore.Domain\SimpleStore.Domain.csproj", "{63FC9EC8-DFF3-4051-B95B-4355B16F8B94}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStore.MenuManager", "SimpleStore.MenuManager\SimpleStore.MenuManager.csproj", "{91098592-CCB9-402E-9213-5798303CE179}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStore.ConsoleUIFrame", "SimpleStore.ConsoleUIFrame\SimpleStore.ConsoleUIFrame.csproj", "{C5764BE6-A5F9-40F5-A95C-D62762630622}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{63FC9EC8-DFF3-4051-B95B-4355B16F8B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63FC9EC8-DFF3-4051-B95B-4355B16F8B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63FC9EC8-DFF3-4051-B95B-4355B16F8B94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91098592-CCB9-402E-9213-5798303CE179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91098592-CCB9-402E-9213-5798303CE179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91098592-CCB9-402E-9213-5798303CE179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91098592-CCB9-402E-9213-5798303CE179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5764BE6-A5F9-40F5-A95C-D62762630622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5764BE6-A5F9-40F5-A95C-D62762630622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5764BE6-A5F9-40F5-A95C-D62762630622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5764BE6-A5F9-40F5-A95C-D62762630622}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
