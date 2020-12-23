@@ -8,7 +8,6 @@ namespace SimpleStore.ConsoleUIFrame.Menus
 {
     public class LoginLogic
     {
-        private List<string> _users = new List<string>();
         private IUserLogger _userLogger;
 
         public LoginLogic(IUserLogger userLogger)

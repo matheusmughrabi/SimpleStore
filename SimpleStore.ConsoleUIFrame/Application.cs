@@ -3,6 +3,8 @@ using SimpleStore.ConsoleUIFrame.Menus;
 using SimpleStore.DataAccessLayer.Connections;
 using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
+using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
+using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,10 +14,12 @@ namespace SimpleStore.ConsoleUIFrame
     public class Application
     {
         private IUserLogger _userLogger;
+        private IUserRegistrator _userRegistrator;
 
-        public Application(IUserLogger userLogger)
+        public Application(IUserLogger userLogger, IUserRegistrator userRegistrator)
         {
             _userLogger = userLogger;
+            _userRegistrator = userRegistrator;
         }
 
         public void RunApp()
@@ -33,13 +37,18 @@ namespace SimpleStore.ConsoleUIFrame
             initialMenu.AddChildMenu(loginMenu);
             initialMenu.AddChildMenu(registerMenu);
 
-            loginMenu.AddTextBox("username");
-            loginMenu.AddTextBox("password");
+            loginMenu.AddTextBox("Username");
+            loginMenu.AddTextBox("Password");
             loginMenu.SetRenavigateMenu(mainMenu);
             loginMenu.Func = new LoginLogic(_userLogger).Login;
 
-            registerMenu.AddTextBox("username");
-            registerMenu.AddTextBox("password");
+            registerMenu.AddTextBox("First Name");
+            registerMenu.AddTextBox("Last Name");
+            registerMenu.AddTextBox("Username");
+            registerMenu.AddTextBox("Password");
+            registerMenu.AddTextBox("Confirm Password");
+            registerMenu.SetRenavigateMenu(initialMenu);
+            registerMenu.Func = new RegistrationLogic(_userRegistrator, new UserModel()).Register;
 
             mainMenu.AddChildMenu(accountMenu);
             mainMenu.AddChildMenu(storeCategoriesMenu);
