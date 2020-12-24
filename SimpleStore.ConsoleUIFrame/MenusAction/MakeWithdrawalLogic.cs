@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStore.ConsoleUIFrame.Menus
+namespace SimpleStore.ConsoleUIFrame.MenusAction
 {
     public class MakeWithdrawalLogic
     {

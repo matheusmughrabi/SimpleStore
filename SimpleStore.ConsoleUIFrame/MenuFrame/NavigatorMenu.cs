@@ -34,7 +34,6 @@ namespace SimpleStore.ConsoleUIFrame.MenuFrame
             {
                 _childMenus[(int)userInput - 1].Run();
             }
-
         }
 
         protected override void PrintMenu()

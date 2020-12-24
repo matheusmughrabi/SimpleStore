@@ -1,11 +1,4 @@
 ﻿using Autofac;
-using SimpleStore.ConsoleUIFrame.MenuFrame;
-using SimpleStore.ConsoleUIFrame.Menus;
-using SimpleStore.DataAccessLayer.Connections;
-using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
-using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
-using System;
-using System.Collections.Generic;
 
 namespace SimpleStore.ConsoleUIFrame
 {

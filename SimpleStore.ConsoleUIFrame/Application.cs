@@ -1,5 +1,5 @@
 ﻿using SimpleStore.ConsoleUIFrame.MenuFrame;
-using SimpleStore.ConsoleUIFrame.Menus;
+using SimpleStore.ConsoleUIFrame.MenusAction;
 using SimpleStore.Domain.Products.Categories;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
@@ -72,19 +72,16 @@ namespace SimpleStore.ConsoleUIFrame
             makeWithdrawalMenu.Func = new MakeWithdrawalLogic(_accountsLogic).MakeWithdrawal;
 
             List<CategoryModel> categories = _categoryService.GetCategories();
-            List<ActionMenu> productMenus = new List<ActionMenu>();
             foreach (var category in categories)
             {
                 ActionMenu productMenu = new ActionMenu($"{category.CategoryName} Menu", storeCategoriesMenu);
-                productMenus.Add(productMenu);
+                productMenu.Func = new BuyProductLogic(_accountsLogic, category, _productService).BuyProduct;
+                
                 storeCategoriesMenu.AddChildMenu(productMenu);
 
-                productMenu.AddTextBox("Select Product");
+                productMenu.AddTextBlock("Select Product");
                 productMenu.Func = new BuyProductLogic(_accountsLogic, category, _productService).BuyProduct;
             }
-
-
-            //storeCategoriesMenu.AddChildMenu(storeProductsMenu);
 
             initialMenu.Run();
         }

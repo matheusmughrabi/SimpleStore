@@ -19,6 +19,11 @@ namespace SimpleStore.Domain.UsersAccounts.AccountsLogic
             _accountsService = accountService;
         }
 
+        public void UpdateCurrentAccount()
+        {
+            CurrentAccount = UserLogger.CurrentAccount;
+        }
+
         public bool MakePurchase(decimal price)
         {
             CurrentAccount = UserLogger.CurrentAccount;
