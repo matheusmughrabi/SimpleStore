@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStore.ConsoleUIFrame.MenusAction
+namespace SimpleStore.ConsoleUI.MenusAction
 {
     public class BuyProductLogic
     {

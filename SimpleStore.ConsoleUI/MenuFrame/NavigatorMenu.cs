@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStore.ConsoleUIFrame.MenuFrame
+namespace SimpleStore.ConsoleUI.MenuFrame
 {
     public class NavigatorMenu : BaseMenu
     {

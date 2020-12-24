@@ -1,10 +1,10 @@
-﻿using SimpleStore.ConsoleUIFrame.MenuFrame;
+﻿using SimpleStore.ConsoleUI.MenuFrame;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStore.ConsoleUIFrame.MenusAction
+namespace SimpleStore.ConsoleUI.MenusAction
 {
     public class LoginLogic
     {

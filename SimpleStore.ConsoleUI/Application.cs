@@ -1,5 +1,5 @@
-﻿using SimpleStore.ConsoleUIFrame.MenuFrame;
-using SimpleStore.ConsoleUIFrame.MenusAction;
+﻿using SimpleStore.ConsoleUI.MenuFrame;
+using SimpleStore.ConsoleUI.MenusAction;
 using SimpleStore.Domain.Products.Categories;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
@@ -8,7 +8,7 @@ using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System.Collections.Generic;
 
-namespace SimpleStore.ConsoleUIFrame
+namespace SimpleStore.ConsoleUI
 {
     public class Application
     {
