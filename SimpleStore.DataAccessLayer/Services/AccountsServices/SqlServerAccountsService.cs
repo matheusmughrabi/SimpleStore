@@ -33,7 +33,7 @@ namespace SimpleStore.DataAccessLayer.Services.AccountsServices
 
                     while (sqlDataReader.Read())
                     {
-                        account = new AccountModel();
+                        account = new AccountModel(new UserModel());
 
                         account.Id = sqlDataReader.GetInt32(0);
                         account.User.Id = sqlDataReader.GetInt32(1);
@@ -60,8 +60,7 @@ namespace SimpleStore.DataAccessLayer.Services.AccountsServices
 
         public AccountModel GetAccountByUserId(int userId)
         {
-            AccountModel account = new AccountModel();
-            account.User = new UserModel();
+            AccountModel account = new AccountModel(new UserModel());
 
             try
             {
