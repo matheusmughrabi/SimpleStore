@@ -4,13 +4,13 @@ using System.Text;
 
 namespace SimpleStore.ConsoleUI.MenuFrame.Menus
 {
-    public class NavigatorActionMenu : BaseMenu
+    public class MasterNavigatorMenu : BaseMenu
     {
         protected List<BaseMenu> _childMenus = new List<BaseMenu>();
 
         public Action Action { get; set; }
 
-        public NavigatorActionMenu(string menuName, BaseMenu root) : base(menuName, root)
+        public MasterNavigatorMenu(string menuName, BaseMenu root) : base(menuName, root)
         {
         }
 

@@ -31,15 +31,14 @@ namespace SimpleStore.ConsoleUI
 
         public void RunApp()
         {
-            var initialMenu = new NavigatorMenu("Initial Menu", null);
-            var loginMenu = new ActionMenu("Login Menu", initialMenu);
-            var registerMenu = new ActionMenu("Register Menu", initialMenu);
-            var mainMenu = new NavigatorActionMenu("Main Menu", loginMenu);
-            var accountMenu = new NavigatorMenu("Account Menu", mainMenu);
-            var makeDepositMenu = new ActionMenu("Make Deposit Menu", accountMenu);
-            var makeWithdrawalMenu = new ActionMenu("Make Withdrawal Menu", accountMenu);
-            var storeCategoriesMenu = new NavigatorMenu("Store Categories Menu", mainMenu);
-            var storeProductsMenu = new ActionMenu("Store Products Menu", mainMenu);
+            var initialMenu = new SimpleNavigatorMenu("Initial Menu", null);
+            var loginMenu = new SimpleActionMenu("Login Menu", initialMenu);
+            var registerMenu = new SimpleActionMenu("Register Menu", initialMenu);
+            var mainMenu = new MasterNavigatorMenu("Main Menu", loginMenu);
+            var accountMenu = new SimpleNavigatorMenu("Account Menu", mainMenu);
+            var makeDepositMenu = new SimpleActionMenu("Make Deposit Menu", accountMenu);
+            var makeWithdrawalMenu = new SimpleActionMenu("Make Withdrawal Menu", accountMenu);
+            var storeCategoriesMenu = new SimpleNavigatorMenu("Store Categories Menu", mainMenu);
 
             initialMenu.AddChildMenu(loginMenu);
             initialMenu.AddChildMenu(registerMenu);
@@ -60,7 +59,6 @@ namespace SimpleStore.ConsoleUI
             mainMenu.AddChildMenu(accountMenu);
             mainMenu.AddChildMenu(storeCategoriesMenu);
             mainMenu.Action = new AccountInfoLogic(_accountsLogic).PrintAccountInfoLogic;
-            //mainMenu.AddTextBlock($"{ UserLogger.CurrentAccount.User.FirstName } your balance is { UserLogger.CurrentAccount.Balance }$");
 
             accountMenu.AddChildMenu(makeDepositMenu);
             accountMenu.AddChildMenu(makeWithdrawalMenu);
@@ -76,13 +74,9 @@ namespace SimpleStore.ConsoleUI
             List<CategoryModel> categories = _categoryService.GetCategories();
             foreach (var category in categories)
             {
-                ActionMenu productMenu = new ActionMenu($"{category.CategoryName} Menu", storeCategoriesMenu);
+                SimpleActionMenu productMenu = new SimpleActionMenu($"{category.CategoryName} Menu", storeCategoriesMenu);
                 productMenu.Func = new BuyProductLogic(_accountsLogic, category, _productService).BuyProduct;
-                
-                storeCategoriesMenu.AddChildMenu(productMenu);
-
-                productMenu.AddTextBlock("Select Product");
-                productMenu.Func = new BuyProductLogic(_accountsLogic, category, _productService).BuyProduct;
+                storeCategoriesMenu.AddChildMenu(productMenu);  
             }
 
             initialMenu.Run();

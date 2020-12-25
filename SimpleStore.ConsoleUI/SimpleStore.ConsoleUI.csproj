@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MenuFrame\MenuItems\" />
+    <Folder Include="MenuFrameTest\Actions\" />
   </ItemGroup>
 
 </Project>
