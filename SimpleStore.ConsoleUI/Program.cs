@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using SimpleStore.ConsoleUI.Control.InitialMenu;
 
 namespace SimpleStore.ConsoleUI
 {
@@ -11,14 +10,9 @@ namespace SimpleStore.ConsoleUI
 
             using (var scope = container.BeginLifetimeScope())
             {
-                var initialMenu = scope.Resolve<InitialMenu>();
-
-                bool isActive = true;
-                while (isActive)
-                {
-                    isActive = initialMenu.RunMenu();
-                }
-            } 
+                var initialMenuRun = scope.Resolve<Application>();
+                initialMenuRun.RunApp();
+            }
         }
     }
 }

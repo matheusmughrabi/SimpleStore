@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,15 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Menus\**" />
+    <EmbeddedResource Remove="Menus\**" />
+    <None Remove="Menus\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="6.1.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.113.6" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SimpleStore.DataAccessLayer\SimpleStore.DataAccessLayer.csproj" />
     <ProjectReference Include="..\SimpleStore.Domain\SimpleStore.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MenuFrameTest\Actions\" />
   </ItemGroup>
 
 </Project>
