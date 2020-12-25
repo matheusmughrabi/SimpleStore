@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStore.ConsoleUIFrame.MenuFrame
+namespace SimpleStore.ConsoleUI.MenuFrame
 {
-    public class NavigatorMenu : BaseMenu
+    public class SimpleNavigatorMenu : BaseMenu
     {
         protected List<BaseMenu> _childMenus = new List<BaseMenu>();
 
-        public NavigatorMenu(string menuName, BaseMenu root) : base(menuName, root)
+        public SimpleNavigatorMenu(string menuName, BaseMenu root) : base(menuName, root)
         {
         }
 

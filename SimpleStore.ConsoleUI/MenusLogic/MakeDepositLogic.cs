@@ -1,20 +1,22 @@
-﻿using SimpleStore.Domain.UsersAccounts.AccountsLogic;
+﻿using SimpleStore.Domain.Services.AccountServices;
+using SimpleStore.Domain.UsersAccounts.AccountsLogic;
+using SimpleStore.Domain.UsersAccounts.AccountsModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStore.ConsoleUIFrame.MenusAction
+namespace SimpleStore.ConsoleUI.MenusAction
 {
-    public class MakeWithdrawalLogic
+    public class MakeDepositLogic
     {
         private AccountsLogic _accountLogic;
 
-        public MakeWithdrawalLogic(AccountsLogic accountLogic)
+        public MakeDepositLogic(AccountsLogic accountLogic)
         {
             _accountLogic = accountLogic;
         }
 
-        public bool MakeWithdrawal(List<string> inputs)
+        public bool MakeDeposit(List<string> inputs)
         {
             decimal amount = 0;
             bool isValidAmount = decimal.TryParse(inputs[0], out amount);
@@ -28,15 +30,8 @@ namespace SimpleStore.ConsoleUIFrame.MenusAction
 
             if (amount > 0)
             {
-                bool isWithdrawalSuccessful = _accountLogic.MakeWithdrawal(amount);
-                if (isWithdrawalSuccessful)
-                {
-                    Console.WriteLine("Withdrawal successful");  
-                }
-                else
-                {
-                    Console.WriteLine("Withdrawal unsuccessful");
-                }
+                _accountLogic.MakeDeposit(amount);
+                Console.WriteLine("Deposit successful");
                 Console.ReadLine();
             }
 

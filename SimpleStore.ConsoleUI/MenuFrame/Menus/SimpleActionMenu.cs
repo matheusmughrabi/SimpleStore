@@ -2,29 +2,24 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStore.ConsoleUIFrame.MenuFrame
+namespace SimpleStore.ConsoleUI.MenuFrame
 {
-    public class ActionMenu : BaseMenu
+    public class SimpleActionMenu : BaseMenu
     {
+        private bool _actionSucceeded = false;
         protected BaseMenu _renavigateMenu;
         protected List<string> _textBoxes = new List<string>();
         List<string> textBoxInputs;
 
         public Func<List<string>, bool> Func { get; set; }
 
-        public ActionMenu(string menuName, BaseMenu root) : base(menuName, root)
+        public SimpleActionMenu(string menuName, BaseMenu root) : base(menuName, root)
         {
         }
 
         public override void Run()
         {
             PrintMenu();
-            bool success = false;
-
-            if (Func != null)
-            {
-                success = Func(textBoxInputs);
-            }
 
             if (_renavigateMenu == null)
             {
@@ -32,7 +27,7 @@ namespace SimpleStore.ConsoleUIFrame.MenuFrame
             }
             else
             {
-                if (success)
+                if (_actionSucceeded)
                 {
                     _renavigateMenu.Run();
                 }
@@ -61,6 +56,10 @@ namespace SimpleStore.ConsoleUIFrame.MenuFrame
             PrintTextBlocks();
             Console.WriteLine();
             PrintTextBoxes();
+            if (Func != null)
+            {
+                _actionSucceeded = Func(textBoxInputs);
+            }
             Console.WriteLine(_separator);
         }
 

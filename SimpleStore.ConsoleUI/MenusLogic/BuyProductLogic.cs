@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStore.ConsoleUIFrame.MenusAction
+namespace SimpleStore.ConsoleUI.MenusAction
 {
     public class BuyProductLogic
     {
@@ -25,6 +25,9 @@ namespace SimpleStore.ConsoleUIFrame.MenusAction
         {
             List<ProductModel> products = _productsService.GetProductsByCategory(_category.Id);
 
+            _accountLogic.ReloadCurrentAccount();
+            Console.WriteLine($"{ _accountLogic.CurrentAccount.User.FirstName } your balance is { _accountLogic.CurrentAccount.Balance }");
+
             int i = 1;
             foreach (var product in products)
             {
@@ -36,8 +39,6 @@ namespace SimpleStore.ConsoleUIFrame.MenusAction
 
             string selectedProduct = Console.ReadLine();
             bool isInputValidUint = uint.TryParse(selectedProduct, out uint parsedSelectedProduct);
-
-            _accountLogic.UpdateCurrentAccount();
 
             if (isInputValidUint && parsedSelectedProduct <= products.Count)
             {

@@ -1,11 +1,7 @@
 ﻿using SimpleStore.Domain.Services.AccountServices;
-using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SimpleStore.Domain.UsersAccounts.AccountsLogic
 {
@@ -19,7 +15,7 @@ namespace SimpleStore.Domain.UsersAccounts.AccountsLogic
             _accountsService = accountService;
         }
 
-        public void UpdateCurrentAccount()
+        public void ReloadCurrentAccount()
         {
             CurrentAccount = UserLogger.CurrentAccount;
         }
