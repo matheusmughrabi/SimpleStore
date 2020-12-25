@@ -37,7 +37,7 @@ namespace SimpleStore.ConsoleUI.MenusAction
             string selectedProduct = Console.ReadLine();
             bool isInputValidUint = uint.TryParse(selectedProduct, out uint parsedSelectedProduct);
 
-            _accountLogic.UpdateCurrentAccount();
+            _accountLogic.ReloadCurrentAccount();
 
             if (isInputValidUint && parsedSelectedProduct <= products.Count)
             {
