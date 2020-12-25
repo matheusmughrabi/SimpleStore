@@ -25,6 +25,9 @@ namespace SimpleStore.ConsoleUI.MenusAction
         {
             List<ProductModel> products = _productsService.GetProductsByCategory(_category.Id);
 
+            _accountLogic.ReloadCurrentAccount();
+            Console.WriteLine($"{ _accountLogic.CurrentAccount.User.FirstName } your balance is { _accountLogic.CurrentAccount.Balance }");
+
             int i = 1;
             foreach (var product in products)
             {
@@ -36,8 +39,6 @@ namespace SimpleStore.ConsoleUI.MenusAction
 
             string selectedProduct = Console.ReadLine();
             bool isInputValidUint = uint.TryParse(selectedProduct, out uint parsedSelectedProduct);
-
-            _accountLogic.ReloadCurrentAccount();
 
             if (isInputValidUint && parsedSelectedProduct <= products.Count)
             {

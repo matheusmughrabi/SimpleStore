@@ -1,4 +1,5 @@
 ﻿using SimpleStore.ConsoleUI.MenuFrame;
+using SimpleStore.ConsoleUI.MenuFrame.Menus;
 using SimpleStore.ConsoleUI.MenusAction;
 using SimpleStore.Domain.Products.Categories;
 using SimpleStore.Domain.Services.ProductsServices;
@@ -33,7 +34,7 @@ namespace SimpleStore.ConsoleUI
             var initialMenu = new NavigatorMenu("Initial Menu", null);
             var loginMenu = new ActionMenu("Login Menu", initialMenu);
             var registerMenu = new ActionMenu("Register Menu", initialMenu);
-            var mainMenu = new NavigatorMenu("Main Menu", loginMenu);
+            var mainMenu = new NavigatorActionMenu("Main Menu", loginMenu);
             var accountMenu = new NavigatorMenu("Account Menu", mainMenu);
             var makeDepositMenu = new ActionMenu("Make Deposit Menu", accountMenu);
             var makeWithdrawalMenu = new ActionMenu("Make Withdrawal Menu", accountMenu);
@@ -58,7 +59,8 @@ namespace SimpleStore.ConsoleUI
 
             mainMenu.AddChildMenu(accountMenu);
             mainMenu.AddChildMenu(storeCategoriesMenu);
-            mainMenu.AddTextBlock($"{ UserLogger.CurrentAccount.User.FirstName } your balance is { UserLogger.CurrentAccount.Balance }$");
+            mainMenu.Action = new AccountInfoLogic(_accountsLogic).PrintAccountInfoLogic;
+            //mainMenu.AddTextBlock($"{ UserLogger.CurrentAccount.User.FirstName } your balance is { UserLogger.CurrentAccount.Balance }$");
 
             accountMenu.AddChildMenu(makeDepositMenu);
             accountMenu.AddChildMenu(makeWithdrawalMenu);
