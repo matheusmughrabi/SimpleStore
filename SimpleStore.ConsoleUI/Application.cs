@@ -45,14 +45,15 @@ namespace SimpleStore.ConsoleUI
             var mainMenu = new MasterNavigatorMenu("Main Menu", initialMenu);
             var managerMainMenu = new MasterNavigatorMenu("Manager Main Menu", initialMenu);
             var managerAddCategoryMenu = new SimpleActionMenu("Add Category Menu", managerMainMenu);
+            var managerAddProductMenu = new SimpleActionMenu("Add Product Menu", managerMainMenu);
             var accountMenu = new SimpleNavigatorMenu("Account Menu", mainMenu);
             var makeDepositMenu = new SimpleActionMenu("Make Deposit Menu", accountMenu);
             var makeWithdrawalMenu = new SimpleActionMenu("Make Withdrawal Menu", accountMenu);
             var storeCategoriesMenu = new SimpleNavigatorMenu("Store Categories Menu", mainMenu);
 
             initialMenu.AddChildMenu(loginMenu);
-            initialMenu.AddChildMenu(registerMenu);
             initialMenu.AddChildMenu(managerLoginMenu);
+            initialMenu.AddChildMenu(registerMenu);         
 
             loginMenu.AddTextBox("Username");
             loginMenu.AddTextBox("Password");
@@ -78,9 +79,12 @@ namespace SimpleStore.ConsoleUI
 
             managerMainMenu.AddTextBlock("Welcome Manager");
             managerMainMenu.AddChildMenu(managerAddCategoryMenu);
+            managerMainMenu.AddChildMenu(managerAddProductMenu);
 
             managerAddCategoryMenu.AddTextBox("Category Name");
             managerAddCategoryMenu.Func = new ManagerInsertCategoryLogic(_categoryOperator).InsertCategory;
+
+            managerAddProductMenu.AddTextBox("Product Name");
     
             accountMenu.AddChildMenu(makeDepositMenu);
             accountMenu.AddChildMenu(makeWithdrawalMenu);
