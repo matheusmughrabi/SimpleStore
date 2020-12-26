@@ -1,4 +1,5 @@
 ﻿using SimpleStore.Domain.UsersAuthenticator.Users;
+using SimpleStore.Domain.UsersAuthenticator.UsersModel;
 using System;
 using System.Collections.Generic;
 using System.Text;

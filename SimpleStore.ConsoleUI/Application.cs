@@ -1,9 +1,11 @@
 ﻿using SimpleStore.ConsoleUI.MenuFrame;
 using SimpleStore.ConsoleUI.MenuFrame.Menus;
 using SimpleStore.ConsoleUI.MenusAction;
+using SimpleStore.ConsoleUI.MenusLogic;
 using SimpleStore.Domain.Products.Categories;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
+using SimpleStore.Domain.UsersAuthenticator.Authenticator.ManagerLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Users;
@@ -14,15 +16,17 @@ namespace SimpleStore.ConsoleUI
     public class Application
     {
         private IUserLogger _userLogger;
+        private IManagerLogger _managerLogger;
         private IUserRegistrator _userRegistrator;
         private ICategoryService _categoryService;
         private IProductsService _productService;
         private AccountsLogic _accountsLogic;
 
-        public Application(IUserLogger userLogger, IUserRegistrator userRegistrator, ICategoryService categoryService, 
+        public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator, ICategoryService categoryService, 
             IProductsService productService, AccountsLogic accountsLogic)
         {
             _userLogger = userLogger;
+            _managerLogger = managerLogger;
             _userRegistrator = userRegistrator;
             _categoryService = categoryService;
             _productService = productService;
@@ -33,8 +37,10 @@ namespace SimpleStore.ConsoleUI
         {
             var initialMenu = new SimpleNavigatorMenu("Initial Menu", null);
             var loginMenu = new SimpleActionMenu("Login Menu", initialMenu);
-            var registerMenu = new SimpleActionMenu("Register Menu", initialMenu);
-            var mainMenu = new MasterNavigatorMenu("Main Menu", loginMenu);
+            var managerLoginMenu = new SimpleActionMenu("Manager Login Menu", initialMenu);
+            var registerMenu = new SimpleActionMenu("Register Menu", initialMenu);           
+            var mainMenu = new MasterNavigatorMenu("Main Menu", initialMenu);
+            var managerMainMenu = new MasterNavigatorMenu("Manager Main Menu", initialMenu);
             var accountMenu = new SimpleNavigatorMenu("Account Menu", mainMenu);
             var makeDepositMenu = new SimpleActionMenu("Make Deposit Menu", accountMenu);
             var makeWithdrawalMenu = new SimpleActionMenu("Make Withdrawal Menu", accountMenu);
@@ -42,11 +48,17 @@ namespace SimpleStore.ConsoleUI
 
             initialMenu.AddChildMenu(loginMenu);
             initialMenu.AddChildMenu(registerMenu);
+            initialMenu.AddChildMenu(managerLoginMenu);
 
             loginMenu.AddTextBox("Username");
             loginMenu.AddTextBox("Password");
             loginMenu.SetRenavigateMenu(mainMenu);
             loginMenu.Func = new LoginLogic(_userLogger).Login;
+
+            managerLoginMenu.AddTextBox("Username");
+            managerLoginMenu.AddTextBox("Password");
+            managerLoginMenu.SetRenavigateMenu(managerMainMenu);
+            managerLoginMenu.Func = new ManagerLoginLogic(_managerLogger).Login;
 
             registerMenu.AddTextBox("First Name");
             registerMenu.AddTextBox("Last Name");
@@ -60,6 +72,8 @@ namespace SimpleStore.ConsoleUI
             mainMenu.AddChildMenu(storeCategoriesMenu);
             mainMenu.Action = new AccountInfoLogic(_accountsLogic).PrintAccountInfoLogic;
 
+            managerMainMenu.AddTextBlock("Welcome Manager");
+    
             accountMenu.AddChildMenu(makeDepositMenu);
             accountMenu.AddChildMenu(makeWithdrawalMenu);
 

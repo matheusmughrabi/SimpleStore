@@ -8,9 +8,9 @@ using System.Data.SqlClient;
 
 namespace SimpleStore.DataAccessLayer.Services.AuthenticationServices
 {
-    public class SqlServerAutenticationService : BaseSqlServerService, IAuthenticationService
+    public class SqlServerAuthenticationService : BaseSqlServerService, IAuthenticationService
     {
-        public SqlServerAutenticationService(IConnection sqlServerConnection) : base(sqlServerConnection) 
+        public SqlServerAuthenticationService(IConnection sqlServerConnection) : base(sqlServerConnection) 
         {
         }
 

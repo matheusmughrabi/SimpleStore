@@ -3,20 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStore.Domain.UsersAccounts.AccountsModel
+namespace SimpleStore.Domain.UsersAuthenticator.UsersModel
 {
-    public class AccountModel
+    public class ManagerModel
     {
         public int Id { get; set; }
         public UserModel User { get; set; }
-        public decimal Balance { get; set; }
+        public string ManagerPermission { get; set; }
 
-        public AccountModel()
+        public ManagerModel()
         {
 
         }
-
-        public AccountModel(UserModel user)
+        public ManagerModel(UserModel user)
         {
             User = user;
         }
