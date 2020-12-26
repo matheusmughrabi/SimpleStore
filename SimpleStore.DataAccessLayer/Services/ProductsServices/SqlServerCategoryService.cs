@@ -66,7 +66,14 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                 _sqlCommand.CommandText = "spInsertCategory";
 
                 _sqlCommand.Parameters.AddWithValue("@Category", category.CategoryName);
-                _sqlCommand.Parameters.AddWithValue("@ParentId", DBNull.Value);
+                if (category.ParentCategoryId == null)
+                {
+                    _sqlCommand.Parameters.AddWithValue("@ParentId", DBNull.Value);
+                }
+                else
+                {
+                    _sqlCommand.Parameters.AddWithValue("@ParentId", category.ParentCategoryId);
+                }                
                 _sqlCommand.Parameters.AddWithValue("@InsertedAt", DateTime.Now);
                 _sqlCommand.Parameters.AddWithValue("@UpdatedAt", DBNull.Value);
                 _sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Direction = ParameterDirection.Output;
