@@ -20,7 +20,14 @@ namespace SimpleStore.ConsoleUI.MenusLogic
             CategoryModel category = new CategoryModel();
             category.CategoryName = inputs[0];
 
-            _categoryOperator.InsertCategory(category);
+            bool success = _categoryOperator.InsertCategory(category);
+
+            if (success == false)
+            {
+                Console.WriteLine("This category already exists");
+                Console.ReadLine();
+                return false;
+            }
 
             return true;
         }

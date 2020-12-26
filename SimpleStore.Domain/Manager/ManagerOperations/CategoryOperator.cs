@@ -9,6 +9,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
     public class CategoryOperator : ICategoryOperator
     {
         private readonly ICategoryService _categoryService;
+        private List<CategoryModel> _registeredCategories;
 
         public CategoryOperator(ICategoryService categoryService)
         {
@@ -17,6 +18,16 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 
         public bool InsertCategory(CategoryModel category)
         {
+            _registeredCategories = _categoryService.GetCategories();
+
+            foreach (var registeredCategory in _registeredCategories)
+            {
+                if (registeredCategory.CategoryName == category.CategoryName)
+                {
+                    return false;
+                }
+            }
+
             _categoryService.InsertCategory(category);
             return true;
         }
