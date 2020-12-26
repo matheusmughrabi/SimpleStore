@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
+using SimpleStore.Domain.Manager.ManagerModels;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Users;
-using SimpleStore.Domain.UsersAuthenticator.UsersModel;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.ManagerLogin
+namespace SimpleStore.Domain.Manager.ManagerLogin
 {
     public class ManagerLogger : IManagerLogger
     {

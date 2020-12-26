@@ -4,13 +4,14 @@ using SimpleStore.DataAccessLayer.Services.AccountsServices;
 using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
 using SimpleStore.DataAccessLayer.Services.ManagerAuthenticationServices;
 using SimpleStore.DataAccessLayer.Services.ProductsServices;
+using SimpleStore.Domain.Manager.ManagerLogin;
+using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Domain.UsersAccounts.AccountsModel;
-using SimpleStore.Domain.UsersAuthenticator.Authenticator.ManagerLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration;
@@ -39,6 +40,7 @@ namespace SimpleStore.ConsoleUI
             builder.RegisterType<AccountModel>().AsSelf().SingleInstance();
 
             builder.RegisterType<AccountsLogic>().AsSelf();
+            builder.RegisterType<CategoryOperator>().As<ICategoryOperator>();
 
             builder.RegisterType<Application>().AsSelf();
 
