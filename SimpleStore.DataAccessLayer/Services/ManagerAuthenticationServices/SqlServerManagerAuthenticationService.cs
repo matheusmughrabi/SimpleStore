@@ -1,11 +1,9 @@
-﻿using SimpleStore.Domain.Services;
+﻿using SimpleStore.Domain.Manager.ManagerModels;
+using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Users;
-using SimpleStore.Domain.UsersAuthenticator.UsersModel;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace SimpleStore.DataAccessLayer.Services.ManagerAuthenticationServices
 {

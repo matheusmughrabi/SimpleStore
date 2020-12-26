@@ -1,7 +1,5 @@
-﻿using SimpleStore.Domain.UsersAuthenticator.UsersModel;
-using System;
+﻿using SimpleStore.Domain.Manager.ManagerModels;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.Domain.Services.AuthenticationServices
 {

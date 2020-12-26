@@ -1,4 +1,4 @@
-﻿using SimpleStore.Domain.UsersAuthenticator.Authenticator.ManagerLogin;
+﻿using SimpleStore.Domain.Manager.ManagerLogin;
 using System;
 using System.Collections.Generic;
 

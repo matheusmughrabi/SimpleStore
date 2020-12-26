@@ -4,6 +4,7 @@ using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.ProductsServices;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -55,6 +56,37 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                 _sqlServerConnection.CloseConnection();
             }
             return categories;
+        }
+
+        public CategoryModel InsertCategory(CategoryModel category)
+        {
+            try
+            {
+                _sqlCommand.Parameters.Clear();
+                _sqlCommand.CommandText = "spInsertCategory";
+
+                _sqlCommand.Parameters.AddWithValue("@Category", category.CategoryName);
+                _sqlCommand.Parameters.AddWithValue("@ParentId", DBNull.Value);
+                _sqlCommand.Parameters.AddWithValue("@InsertedAt", DateTime.Now);
+                _sqlCommand.Parameters.AddWithValue("@UpdatedAt", DBNull.Value);
+                _sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                _sqlServerConnection.OpenConnection();
+                _sqlCommand.ExecuteNonQuery();
+
+                category.Id = Convert.ToInt32(_sqlCommand.Parameters["@Id"].Value);
+
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _sqlServerConnection.CloseConnection();
+            }
+
+            return category;
         }
     }
 }
