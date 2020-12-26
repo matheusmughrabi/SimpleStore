@@ -16,6 +16,7 @@ namespace SimpleStore.DataAccessLayer.Connections
         public SqlServerConnection()
         {
             GetConnection();
+            GetSqlCommand();
         }
 
         public void GetConnection()
@@ -34,7 +35,7 @@ namespace SimpleStore.DataAccessLayer.Connections
             _sqlConnection.Close();
         }   
         
-        public SqlCommand GetSqlCommand()
+        private SqlCommand GetSqlCommand()
         {
             _sqlCommand = new SqlCommand();
             _sqlCommand.Connection = _sqlConnection;

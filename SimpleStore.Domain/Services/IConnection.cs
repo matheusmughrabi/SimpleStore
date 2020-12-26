@@ -10,6 +10,5 @@ namespace SimpleStore.Domain.Services
         void GetConnection();
         void OpenConnection();
         void CloseConnection();
-        SqlCommand GetSqlCommand();
     }
 }
