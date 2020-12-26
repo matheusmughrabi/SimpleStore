@@ -84,7 +84,13 @@ namespace SimpleStore.ConsoleUI
             managerAddCategoryMenu.AddTextBox("Category Name");
             managerAddCategoryMenu.Func = new ManagerInsertCategoryLogic(_categoryOperator).InsertCategory;
 
-            managerAddProductMenu.AddTextBox("Product Name");
+            managerAddProductMenu.AddTextBox("Name");
+            managerAddProductMenu.AddTextBox("Brand");
+            managerAddProductMenu.AddTextBox("Category");
+            managerAddProductMenu.AddTextBox("Regular Price");
+            managerAddProductMenu.AddTextBox("Discounted Price");
+            managerAddProductMenu.AddTextBox("Description");
+            managerAddProductMenu.AddTextBox("Status");
     
             accountMenu.AddChildMenu(makeDepositMenu);
             accountMenu.AddChildMenu(makeWithdrawalMenu);
