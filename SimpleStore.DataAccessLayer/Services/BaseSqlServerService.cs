@@ -14,7 +14,7 @@ namespace SimpleStore.DataAccessLayer.Services
         public BaseSqlServerService(IConnection sqlServerConnection)
         {
             _sqlServerConnection = sqlServerConnection;
-            _sqlCommand = _sqlServerConnection.GetSqlCommand();
+            _sqlCommand = sqlServerConnection.GetSqlCommand();
         }
     }
 }

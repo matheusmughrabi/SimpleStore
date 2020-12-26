@@ -2,7 +2,10 @@
 using SimpleStore.DataAccessLayer.Connections;
 using SimpleStore.DataAccessLayer.Services.AccountsServices;
 using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
+using SimpleStore.DataAccessLayer.Services.ManagerAuthenticationServices;
 using SimpleStore.DataAccessLayer.Services.ProductsServices;
+using SimpleStore.Domain.Manager.ManagerLogin;
+using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
@@ -23,18 +26,21 @@ namespace SimpleStore.ConsoleUI
             var builder = new ContainerBuilder();
 
             builder.RegisterType<SqlServerConnection>().As<IConnection>();
-            builder.RegisterType<SqlServerAutenticationService>().As<IAuthenticationService>();
+            builder.RegisterType<SqlServerAuthenticationService>().As<IAuthenticationService>();
+            builder.RegisterType<SqlServerManagerAuthenticationService>().As<IManagerAuthenticationService>();
             builder.RegisterType<SqlServerAccountsService>().As<IAccountsService>();
             builder.RegisterType<SqlServerCategoryService>().As<ICategoryService>();
             builder.RegisterType<SqlServerProductsService>().As<IProductsService>();
 
             builder.RegisterType<UserLogger>().As<IUserLogger>().SingleInstance();
+            builder.RegisterType<ManagerLogger>().As<IManagerLogger>().SingleInstance();
             builder.RegisterType<UserRegistrator>().As<IUserRegistrator>();
 
             builder.RegisterType<UserModel>().AsSelf().SingleInstance();
             builder.RegisterType<AccountModel>().AsSelf().SingleInstance();
 
             builder.RegisterType<AccountsLogic>().AsSelf();
+            builder.RegisterType<CategoryOperator>().As<ICategoryOperator>();
 
             builder.RegisterType<Application>().AsSelf();
 
