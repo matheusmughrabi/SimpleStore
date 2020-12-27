@@ -6,7 +6,7 @@ namespace SimpleStore.Domain.Manager.ManagerModels
     {
         public int Id { get; set; }
         public UserModel User { get; set; }
-        public string ManagerPermission { get; set; }
+        public ManagerPermissionModel ManagerPermission { get; set; }
 
         public ManagerModel()
         {

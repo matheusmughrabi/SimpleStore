@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.MenuFrame
 {
     public class SimpleActionMenu : BaseMenu
     {
-        private bool _actionSucceeded = false;
+        private bool _isActionSuccess = false;
         protected BaseMenu _renavigateMenu;
         protected List<string> _textBoxes = new List<string>();
         List<string> textBoxInputs;
@@ -27,7 +26,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame
             }
             else
             {
-                if (_actionSucceeded)
+                if (_isActionSuccess)
                 {
                     _renavigateMenu.Run();
                 }
@@ -58,7 +57,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame
             PrintTextBoxes();
             if (Func != null)
             {
-                _actionSucceeded = Func(textBoxInputs);
+                _isActionSuccess = Func(textBoxInputs);
             }
             Console.WriteLine(_separator);
         }

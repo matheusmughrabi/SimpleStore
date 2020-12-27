@@ -1,5 +1,5 @@
 ﻿using SimpleStore.DataAccessLayer.Helpers;
-using SimpleStore.Domain.Products.Categories;
+using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.ProductsServices;
 using System;

@@ -1,4 +1,4 @@
-﻿using SimpleStore.Domain.Products.Categories;
+﻿using SimpleStore.Domain.Products;
 using System;
 using System.Collections.Generic;
 using System.Text;
