@@ -20,9 +20,10 @@ namespace SimpleStore.ConsoleUI.MenusLogic
         {
             ManagerModel manager = new ManagerModel();
             manager.User = new UserModel();
+            manager.ManagerPermission = new ManagerPermissionModel();
 
             manager.User.Username = inputs[0];
-            manager.ManagerPermission = inputs[1];
+            manager.ManagerPermission.PermissionTitle = inputs[1];
 
             _managerCreator.RegisterManager(manager);
 

@@ -13,6 +13,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
         private readonly IManagerService _managerService;
         private readonly IAuthenticationService _authenticationService;
         private List<UserModel> _registeredUsers;
+        private List<ManagerPermissionModel> _registeredManagerPermissions;
 
         public ManagerCreator(IManagerService managerService, IAuthenticationService authenticationService)
         {
@@ -23,6 +24,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
         public bool RegisterManager(ManagerModel manager)
         {
             _registeredUsers = _authenticationService.GetRegisteredUsers();
+            _registeredManagerPermissions = _managerService.GetRegisteredManagerPermissions();
 
             bool userExists = false;
             foreach (var registeredUser in _registeredUsers)
@@ -31,10 +33,22 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 {
                     manager.User.Id = registeredUser.Id;
                     userExists = true;
+                    break;
                 }
             }
 
-            if (!userExists)
+            bool permissionExists = false;
+            foreach (var registeredManagerPermission in _registeredManagerPermissions)
+            {
+                if (registeredManagerPermission.PermissionTitle == manager.ManagerPermission.PermissionTitle)
+                {
+                    manager.ManagerPermission.Id = registeredManagerPermission.Id;
+                    permissionExists = true;
+                    break;
+                }
+            }
+
+            if (!userExists || !permissionExists)
             {
                 return false;
             }

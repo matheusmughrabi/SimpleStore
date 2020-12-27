@@ -89,7 +89,7 @@ namespace SimpleStore.ConsoleUI
             managerMainMenu.AddChildMenu(managerCreateManagerMenu);
 
             managerCreateManagerMenu.AddTextBox("Manager username");
-            managerCreateManagerMenu.AddTextBox("Manager permission");
+            managerCreateManagerMenu.AddTextBox("Manager permission (Super Admin or Admin)");
             managerCreateManagerMenu.Func = new ManagerCreatorLogic(_managerCreator).CreateManager;
 
 

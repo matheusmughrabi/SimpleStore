@@ -35,6 +35,7 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
                     {
                         manager = new ManagerModel();
                         manager.User = new UserModel();
+                        manager.ManagerPermission = new ManagerPermissionModel();
 
                         manager.Id = sqlDataReader.GetInt32(0);
                         manager.User.Id = sqlDataReader.GetInt32(1);
@@ -42,7 +43,7 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
                         manager.User.LastName = sqlDataReader.GetString(3);
                         manager.User.Username = sqlDataReader.GetString(4);
                         manager.User.Password = sqlDataReader.GetString(5);
-                        manager.ManagerPermission = sqlDataReader.GetString(6);
+                        manager.ManagerPermission.PermissionTitle = sqlDataReader.GetString(6);
 
                         registeredManagers.Add(manager);
                     }
@@ -60,6 +61,45 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
             return registeredManagers;
         }
 
+        public List<ManagerPermissionModel> GetRegisteredManagerPermissions()
+        {
+            List<ManagerPermissionModel> registeredManagerPermissions = new List<ManagerPermissionModel>();
+
+            try
+            {
+                _sqlCommand.Parameters.Clear();
+                _sqlCommand.CommandText = "spGetManagerPermissions";
+
+                _sqlServerConnection.OpenConnection();
+
+                var sqlDataReader = _sqlCommand.ExecuteReader();
+                if (sqlDataReader.HasRows)
+                {
+                    ManagerPermissionModel managerPermission;
+
+                    while (sqlDataReader.Read())
+                    {
+                        managerPermission = new ManagerPermissionModel();
+
+                        managerPermission.Id = sqlDataReader.GetInt32(0);
+                        managerPermission.PermissionTitle = sqlDataReader.GetString(1);
+
+                        registeredManagerPermissions.Add(managerPermission);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                _sqlServerConnection.CloseConnection();
+            }
+            return registeredManagerPermissions;
+        }
+
         public ManagerModel CreateManager(ManagerModel manager)
         {
             try
@@ -68,7 +108,7 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
                 _sqlCommand.CommandText = "spCreateManager";
 
                 _sqlCommand.Parameters.AddWithValue("@UserId", manager.User.Id);
-                _sqlCommand.Parameters.AddWithValue("@ManagerPermission", manager.ManagerPermission);
+                _sqlCommand.Parameters.AddWithValue("@ManagerPermissionId", manager.ManagerPermission.Id);
                 _sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 _sqlServerConnection.OpenConnection();
