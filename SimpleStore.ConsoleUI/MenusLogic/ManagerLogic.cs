@@ -1,9 +1,7 @@
 ﻿using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Products;
-using SimpleStore.Domain.Services.ProductsServices;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.MenusLogic
 {

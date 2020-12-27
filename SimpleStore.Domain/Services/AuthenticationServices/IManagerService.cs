@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace SimpleStore.Domain.Services.AuthenticationServices
 {
-    public interface IManagerAuthenticationService
+    public interface IManagerService
     {
         List<ManagerModel> GetRegisteredManagers();
+        ManagerModel CreateManager(ManagerModel manager);
     }
 }

@@ -8,13 +8,13 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
 {
     public class ManagerLogger : IManagerLogger
     {
-        private IManagerAuthenticationService _managerAuthenticationService;
+        private IManagerService _managerAuthenticationService;
         private IPasswordHasher _passwordHasher;
         private List<ManagerModel> _registeredManagers;
         private ManagerModel _manager;
         public static ManagerModel CurrentManager { get; private set; } = new ManagerModel(new UserModel());
 
-        public ManagerLogger(IManagerAuthenticationService managerAuthenticationService)
+        public ManagerLogger(IManagerService managerAuthenticationService)
         {
             _managerAuthenticationService = managerAuthenticationService;
             _passwordHasher = new PasswordHasher();

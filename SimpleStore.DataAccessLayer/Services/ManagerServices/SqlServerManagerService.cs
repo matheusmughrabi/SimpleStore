@@ -2,14 +2,16 @@
 using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Users;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
-namespace SimpleStore.DataAccessLayer.Services.ManagerAuthenticationServices
+namespace SimpleStore.DataAccessLayer.Services.ManagerServices
 {
-    public class SqlServerManagerAuthenticationService : BaseSqlServerService, IManagerAuthenticationService
+    public class SqlServerManagerService : BaseSqlServerService, IManagerService
     {
-        public SqlServerManagerAuthenticationService(IConnection sqlServerConnection) : base(sqlServerConnection)
+        public SqlServerManagerService(IConnection sqlServerConnection) : base(sqlServerConnection)
         {
         }
 
@@ -56,6 +58,35 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerAuthenticationServices
                 _sqlServerConnection.CloseConnection();
             }
             return registeredManagers;
+        }
+
+        public ManagerModel CreateManager(ManagerModel manager)
+        {
+            try
+            {
+                _sqlCommand.Parameters.Clear();
+                _sqlCommand.CommandText = "spCreateManager";
+
+                _sqlCommand.Parameters.AddWithValue("@UserId", manager.User.Id);
+                _sqlCommand.Parameters.AddWithValue("@ManagerPermission", manager.ManagerPermission);
+                _sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                _sqlServerConnection.OpenConnection();
+                _sqlCommand.ExecuteNonQuery();
+
+                manager.Id = Convert.ToInt32(_sqlCommand.Parameters["@Id"].Value);
+
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _sqlServerConnection.CloseConnection();
+            }
+
+            return manager;
         }
     }
 }

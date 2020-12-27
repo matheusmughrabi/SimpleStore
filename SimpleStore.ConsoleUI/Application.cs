@@ -4,6 +4,7 @@ using SimpleStore.ConsoleUI.MenusAction;
 using SimpleStore.ConsoleUI.MenusLogic;
 using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Domain.Manager.ManagerOperations;
+using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
@@ -24,9 +25,10 @@ namespace SimpleStore.ConsoleUI
         private AccountsLogic _accountsLogic;
         private readonly ICategoryOperator _categoryOperator;
         private readonly IProductsOperator _productsOperator;
+        private readonly IManagerCreator _managerCreator;
 
         public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator, ICategoryService categoryService, 
-            IProductsService productService, AccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator)
+            IProductsService productService, AccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator, IManagerCreator managerCreator)
         {
             _userLogger = userLogger;
             _managerLogger = managerLogger;
@@ -36,6 +38,7 @@ namespace SimpleStore.ConsoleUI
             _accountsLogic = accountsLogic;
             _categoryOperator = categoryOperator;
             _productsOperator = productsOperator;
+            _managerCreator = managerCreator;
         }
 
         public void RunApp()
@@ -46,6 +49,7 @@ namespace SimpleStore.ConsoleUI
             var registerMenu = new SimpleActionMenu("Register Menu", initialMenu);           
             var mainMenu = new MasterNavigatorMenu("Main Menu", initialMenu);
             var managerMainMenu = new MasterNavigatorMenu("Manager Main Menu", initialMenu);
+            var managerCreateManagerMenu = new SimpleActionMenu("Create Manager Menu", managerMainMenu);
             var managerAddCategoryMenu = new SimpleActionMenu("Add Category Menu", managerMainMenu);
             var managerAddProductMenu = new SimpleActionMenu("Add Product Menu", managerMainMenu);
             var accountMenu = new SimpleNavigatorMenu("Account Menu", mainMenu);
@@ -82,6 +86,12 @@ namespace SimpleStore.ConsoleUI
             managerMainMenu.AddTextBlock("Welcome Manager");
             managerMainMenu.AddChildMenu(managerAddCategoryMenu);
             managerMainMenu.AddChildMenu(managerAddProductMenu);
+            managerMainMenu.AddChildMenu(managerCreateManagerMenu);
+
+            managerCreateManagerMenu.AddTextBox("Manager username");
+            managerCreateManagerMenu.AddTextBox("Manager permission");
+            managerCreateManagerMenu.Func = new ManagerCreatorLogic(_managerCreator).CreateManager;
+
 
             managerAddCategoryMenu.AddTextBox("Category Name");
             managerAddCategoryMenu.Func = new ManagerLogic(_categoryOperator, _productsOperator).InsertCategory;

@@ -2,7 +2,6 @@
 using SimpleStore.Domain.Services.ProductsServices;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.Domain.Manager.ManagerOperations
 {
