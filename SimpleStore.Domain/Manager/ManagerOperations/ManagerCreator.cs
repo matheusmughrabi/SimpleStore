@@ -13,6 +13,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
         private readonly IManagerService _managerService;
         private readonly IAuthenticationService _authenticationService;
         private List<UserModel> _registeredUsers;
+        private List<ManagerModel> _registeredManagers;
         private List<ManagerPermissionModel> _registeredManagerPermissions;
 
         public ManagerCreator(IManagerService managerService, IAuthenticationService authenticationService)
@@ -25,6 +26,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
         {
             _registeredUsers = _authenticationService.GetRegisteredUsers();
             _registeredManagerPermissions = _managerService.GetRegisteredManagerPermissions();
+            _registeredManagers = _managerService.GetRegisteredManagers();
 
             bool userExists = false;
             foreach (var registeredUser in _registeredUsers)
@@ -51,6 +53,14 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             if (!userExists || !permissionExists)
             {
                 return false;
+            }
+
+            foreach (var registeredManger in _registeredManagers)
+            {
+                if (registeredManger.User.Username == manager.User.Username)
+                {
+                    return false;
+                }
             }
 
             _managerService.CreateManager(manager);
