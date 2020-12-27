@@ -1,13 +1,11 @@
 ﻿using SimpleStore.DataAccessLayer.Helpers;
-using SimpleStore.Domain.Products.Categories;
-using SimpleStore.Domain.Products.ProductsModel;
-using SimpleStore.Domain.Products.ProductStatuses;
+using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.ProductsServices;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace SimpleStore.DataAccessLayer.Services.ProductsServices
 {
@@ -114,6 +112,42 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                 _sqlServerConnection.CloseConnection();
             }
             return products;
+        }
+
+        public ProductModel InsertProduct(ProductModel product)
+        {
+            try
+            {
+                _sqlCommand.Parameters.Clear();
+                _sqlCommand.CommandText = "spInsertProduct";
+
+                _sqlCommand.Parameters.AddWithValue("@Name", product.Name);
+                _sqlCommand.Parameters.AddWithValue("@Brand", product.Brand);
+                _sqlCommand.Parameters.AddWithValue("@CategoryId", product.Category.Id);
+                _sqlCommand.Parameters.AddWithValue("@RegularPrice", product.RegularPrice);
+                _sqlCommand.Parameters.AddWithValue("@DiscountedPrice", product.DiscountedPrice);
+                _sqlCommand.Parameters.AddWithValue("@Description", product.Description);
+                _sqlCommand.Parameters.AddWithValue("@ProductStatusId", DBNull.Value);
+                _sqlCommand.Parameters.AddWithValue("@InsertedAt", DateTime.Now);
+                _sqlCommand.Parameters.AddWithValue("@UpdatedAt", DBNull.Value);
+                _sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                _sqlServerConnection.OpenConnection();
+                _sqlCommand.ExecuteNonQuery();
+
+                product.Id = Convert.ToInt32(_sqlCommand.Parameters["@Id"].Value);
+
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _sqlServerConnection.CloseConnection();
+            }
+
+            return product;
         }
     }
 }
