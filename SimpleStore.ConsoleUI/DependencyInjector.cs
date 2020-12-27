@@ -41,6 +41,7 @@ namespace SimpleStore.ConsoleUI
 
             builder.RegisterType<AccountsLogic>().AsSelf();
             builder.RegisterType<CategoryOperator>().As<ICategoryOperator>();
+            builder.RegisterType<ProductsOperator>().As<IProductsOperator>();
 
             builder.RegisterType<Application>().AsSelf();
 

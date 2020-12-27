@@ -1,5 +1,4 @@
-﻿using SimpleStore.Domain.Products.Categories;
-using SimpleStore.Domain.Products.ProductsModel;
+﻿using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using System;

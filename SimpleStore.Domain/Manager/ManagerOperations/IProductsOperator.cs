@@ -5,8 +5,8 @@ using System.Text;
 
 namespace SimpleStore.Domain.Manager.ManagerOperations
 {
-    public interface ICategoryOperator
+    public interface IProductsOperator
     {
-        bool InsertCategory(CategoryModel category);
+        bool InsertProduct(ProductModel product);
     }
 }

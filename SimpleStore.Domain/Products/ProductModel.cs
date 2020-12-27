@@ -1,11 +1,9 @@
 ﻿using SimpleStore.Domain.BaseModels;
-using SimpleStore.Domain.Products.Categories;
-using SimpleStore.Domain.Products.ProductStatuses;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStore.Domain.Products.ProductsModel
+namespace SimpleStore.Domain.Products
 {
     public class ProductModel : BaseModel
     {
