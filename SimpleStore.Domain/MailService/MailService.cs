@@ -3,19 +3,14 @@ using Microsoft.Extensions.Configuration;
 using MimeKit;
 using System.IO;
 
-namespace SimpleStore.ConsoleUI
+namespace SimpleStore.Domain.MailService
 {
-    public class MailService
+    public static class MailService
     {
-        private IConfiguration Configuration;
-        private readonly string _textPart = "plain";
+        private static IConfiguration Configuration;
+        private static readonly string _textPart = "plain";
 
-        public MailService()
-        {
-            GetConfigurationSettings();
-        }
-
-        private void GetConfigurationSettings()
+        private static void GetConfigurationSettings()
         {
             var builder = new ConfigurationBuilder()
                         .SetBasePath(Directory.GetCurrentDirectory())
@@ -24,8 +19,10 @@ namespace SimpleStore.ConsoleUI
             Configuration = builder.Build();
         }
 
-        public void SendMail(string toUsername, string toEmail, string subject, string body)
+        public static void SendMail(string toUsername, string toEmail, string subject, string body)
         {
+            GetConfigurationSettings();
+
             var mailMessage = new MimeMessage();
 
             mailMessage.From.Add(new MailboxAddress(Configuration["Smtp:Username"], Configuration["Smtp:Email"]));
