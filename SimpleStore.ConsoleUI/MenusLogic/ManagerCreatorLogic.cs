@@ -26,15 +26,17 @@ namespace SimpleStore.ConsoleUI.MenusLogic
             manager.ManagerPermission.PermissionTitle = inputs[1];
 
             bool isRegistrationSuccess = _managerCreator.RegisterManager(manager);
-
-            if (isRegistrationSuccess == false)
+            if (isRegistrationSuccess == true)
+            {
+                Console.WriteLine($"{manager.User.Username} registered successfuly");
+            }
+            else
             {
                 Console.WriteLine("Registration failed");
-                Console.ReadLine();
-                return false;
             }
 
-            return true;
+            Console.ReadLine();
+            return isRegistrationSuccess;
         }
     }
 }

@@ -37,8 +37,9 @@ namespace SimpleStore.DataAccessLayer.Services.AuthenticationServices
                         user.Id = sqlDataReader.GetInt32(0);
                         user.FirstName = sqlDataReader.GetString(1);
                         user.LastName = sqlDataReader.GetString(2);
-                        user.Username = sqlDataReader.GetString(3);
-                        user.Password = sqlDataReader.GetString(4);
+                        user.Email = sqlDataReader.GetString(3);
+                        user.Username = sqlDataReader.GetString(4);
+                        user.Password = sqlDataReader.GetString(5);
 
                         registeredUsers.Add(user);
                     }                      
@@ -56,23 +57,24 @@ namespace SimpleStore.DataAccessLayer.Services.AuthenticationServices
             return registeredUsers;
         }
 
-        public UserModel RegisterNewUser(UserModel newUser)
+        public UserModel RegisterUser(UserModel user)
         {
             try
             {
                 _sqlCommand.Parameters.Clear();
-                _sqlCommand.CommandText = "spRegisterNewUser";
+                _sqlCommand.CommandText = "spRegisterUser";
 
-                _sqlCommand.Parameters.AddWithValue("@FirstName", newUser.FirstName);
-                _sqlCommand.Parameters.AddWithValue("@LastName", newUser.LastName);
-                _sqlCommand.Parameters.AddWithValue("@Username", newUser.Username);
-                _sqlCommand.Parameters.AddWithValue("@HashedPassword", newUser.Password);
+                _sqlCommand.Parameters.AddWithValue("@FirstName", user.FirstName);
+                _sqlCommand.Parameters.AddWithValue("@LastName", user.LastName);
+                _sqlCommand.Parameters.AddWithValue("@Email", user.Email);
+                _sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+                _sqlCommand.Parameters.AddWithValue("@HashedPassword", user.Password);
                 _sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 _sqlServerConnection.OpenConnection();
                 _sqlCommand.ExecuteNonQuery();
 
-                newUser.Id = Convert.ToInt32(_sqlCommand.Parameters["@Id"].Value);
+                user.Id = Convert.ToInt32(_sqlCommand.Parameters["@Id"].Value);
             }
             catch (SqlException ex)
             {
@@ -83,7 +85,7 @@ namespace SimpleStore.DataAccessLayer.Services.AuthenticationServices
                 _sqlServerConnection.CloseConnection();
             }
 
-            return newUser;
+            return user;
         }
     }
 }

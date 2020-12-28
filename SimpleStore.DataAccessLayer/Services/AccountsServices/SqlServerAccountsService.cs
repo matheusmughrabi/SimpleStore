@@ -39,8 +39,9 @@ namespace SimpleStore.DataAccessLayer.Services.AccountsServices
                         account.User.Id = sqlDataReader.GetInt32(1);
                         account.User.FirstName = sqlDataReader.GetString(2);
                         account.User.LastName = sqlDataReader.GetString(3);
-                        account.User.Username = sqlDataReader.GetString(4);
-                        account.Balance = sqlDataReader.GetDecimal(5);
+                        account.User.Email = sqlDataReader.GetString(4);
+                        account.User.Username = sqlDataReader.GetString(5);
+                        account.Balance = sqlDataReader.GetDecimal(6);
 
                         accounts.Add(account);
                     }
