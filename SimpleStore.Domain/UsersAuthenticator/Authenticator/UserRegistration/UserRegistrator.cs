@@ -38,7 +38,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
             }
 
             newUser.Password = _passwordHasher.HashPassword(newUser.Password);
-            newUser = _authenticationService.RegisterNewUser(newUser);
+            newUser = _authenticationService.RegisterUser(newUser);
             _accountsService.CreateAccount(newUser.Id);
             return true;
         }

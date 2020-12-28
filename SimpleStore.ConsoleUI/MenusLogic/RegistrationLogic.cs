@@ -21,9 +21,10 @@ namespace SimpleStore.ConsoleUI.MenusAction
         {
             _userModel.FirstName = inputs[0];
             _userModel.LastName = inputs[1];
-            _userModel.Username = inputs[2];
-            _userModel.Password = inputs[3];
-            _userModel.ConfirmPassword = inputs[4];
+            _userModel.Email = inputs[2];
+            _userModel.Username = inputs[3];
+            _userModel.Password = inputs[4];
+            _userModel.ConfirmPassword = inputs[5];
 
             bool isLogginSuccessful = _userRegistrator.RegisterUser(_userModel);
 

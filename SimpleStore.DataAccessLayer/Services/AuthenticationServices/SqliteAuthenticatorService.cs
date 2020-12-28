@@ -22,7 +22,7 @@ namespace SimpleStore.DataAccessLayer.Services.AuthenticationServices
             }
         }
 
-        public UserModel RegisterNewUser(UserModel newUser)
+        public UserModel RegisterUser(UserModel newUser)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
