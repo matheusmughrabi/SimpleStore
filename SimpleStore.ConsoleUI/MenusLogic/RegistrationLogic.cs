@@ -1,4 +1,5 @@
-﻿using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
+﻿using SimpleStore.Domain.MailService;
+using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
 using System.Collections.Generic;
@@ -26,10 +27,11 @@ namespace SimpleStore.ConsoleUI.MenusAction
             _userModel.Password = inputs[4];
             _userModel.ConfirmPassword = inputs[5];
 
-            bool isLogginSuccessful = _userRegistrator.RegisterUser(_userModel);
+            bool isRegistrationSuccessful = _userRegistrator.RegisterUser(_userModel);
 
-            if (isLogginSuccessful)
+            if (isRegistrationSuccessful)
             {
+                MailService.SendMail(_userModel.FirstName, _userModel.Email, "Registered at Simple Store", "You have successfuly registered to simple store");
                 Console.WriteLine("Registration successful");
             }
             else
@@ -38,7 +40,7 @@ namespace SimpleStore.ConsoleUI.MenusAction
             }
 
             Console.ReadLine();
-            return isLogginSuccessful;
+            return isRegistrationSuccessful;
         }
     }
 }
