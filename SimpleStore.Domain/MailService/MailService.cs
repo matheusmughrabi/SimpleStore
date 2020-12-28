@@ -1,6 +1,7 @@
 ﻿using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
+using System;
 using System.IO;
 
 namespace SimpleStore.Domain.MailService
@@ -19,7 +20,7 @@ namespace SimpleStore.Domain.MailService
             Configuration = builder.Build();
         }
 
-        public static void SendMail(string toUsername, string toEmail, string subject, string body)
+        public static bool SendMail(string toUsername, string toEmail, string subject, string body)
         {
             GetConfigurationSettings();
 
@@ -35,10 +36,23 @@ namespace SimpleStore.Domain.MailService
 
             using (var smtpClient = new SmtpClient())
             {
-                smtpClient.Connect(Configuration["Smtp:Host"], int.Parse(Configuration["Smtp:Port"]));
-                smtpClient.Authenticate(Configuration["Smtp:Email"], Configuration["Smtp:Password"]);
-                smtpClient.Send(mailMessage);
-                smtpClient.Disconnect(true);
+                bool emailSend = true;
+                try
+                {
+                    smtpClient.Connect(Configuration["Smtp:Host"], int.Parse(Configuration["Smtp:Port"]));
+                    smtpClient.Authenticate(Configuration["Smtp:Email"], Configuration["Smtp:Password"]);
+                    smtpClient.Send(mailMessage);                   
+                }
+                catch (Exception)
+                {
+                    emailSend = false;
+                }
+                finally
+                {
+                    smtpClient.Disconnect(true);
+                }
+
+                return emailSend;
             }
         }
     }

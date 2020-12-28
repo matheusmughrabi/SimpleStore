@@ -28,11 +28,12 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
             _registeredUsers = _authenticationService.GetRegisteredUsers();
             _newUser = newUser;           
 
-            bool isUniqueLogin = VerifyLogin();
+            bool isLoginUnique = VerifyLogin();
+            bool isEmailUnique = VerifyEmail();
             bool passwordsMatch = VerifyPasswordMatch();
             bool noNullOrEmptyData = CheckForNullData();
 
-            if (!isUniqueLogin || !passwordsMatch || !noNullOrEmptyData)
+            if (!isLoginUnique || !isEmailUnique || !passwordsMatch || !noNullOrEmptyData)
             {
                 return false;
             }
@@ -48,6 +49,19 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
             foreach (UserModel registeredUser in _registeredUsers)
             {
                 if (registeredUser.Username == _newUser.Username)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool VerifyEmail()
+        {
+            foreach (UserModel registeredUser in _registeredUsers)
+            {
+                if (registeredUser.Email == _newUser.Email)
                 {
                     return false;
                 }
