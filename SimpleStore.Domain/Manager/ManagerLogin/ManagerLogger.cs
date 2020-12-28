@@ -40,6 +40,11 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
             return isUsernamePasswordCorrect;
         }
 
+        public void LogoutManager()
+        {
+            CurrentManager = null;
+        }
+
         private bool GetManager(string username)
         {
             foreach (ManagerModel registeredManager in _registeredManagers)

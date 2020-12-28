@@ -6,5 +6,6 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
     {
         static ManagerModel CurrentManager { get; }
         bool LoginManager(string username, string password);
+        void LogoutManager();
     }
 }

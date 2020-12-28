@@ -89,6 +89,8 @@ namespace SimpleStore.ConsoleUI
             managerMainMenu.AddChildMenu(managerAddCategoryMenu);
             managerMainMenu.AddChildMenu(managerAddProductMenu);
             managerMainMenu.AddChildMenu(managerCreateManagerMenu);
+            managerMainMenu.SetReturnOption("0 - Logout");
+            managerMainMenu.ReturnMenuFunc = new ManagerLoginLogic(_managerLogger).Logout;
 
             managerCreateManagerMenu.AddTextBox("Manager username");
             managerCreateManagerMenu.AddTextBox("Manager permission (Super Admin or Admin)");
