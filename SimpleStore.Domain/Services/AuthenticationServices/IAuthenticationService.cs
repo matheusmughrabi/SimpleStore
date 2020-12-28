@@ -7,6 +7,6 @@ namespace SimpleStore.Domain.Services.AuthenticationServices
     {
         List<UserModel> GetRegisteredUsers();
 
-        UserModel RegisterNewUser(UserModel newUser);
+        UserModel RegisterUser(UserModel newUser);
     }
 }

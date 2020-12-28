@@ -73,6 +73,7 @@ namespace SimpleStore.ConsoleUI
 
             registerMenu.AddTextBox("First Name");
             registerMenu.AddTextBox("Last Name");
+            registerMenu.AddTextBox("Email");
             registerMenu.AddTextBox("Username");
             registerMenu.AddTextBox("Password");
             registerMenu.AddTextBox("Confirm Password");

@@ -41,9 +41,10 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
                         manager.User.Id = sqlDataReader.GetInt32(1);
                         manager.User.FirstName = sqlDataReader.GetString(2);
                         manager.User.LastName = sqlDataReader.GetString(3);
-                        manager.User.Username = sqlDataReader.GetString(4);
-                        manager.User.Password = sqlDataReader.GetString(5);
-                        manager.ManagerPermission.PermissionTitle = sqlDataReader.GetString(6);
+                        manager.User.Email = sqlDataReader.GetString(4);
+                        manager.User.Username = sqlDataReader.GetString(5);
+                        manager.User.Password = sqlDataReader.GetString(6);
+                        manager.ManagerPermission.PermissionTitle = sqlDataReader.GetString(7);
 
                         registeredManagers.Add(manager);
                     }
