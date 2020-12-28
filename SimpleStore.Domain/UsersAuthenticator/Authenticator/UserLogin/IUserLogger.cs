@@ -9,6 +9,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
     public interface IUserLogger
     {
         static UserModel CurrentUser { get; }
-        bool LoginUser(string username, string password);  
+        bool LoginUser(string username, string password);
+        void Logout();
     }
 }

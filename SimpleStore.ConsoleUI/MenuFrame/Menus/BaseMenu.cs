@@ -7,9 +7,12 @@ namespace SimpleStore.ConsoleUI.MenuFrame
     public abstract class BaseMenu
     {
         protected readonly string _separator = new string('-', 100);
-        
+        private string _returnMessage = "0 - Return";
+
         protected readonly BaseMenu _root;
         protected List<string> _textBlocks = new List<string>();
+
+        public Action ReturnMenuFunc { get; set; }
 
         public string MenuName { get; }
 
@@ -36,6 +39,16 @@ namespace SimpleStore.ConsoleUI.MenuFrame
             }
         }
 
+        public void SetReturnOption(string message)
+        {
+            _returnMessage = message;
+        }
+
+        protected void ReturnOption()
+        {
+            Console.WriteLine(_returnMessage);
+        }
+
         protected void InvalidOptionMessage()
         {
             Console.WriteLine("Invalid option, press 'Enter' to try again");
@@ -46,5 +59,6 @@ namespace SimpleStore.ConsoleUI.MenuFrame
         {
             _textBlocks.Add(text);
         }
+
     }
 }

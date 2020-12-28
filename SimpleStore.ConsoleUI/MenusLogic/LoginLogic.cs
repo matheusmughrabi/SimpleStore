@@ -31,5 +31,10 @@ namespace SimpleStore.ConsoleUI.MenusAction
             Console.ReadLine();
             return isLogginSuccessful;
         }
+
+        public void Logout()
+        {
+            _userLogger.Logout();
+        }
     }
 }

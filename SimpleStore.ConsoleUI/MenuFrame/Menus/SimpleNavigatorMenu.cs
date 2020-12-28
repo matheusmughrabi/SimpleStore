@@ -27,6 +27,10 @@ namespace SimpleStore.ConsoleUI.MenuFrame
             {
                 if (_root != null)
                 {
+                    if (ReturnMenuFunc != null)
+                    {
+                        ReturnMenuFunc();
+                    }             
                     _root.Run();
                 }
             }
@@ -55,7 +59,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame
                 Console.WriteLine($"{i} - { childMenu.MenuName }");
                 i += 1;
             }
-            Console.WriteLine("0 - Return");
+            ReturnOption();
         }
 
         protected virtual uint GetValidOptionInput()

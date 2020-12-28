@@ -45,6 +45,11 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
             return isUsernamePasswordCorrect;
         }
 
+        public void Logout()
+        {
+            CurrentAccount = null;
+        }
+
         private bool GetUser(string username)
         {
             foreach (UserModel registeredUser in _registeredUsers)

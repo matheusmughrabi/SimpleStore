@@ -81,6 +81,8 @@ namespace SimpleStore.ConsoleUI
 
             mainMenu.AddChildMenu(accountMenu);
             mainMenu.AddChildMenu(storeCategoriesMenu);
+            mainMenu.SetReturnOption("0 - Logout");
+            mainMenu.ReturnMenuFunc = new LoginLogic(_userLogger).Logout;
             mainMenu.Action = new AccountInfoLogic(_accountsLogic).PrintAccountInfoLogic;
 
             managerMainMenu.AddTextBlock("Welcome Manager");
