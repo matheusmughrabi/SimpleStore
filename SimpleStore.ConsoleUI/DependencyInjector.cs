@@ -37,6 +37,7 @@ namespace SimpleStore.ConsoleUI
             builder.RegisterType<ManagerLogger>().As<IManagerLogger>().SingleInstance();
             builder.RegisterType<UserRegistrator>().As<IUserRegistrator>();
             builder.RegisterType<ManagerCreator>().As<IManagerCreator>();
+            builder.RegisterType<RegisteredUsersInfo>().As<IRegisteredUsersInfo>();
 
             builder.RegisterType<UserModel>().AsSelf().SingleInstance();
             builder.RegisterType<AccountModel>().AsSelf().SingleInstance();
