@@ -1,8 +1,8 @@
-﻿using SimpleStore.Domain.Products;
+﻿using SimpleStore.Domain.Manager.ManagerLogin;
+using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Services.ProductsServices;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.Domain.Manager.ManagerOperations
 {
@@ -18,6 +18,11 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 
         public bool InsertCategory(CategoryModel category)
         {
+            if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle != "Super Admin")
+            {
+                throw new Exception("Only Super Admin is allowed");
+            }
+
             _registeredCategories = _categoryService.GetCategories();
 
             foreach (var registeredCategory in _registeredCategories)

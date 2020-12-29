@@ -27,9 +27,9 @@ namespace SimpleStore.ConsoleUI.MenuFrame
             {
                 if (_root != null)
                 {
-                    if (ReturnMenuFunc != null)
+                    if (ReturnMenuAction != null)
                     {
-                        ReturnMenuFunc();
+                        ReturnMenuAction();
                     }             
                     _root.Run();
                 }
