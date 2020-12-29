@@ -1,4 +1,5 @@
-﻿using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
+﻿using SimpleStore.Domain.Manager.ManagerModels;
+using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,15 @@ namespace SimpleStore.ConsoleUI.MenusLogic
 
         public bool DisplayRegisteredUsers(List<string> inputs)
         {
-            List<UserModel> registeredUsers = _registeredUsersInfo.GetRegisteredUsers();
+            List<ManagerModel> registeredUsersAndTitles = _registeredUsersInfo.GetRegisteredUsers();
 
-            foreach (var user in registeredUsers)
+            foreach (var user in registeredUsersAndTitles)
             {
-                Console.WriteLine($"{ user.FullName } || { user.Email } || { user.Username } ");
+                if (user.ManagerPermission.PermissionTitle == string.Empty)
+                {
+                    user.ManagerPermission.PermissionTitle = "Not a manager";
+                }
+                Console.WriteLine($"{ user.User.FullName } || { user.User.Email } || { user.User.Username } || {user.ManagerPermission.PermissionTitle}");
             }
 
             Console.WriteLine("Press any key to continue");

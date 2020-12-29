@@ -1,4 +1,5 @@
-﻿using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
+﻿using SimpleStore.Domain.Manager.ManagerModels;
+using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
@@ -9,17 +10,18 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 {
     public class RegisteredUsersInfo : IRegisteredUsersInfo
     {
-        private readonly IAuthenticationService _authenticationService;
+        private readonly IManagerService _managerService;
 
-        public RegisteredUsersInfo(IAuthenticationService authenticationService)
+        public RegisteredUsersInfo(IManagerService managerService)
         {
-            _authenticationService = authenticationService;
+            _managerService = managerService;
         }
 
-        public List<UserModel> GetRegisteredUsers()
+        public List<ManagerModel> GetRegisteredUsers()
         {
-            List<UserModel> registeredUsers = _authenticationService.GetRegisteredUsers();
-            return registeredUsers;
+            List<ManagerModel> registeredUsersAndTitles = _managerService.GetUsersAndTitles();
+
+            return registeredUsersAndTitles;
         }
     }
 }
