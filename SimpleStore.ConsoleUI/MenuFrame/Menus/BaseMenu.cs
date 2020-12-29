@@ -12,7 +12,8 @@ namespace SimpleStore.ConsoleUI.MenuFrame
         protected readonly BaseMenu _root;
         protected List<string> _textBlocks = new List<string>();
 
-        public Action ReturnMenuFunc { get; set; }
+        public Action ReturnMenuAction { get; set; }
+        public Func<bool> AccessAllowedFunc { get; set; }
 
         public string MenuName { get; }
 

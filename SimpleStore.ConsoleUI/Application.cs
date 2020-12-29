@@ -2,6 +2,7 @@
 using SimpleStore.ConsoleUI.MenuFrame.Menus;
 using SimpleStore.ConsoleUI.MenusAction;
 using SimpleStore.ConsoleUI.MenusLogic;
+using SimpleStore.ConsoleUI.MenusLogic.AccessPermissions;
 using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
@@ -87,7 +88,7 @@ namespace SimpleStore.ConsoleUI
             mainMenu.AddChildMenu(accountMenu);
             mainMenu.AddChildMenu(storeCategoriesMenu);
             mainMenu.SetReturnOption("0 - Logout");
-            mainMenu.ReturnMenuFunc = new LoginLogic(_userLogger).Logout;
+            mainMenu.ReturnMenuAction = new LoginLogic(_userLogger).Logout;
             mainMenu.Action = new AccountInfoLogic(_accountsLogic).PrintAccountInfoLogic;
 
             managerMainMenu.AddTextBlock("Welcome Manager");
@@ -96,15 +97,17 @@ namespace SimpleStore.ConsoleUI
             managerMainMenu.AddChildMenu(managerCreateManagerMenu);
             managerMainMenu.AddChildMenu(managerRegisteredUsersMenu);
             managerMainMenu.SetReturnOption("0 - Logout");
-            managerMainMenu.ReturnMenuFunc = new ManagerLoginLogic(_managerLogger).Logout;
+            managerMainMenu.ReturnMenuAction = new ManagerLoginLogic(_managerLogger).Logout;
 
             managerCreateManagerMenu.AddTextBox("Manager username");
             managerCreateManagerMenu.AddTextBox("Manager permission (Super Admin or Admin)");
+            managerCreateManagerMenu.AccessAllowedFunc = new AccessValidator().AllowSuperAdminOnly;
             managerCreateManagerMenu.Func = new ManagerCreatorLogic(_managerCreator).CreateManager;
 
             managerRegisteredUsersMenu.Func = new RegisteredUsersLogic(_registeredUsersInfo).DisplayRegisteredUsers;
 
             managerAddCategoryMenu.AddTextBox("Category Name");
+            managerAddCategoryMenu.AccessAllowedFunc = new AccessValidator().AllowSuperAdminOnly;
             managerAddCategoryMenu.Func = new ManagerLogic(_categoryOperator, _productsOperator).InsertCategory;
 
             managerAddProductMenu.AddTextBox("Name");

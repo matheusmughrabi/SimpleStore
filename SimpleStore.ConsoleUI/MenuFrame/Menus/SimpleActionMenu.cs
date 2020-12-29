@@ -18,6 +18,19 @@ namespace SimpleStore.ConsoleUI.MenuFrame
 
         public override void Run()
         {
+            bool isAccessAllowed = true;
+            if (AccessAllowedFunc != null)
+            {
+                isAccessAllowed = AccessAllowedFunc();
+            }
+
+            if (isAccessAllowed == false)
+            {
+                Console.WriteLine("Access denied");
+                Console.ReadLine();
+                _root.Run();
+            }
+
             PrintMenu();
 
             if (_renavigateMenu == null)

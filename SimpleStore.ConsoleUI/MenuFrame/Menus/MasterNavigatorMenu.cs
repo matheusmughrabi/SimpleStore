@@ -21,6 +21,17 @@ namespace SimpleStore.ConsoleUI.MenuFrame.Menus
 
         public override void Run()
         {
+            //bool isAccessAllowed = true;
+            //if (AccessAllowedFunc != null)
+            //{
+            //    isAccessAllowed = AccessAllowedFunc();
+            //}
+
+            //if (isAccessAllowed == false)
+            //{
+            //    return;
+            //}
+
             PrintMenu();
 
             uint userInput = GetValidOptionInput();
@@ -29,9 +40,9 @@ namespace SimpleStore.ConsoleUI.MenuFrame.Menus
             {
                 if (_root != null)
                 {
-                    if (ReturnMenuFunc != null)
+                    if (ReturnMenuAction != null)
                     {
-                        ReturnMenuFunc();
+                        ReturnMenuAction();
                     }
                     _root.Run();
                 }
