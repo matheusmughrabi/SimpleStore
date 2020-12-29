@@ -1,10 +1,10 @@
-﻿using SimpleStore.Domain.Manager.ManagerModels;
+﻿using SimpleStore.Domain.Manager.ManagerLogin;
+using SimpleStore.Domain.Manager.ManagerModels;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.Domain.Manager.ManagerOperations
 {
@@ -24,6 +24,11 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 
         public bool RegisterManager(ManagerModel manager)
         {
+            if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle != "Super Admin")
+            {
+                throw new Exception("Only Super Admin is allowed");
+            }
+
             _registeredUsers = _authenticationService.GetRegisteredUsers();
             _registeredManagerPermissions = _managerService.GetRegisteredManagerPermissions();
             _registeredManagers = _managerService.GetRegisteredManagers();

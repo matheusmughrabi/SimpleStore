@@ -1,11 +1,8 @@
 ﻿using SimpleStore.Domain.Manager.ManagerLogin;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.MenusLogic.AccessPermissions
 {
-    public class AccessValidator
+    public class AccessValidatorLogic
     {
         public bool InvalidateAccess()
         {

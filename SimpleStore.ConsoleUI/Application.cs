@@ -101,13 +101,13 @@ namespace SimpleStore.ConsoleUI
 
             managerCreateManagerMenu.AddTextBox("Manager username");
             managerCreateManagerMenu.AddTextBox("Manager permission (Super Admin or Admin)");
-            managerCreateManagerMenu.AccessAllowedFunc = new AccessValidator().AllowSuperAdminOnly;
+            managerCreateManagerMenu.AccessAllowedFunc = new AccessValidatorLogic().AllowSuperAdminOnly;
             managerCreateManagerMenu.Func = new ManagerCreatorLogic(_managerCreator).CreateManager;
 
             managerRegisteredUsersMenu.Func = new RegisteredUsersLogic(_registeredUsersInfo).DisplayRegisteredUsers;
 
             managerAddCategoryMenu.AddTextBox("Category Name");
-            managerAddCategoryMenu.AccessAllowedFunc = new AccessValidator().AllowSuperAdminOnly;
+            managerAddCategoryMenu.AccessAllowedFunc = new AccessValidatorLogic().AllowSuperAdminOnly;
             managerAddCategoryMenu.Func = new ManagerLogic(_categoryOperator, _productsOperator).InsertCategory;
 
             managerAddProductMenu.AddTextBox("Name");
