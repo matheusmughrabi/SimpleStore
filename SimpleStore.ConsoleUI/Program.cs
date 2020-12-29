@@ -1,6 +1,4 @@
 ﻿using Autofac;
-using SimpleStore.Domain.MailService;
-using System;
 
 namespace SimpleStore.ConsoleUI
 {
