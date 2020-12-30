@@ -44,7 +44,7 @@ namespace SimpleStore.ConsoleUI
 
         public void RunApp()
         {
-            var initialMenu = new SimpleNavigatorMenu("Initial Menu", null);
+            var initialMenu = new MasterNavigatorMenu("Initial Menu", null);
             var loginMenu = new SimpleActionMenu("Login Menu", initialMenu);
             var managerLoginMenu = new SimpleActionMenu("Manager Login Menu", initialMenu);
             var registerMenu = new SimpleActionMenu("Register Menu", initialMenu);
@@ -55,10 +55,10 @@ namespace SimpleStore.ConsoleUI
             var managerAddCategoryMenu = new SimpleActionMenu("Add Category Menu", managerMainMenu);
             var managerAddProductMenu = new SimpleActionMenu("Add Product Menu", managerMainMenu);
             var managerBuyProductMenu = new SimpleActionMenu("Buy Product Menu", managerMainMenu);
-            var accountMenu = new SimpleNavigatorMenu("Account Menu", mainMenu);
+            var accountMenu = new MasterNavigatorMenu("Account Menu", mainMenu);
             var makeDepositMenu = new SimpleActionMenu("Make Deposit Menu", accountMenu);
             var makeWithdrawalMenu = new SimpleActionMenu("Make Withdrawal Menu", accountMenu);
-            var storeCategoriesMenu = new SimpleNavigatorMenu("Store Categories Menu", mainMenu);
+            var storeCategoriesMenu = new MasterNavigatorMenu("Store Categories Menu", mainMenu);
 
             initialMenu.AddChildMenu(loginMenu);
             initialMenu.AddChildMenu(managerLoginMenu);
