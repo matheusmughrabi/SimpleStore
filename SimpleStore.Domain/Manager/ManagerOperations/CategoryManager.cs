@@ -31,6 +31,10 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 {
                     return false;
                 }
+                if (string.IsNullOrEmpty(category.CategoryName))
+                {
+                    return false;
+                }
             }
 
             _categoryService.InsertCategory(category);
