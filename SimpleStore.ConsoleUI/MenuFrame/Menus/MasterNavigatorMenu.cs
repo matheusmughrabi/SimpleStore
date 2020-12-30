@@ -7,7 +7,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame.Menus
     {
         protected List<BaseMenu> _childMenus = new List<BaseMenu>();
 
-        public Action Action { get; set; }
+        public Action MenuActionLogic { get; set; }
 
         public MasterNavigatorMenu(string menuName, BaseMenu root) : base(menuName, root)
         {
@@ -47,9 +47,9 @@ namespace SimpleStore.ConsoleUI.MenuFrame.Menus
             Console.WriteLine(_separator);
             PrintMenuHeader();
 
-            if (Action != null)
+            if (MenuActionLogic != null)
             {
-                Action();
+                MenuActionLogic();
             }
 
             PrintTextBlocks();

@@ -10,7 +10,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame
         protected List<string> _textBoxes = new List<string>();
         List<string> textBoxInputs;
 
-        public Func<List<string>, bool> Func { get; set; }
+        public Func<List<string>, bool> MenuFuncLogic { get; set; }
 
         public SimpleActionMenu(string menuName, BaseMenu root) : base(menuName, root)
         {
@@ -55,9 +55,9 @@ namespace SimpleStore.ConsoleUI.MenuFrame
             PrintTextBlocks();
             Console.WriteLine();
             PrintTextBoxes();
-            if (Func != null)
+            if (MenuFuncLogic != null)
             {
-                _isActionSuccess = Func(textBoxInputs);
+                _isActionSuccess = MenuFuncLogic(textBoxInputs);
             }
             Console.WriteLine(_separator);
         }
