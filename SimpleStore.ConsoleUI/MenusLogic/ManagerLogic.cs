@@ -89,5 +89,21 @@ namespace SimpleStore.ConsoleUI.MenusLogic
             Console.ReadLine();
             return isPurchaseSuccessful;
         }
+
+        public bool DeleteProduct(List<string> inputs)
+        {
+            bool isDeletionSuccess = _productsOperator.DeleteProduct(inputs[0]);
+            if (isDeletionSuccess == true)
+            {
+                Console.WriteLine($"{inputs[0] } has been deleted");
+            }
+            else
+            {
+                Console.WriteLine("Deletion failed");
+            }
+
+            Console.ReadLine();
+            return isDeletionSuccess;
+        }
     }
 }

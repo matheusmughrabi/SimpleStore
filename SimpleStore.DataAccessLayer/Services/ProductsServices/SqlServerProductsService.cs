@@ -63,6 +63,48 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
             return products;
         }
 
+        public ProductModel GetProductsByName(string name)
+        {
+            ProductModel product = new ProductModel();
+            product.Category = new CategoryModel();
+
+            try
+            {
+                _sqlCommand.Parameters.Clear();
+                _sqlCommand.CommandText = "spGetProductByName";
+                _sqlCommand.Parameters.AddWithValue("@Name", name);
+
+                _sqlServerConnection.OpenConnection();
+
+                var sqlDataReader = _sqlCommand.ExecuteReader();
+                if (sqlDataReader.HasRows)
+                {
+                    sqlDataReader.Read();
+
+                    product.Id = sqlDataReader.GetInt32(0);
+                    product.Name = sqlDataReader.GetString(1);
+                    product.Brand = sqlDataReader.GetString(2);
+                    product.Category.Id = sqlDataReader.GetInt32(3);
+                    product.RegularPrice = sqlDataReader.GetDecimal(4);
+                    product.DiscountedPrice = sqlDataReader.GetDecimal(5);
+                    product.Description = sqlDataReader.GetString(6);
+                    product.QuantityInStock = sqlDataReader.GetInt32(7);
+                    product.InsertedAt = sqlDataReader.GetDateTime(8);
+                    product.UpdatedAt = sqlDataReader.SafeGetDateTime(9);
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                _sqlServerConnection.CloseConnection();
+            }
+            return product;
+        }
+
         public List<ProductModel> GetProductsByCategory(int categoryId)
         {
             List<ProductModel> products = new List<ProductModel>();
@@ -158,6 +200,30 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                 _sqlCommand.Parameters.AddWithValue("@Id", id);
                 _sqlCommand.Parameters.AddWithValue("@QuantityInStock", quantity);
                 _sqlCommand.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
+
+                _sqlServerConnection.OpenConnection();
+                _sqlCommand.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _sqlServerConnection.CloseConnection();
+            }
+
+            return true;
+        }
+
+        public bool DeleteProduct(int id)
+        {
+            try
+            {
+                _sqlCommand.Parameters.Clear();
+                _sqlCommand.CommandText = "spDeleteProduct";
+
+                _sqlCommand.Parameters.AddWithValue("@Id", id);
 
                 _sqlServerConnection.OpenConnection();
                 _sqlCommand.ExecuteNonQuery();

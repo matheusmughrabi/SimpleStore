@@ -39,6 +39,19 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             return true;
         }
 
+        public bool DeleteProduct(string name)
+        {
+            ProductModel product = _productsService.GetProductsByName(name);
+            if (product.Id == 0)
+            {
+                return false;
+            }
+
+            _productsService.DeleteProduct(product.Id);
+
+            return true;
+        }
+
         private ProductModel GetProductIdByName(string name)
         {
             List<ProductModel> products = _productsService.GetProducts();

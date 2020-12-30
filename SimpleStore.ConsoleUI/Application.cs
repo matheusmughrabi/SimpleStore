@@ -54,6 +54,7 @@ namespace SimpleStore.ConsoleUI
             var managerRegisteredUsersMenu = new SimpleActionMenu("Registered Users Menu", managerMainMenu);
             var managerAddCategoryMenu = new SimpleActionMenu("Add Category Menu", managerMainMenu);
             var managerAddProductMenu = new SimpleActionMenu("Add Product Menu", managerMainMenu);
+            var managerDeleteProductMenu = new SimpleActionMenu("Delete Product Menu", managerMainMenu);
             var managerBuyProductMenu = new SimpleActionMenu("Buy Product Menu", managerMainMenu);
             var accountMenu = new MasterNavigatorMenu("Account Menu", mainMenu);
             var makeDepositMenu = new SimpleActionMenu("Make Deposit Menu", accountMenu);
@@ -93,6 +94,7 @@ namespace SimpleStore.ConsoleUI
             managerMainMenu.AddTextBlock("Welcome Manager");
             managerMainMenu.AddChildMenu(managerAddCategoryMenu);
             managerMainMenu.AddChildMenu(managerAddProductMenu);
+            managerMainMenu.AddChildMenu(managerDeleteProductMenu);
             managerMainMenu.AddChildMenu(managerBuyProductMenu);
             managerMainMenu.AddChildMenu(managerCreateManagerMenu);
             managerMainMenu.AddChildMenu(managerRegisteredUsersMenu);
@@ -117,6 +119,9 @@ namespace SimpleStore.ConsoleUI
             managerAddProductMenu.AddTextBox("Discounted Price");
             managerAddProductMenu.AddTextBox("Description");
             managerAddProductMenu.MenuFuncLogic = new ManagerLogic(_categoryOperator, _productsOperator).InsertProduct;
+
+            managerDeleteProductMenu.AddTextBox("Name");
+            managerDeleteProductMenu.MenuFuncLogic = new ManagerLogic(_categoryOperator, _productsOperator).DeleteProduct;
 
             managerBuyProductMenu.AddTextBox("Name");
             managerBuyProductMenu.AddTextBox("Amount");

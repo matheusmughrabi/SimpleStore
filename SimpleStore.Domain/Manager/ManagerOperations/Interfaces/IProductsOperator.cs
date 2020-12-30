@@ -6,5 +6,6 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
     {
         bool InsertProduct(ProductModel product);
         bool BuyProduct(string name, int quantity);
+        bool DeleteProduct(string name);
     }
 }
