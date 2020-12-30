@@ -147,5 +147,31 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
 
             return product;
         }
+
+        public bool UpdateProductQuantityInStock(int id, int quantity)
+        {
+            try
+            {
+                _sqlCommand.Parameters.Clear();
+                _sqlCommand.CommandText = "spUpdateProductQuantityInStock";
+
+                _sqlCommand.Parameters.AddWithValue("@Id", id);
+                _sqlCommand.Parameters.AddWithValue("@QuantityInStock", quantity);
+                _sqlCommand.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
+
+                _sqlServerConnection.OpenConnection();
+                _sqlCommand.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _sqlServerConnection.CloseConnection();
+            }
+
+            return true;
+        }
     }
 }

@@ -49,5 +49,22 @@ namespace SimpleStore.ConsoleUI.MenusLogic
 
             return true;
         }
+
+        public bool BuyProduct(List<string> inputs)
+        {
+            bool isPurchaseSuccessful = _productsOperator.BuyProduct(inputs[0], int.Parse(inputs[1]));
+
+            if (isPurchaseSuccessful)
+            {
+                Console.WriteLine($"You bought { inputs[1] } units of {inputs[0]}");
+            }
+            else
+            {
+                Console.WriteLine("Purchase failed");
+            }
+
+            Console.ReadLine();
+            return isPurchaseSuccessful;
+        }
     }
 }

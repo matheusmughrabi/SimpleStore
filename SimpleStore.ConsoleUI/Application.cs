@@ -56,6 +56,7 @@ namespace SimpleStore.ConsoleUI
             var managerRegisteredUsersMenu = new SimpleActionMenu("Registered Users Menu", managerMainMenu);
             var managerAddCategoryMenu = new SimpleActionMenu("Add Category Menu", managerMainMenu);
             var managerAddProductMenu = new SimpleActionMenu("Add Product Menu", managerMainMenu);
+            var managerBuyProductMenu = new SimpleActionMenu("Buy Product Menu", managerMainMenu);
             var accountMenu = new SimpleNavigatorMenu("Account Menu", mainMenu);
             var makeDepositMenu = new SimpleActionMenu("Make Deposit Menu", accountMenu);
             var makeWithdrawalMenu = new SimpleActionMenu("Make Withdrawal Menu", accountMenu);
@@ -94,6 +95,7 @@ namespace SimpleStore.ConsoleUI
             managerMainMenu.AddTextBlock("Welcome Manager");
             managerMainMenu.AddChildMenu(managerAddCategoryMenu);
             managerMainMenu.AddChildMenu(managerAddProductMenu);
+            managerMainMenu.AddChildMenu(managerBuyProductMenu);
             managerMainMenu.AddChildMenu(managerCreateManagerMenu);
             managerMainMenu.AddChildMenu(managerRegisteredUsersMenu);
             managerMainMenu.SetReturnOption("0 - Logout");
@@ -117,6 +119,10 @@ namespace SimpleStore.ConsoleUI
             managerAddProductMenu.AddTextBox("Discounted Price");
             managerAddProductMenu.AddTextBox("Description");
             managerAddProductMenu.Func = new ManagerLogic(_categoryOperator, _productsOperator).InsertProduct;
+
+            managerBuyProductMenu.AddTextBox("Name");
+            managerBuyProductMenu.AddTextBox("Amount");
+            managerBuyProductMenu.Func = new ManagerLogic(_categoryOperator, _productsOperator).BuyProduct;
 
             accountMenu.AddChildMenu(makeDepositMenu);
             accountMenu.AddChildMenu(makeWithdrawalMenu);

@@ -26,6 +26,33 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             return true;
         }
 
+        public bool BuyProduct(string name, int quantity)
+        {
+            ProductModel product = GetProductIdByName(name);
+            if (product == null)
+            {
+                return false;
+            }
+
+            _productsService.UpdateProductQuantityInStock(product.Id, quantity);
+
+            return true;
+        }
+
+        private ProductModel GetProductIdByName(string name)
+        {
+            List<ProductModel> products = _productsService.GetProducts();
+            foreach (var product in products)
+            {
+                if (product.Name == name)
+                {
+                    return product;
+                }
+            }
+
+            return null;
+        }
+
         private CategoryModel GetCategoryByName(string categoryName)
         {
             List<CategoryModel> registeredCategories = _categoryService.GetCategories();
