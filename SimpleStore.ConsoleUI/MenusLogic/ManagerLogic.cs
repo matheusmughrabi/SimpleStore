@@ -37,6 +37,22 @@ namespace SimpleStore.ConsoleUI.MenusLogic
             return success;
         }
 
+        public bool DeleteCategory(List<string> inputs)
+        {           
+            bool isDeletionSuccess = _categoryOperator.DeleteCategory(inputs[0]);
+            if (isDeletionSuccess == true)
+            {
+                Console.WriteLine($"{inputs[0] } has been deleted");
+            }
+            else
+            {
+                Console.WriteLine("Deletion failed");
+            }
+
+            Console.ReadLine();
+            return isDeletionSuccess;
+        }
+
         public bool InsertProduct(List<string> inputs)
         {
             bool isRegularPriceValid = decimal.TryParse(inputs[3], out decimal regularPrice);
@@ -88,6 +104,22 @@ namespace SimpleStore.ConsoleUI.MenusLogic
 
             Console.ReadLine();
             return isPurchaseSuccessful;
+        }
+
+        public bool DeleteProduct(List<string> inputs)
+        {
+            bool isDeletionSuccess = _productsOperator.DeleteProduct(inputs[0]);
+            if (isDeletionSuccess == true)
+            {
+                Console.WriteLine($"{inputs[0] } has been deleted");
+            }
+            else
+            {
+                Console.WriteLine("Deletion failed");
+            }
+
+            Console.ReadLine();
+            return isDeletionSuccess;
         }
     }
 }
