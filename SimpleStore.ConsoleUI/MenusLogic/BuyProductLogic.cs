@@ -38,17 +38,6 @@ namespace SimpleStore.ConsoleUI.MenusAction
               new[] { "Name", "Brand", "Price", "Description" },
               a => a.Item1, a => a.Item2, a => a.Item3, a => a.Item4));
 
-
-
-
-
-            //int i = 1;
-            //foreach (var product in productsInCategory)
-            //{
-            //    Console.WriteLine($"{ i } - { product.Name } price { product.RegularPrice }");
-            //    i += 1;
-            //}
-
             Console.WriteLine("Select a product");
 
             string selectedProduct = Console.ReadLine();
