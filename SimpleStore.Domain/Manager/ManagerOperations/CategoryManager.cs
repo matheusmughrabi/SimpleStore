@@ -40,5 +40,23 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             _categoryService.InsertCategory(category);
             return true;
         }
+
+        public bool DeleteCategory(string categoryName)
+        {
+            if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle != "Super Admin")
+            {
+                throw new Exception("Only Super Admin is allowed");
+            }
+
+            CategoryModel category = _categoryService.GetCategoryByName(categoryName);
+            if (category.Id == 0)
+            {
+                return false;
+            }
+
+            _categoryService.DeleteCategory(category.Id);
+
+            return true;
+        }
     }
 }

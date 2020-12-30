@@ -8,7 +8,6 @@ using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Products.ProductsLogic;
-using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
@@ -53,7 +52,9 @@ namespace SimpleStore.ConsoleUI
             var managerCreateManagerMenu = new SimpleActionMenu("Create Manager Menu", managerMainMenu);
             var managerRegisteredUsersMenu = new SimpleActionMenu("Registered Users Menu", managerMainMenu);
             var managerAddCategoryMenu = new SimpleActionMenu("Add Category Menu", managerMainMenu);
+            var managerDeleteCategoryMenu = new SimpleActionMenu("Delete Category Menu", managerMainMenu);
             var managerAddProductMenu = new SimpleActionMenu("Add Product Menu", managerMainMenu);
+            var managerDeleteProductMenu = new SimpleActionMenu("Delete Product Menu", managerMainMenu);
             var managerBuyProductMenu = new SimpleActionMenu("Buy Product Menu", managerMainMenu);
             var accountMenu = new MasterNavigatorMenu("Account Menu", mainMenu);
             var makeDepositMenu = new SimpleActionMenu("Make Deposit Menu", accountMenu);
@@ -92,7 +93,9 @@ namespace SimpleStore.ConsoleUI
 
             managerMainMenu.AddTextBlock("Welcome Manager");
             managerMainMenu.AddChildMenu(managerAddCategoryMenu);
+            managerMainMenu.AddChildMenu(managerDeleteCategoryMenu);
             managerMainMenu.AddChildMenu(managerAddProductMenu);
+            managerMainMenu.AddChildMenu(managerDeleteProductMenu);
             managerMainMenu.AddChildMenu(managerBuyProductMenu);
             managerMainMenu.AddChildMenu(managerCreateManagerMenu);
             managerMainMenu.AddChildMenu(managerRegisteredUsersMenu);
@@ -110,6 +113,10 @@ namespace SimpleStore.ConsoleUI
             managerAddCategoryMenu.AccessAllowedFunc = new AccessValidatorLogic().AllowSuperAdminOnly;
             managerAddCategoryMenu.MenuFuncLogic = new ManagerLogic(_categoryOperator, _productsOperator).InsertCategory;
 
+            managerDeleteCategoryMenu.AddTextBox("Category");
+            managerDeleteCategoryMenu.AccessAllowedFunc = new AccessValidatorLogic().AllowSuperAdminOnly;
+            managerDeleteCategoryMenu.MenuFuncLogic = new ManagerLogic(_categoryOperator, _productsOperator).DeleteCategory;
+
             managerAddProductMenu.AddTextBox("Name");
             managerAddProductMenu.AddTextBox("Brand");
             managerAddProductMenu.AddTextBox("Category");
@@ -117,6 +124,10 @@ namespace SimpleStore.ConsoleUI
             managerAddProductMenu.AddTextBox("Discounted Price");
             managerAddProductMenu.AddTextBox("Description");
             managerAddProductMenu.MenuFuncLogic = new ManagerLogic(_categoryOperator, _productsOperator).InsertProduct;
+
+            managerDeleteProductMenu.AddTextBox("Name");
+            managerDeleteProductMenu.AccessAllowedFunc = new AccessValidatorLogic().AllowSuperAdminOnly;
+            managerDeleteProductMenu.MenuFuncLogic = new ManagerLogic(_categoryOperator, _productsOperator).DeleteProduct;
 
             managerBuyProductMenu.AddTextBox("Name");
             managerBuyProductMenu.AddTextBox("Amount");
