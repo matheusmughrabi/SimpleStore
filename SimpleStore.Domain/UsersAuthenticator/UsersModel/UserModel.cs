@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SimpleStore.Domain.UsersAuthenticator.Users
+﻿namespace SimpleStore.Domain.UsersAuthenticator.Users
 {
     public class UserModel
     {

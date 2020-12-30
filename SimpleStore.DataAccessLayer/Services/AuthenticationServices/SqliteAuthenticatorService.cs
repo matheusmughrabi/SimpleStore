@@ -1,13 +1,11 @@
 ﻿using Dapper;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Users;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
 
 namespace SimpleStore.DataAccessLayer.Services.AuthenticationServices
 {

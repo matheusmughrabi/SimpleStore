@@ -35,16 +35,15 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                     {
                         product = new ProductModel();
                         product.Category = new CategoryModel();
-                        product.ProductStatus = new ProductStatusModel();
 
                         product.Id = sqlDataReader.GetInt32(0);
                         product.Name = sqlDataReader.GetString(1);
-                        product.Brand = sqlDataReader.GetString(1);
+                        product.Brand = sqlDataReader.GetString(2);
                         product.Category.Id = sqlDataReader.GetInt32(3);
                         product.RegularPrice = sqlDataReader.GetDecimal(4);
                         product.DiscountedPrice = sqlDataReader.GetDecimal(5);
                         product.Description = sqlDataReader.GetString(6);
-                        product.ProductStatus.Id = sqlDataReader.GetInt32(7);
+                        product.QuantityInStock = sqlDataReader.GetInt32(7);
                         product.InsertedAt = sqlDataReader.GetDateTime(8);
                         product.UpdatedAt = sqlDataReader.SafeGetDateTime(9);
 
@@ -85,16 +84,15 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                     {
                         product = new ProductModel();
                         product.Category = new CategoryModel();
-                        product.ProductStatus = new ProductStatusModel();
 
                         product.Id = sqlDataReader.GetInt32(0);
                         product.Name = sqlDataReader.GetString(1);
-                        product.Brand = sqlDataReader.GetString(1);
+                        product.Brand = sqlDataReader.GetString(2);
                         product.Category.Id = sqlDataReader.GetInt32(3);
                         product.RegularPrice = sqlDataReader.GetDecimal(4);
                         product.DiscountedPrice = sqlDataReader.GetDecimal(5);
                         product.Description = sqlDataReader.GetString(6);
-                        product.ProductStatus.Id = sqlDataReader.GetInt32(7);
+                        product.QuantityInStock = sqlDataReader.GetInt32(7);
                         product.InsertedAt = sqlDataReader.GetDateTime(8);
                         product.UpdatedAt = sqlDataReader.SafeGetDateTime(9);
 
@@ -127,7 +125,7 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                 _sqlCommand.Parameters.AddWithValue("@RegularPrice", product.RegularPrice);
                 _sqlCommand.Parameters.AddWithValue("@DiscountedPrice", product.DiscountedPrice);
                 _sqlCommand.Parameters.AddWithValue("@Description", product.Description);
-                _sqlCommand.Parameters.AddWithValue("@ProductStatusId", DBNull.Value);
+                _sqlCommand.Parameters.AddWithValue("@QuantityInStock", product.QuantityInStock);
                 _sqlCommand.Parameters.AddWithValue("@InsertedAt", DateTime.Now);
                 _sqlCommand.Parameters.AddWithValue("@UpdatedAt", DBNull.Value);
                 _sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -148,6 +146,32 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
             }
 
             return product;
+        }
+
+        public bool UpdateProductQuantityInStock(int id, int quantity)
+        {
+            try
+            {
+                _sqlCommand.Parameters.Clear();
+                _sqlCommand.CommandText = "spUpdateProductQuantityInStock";
+
+                _sqlCommand.Parameters.AddWithValue("@Id", id);
+                _sqlCommand.Parameters.AddWithValue("@QuantityInStock", quantity);
+                _sqlCommand.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
+
+                _sqlServerConnection.OpenConnection();
+                _sqlCommand.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _sqlServerConnection.CloseConnection();
+            }
+
+            return true;
         }
     }
 }

@@ -1,7 +1,4 @@
 ﻿using SimpleStore.Domain.BaseModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.Domain.Products
 {
@@ -13,6 +10,6 @@ namespace SimpleStore.Domain.Products
         public decimal RegularPrice { get; set; }
         public decimal DiscountedPrice { get; set; }
         public string Description { get; set; }
-        public ProductStatusModel ProductStatus { get; set; }
+        public int QuantityInStock { get; set; }
     }
 }

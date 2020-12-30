@@ -10,7 +10,7 @@ namespace SimpleStore.DataAccessLayer.Services.AuthenticationServices
 {
     public class SqlServerAuthenticationService : BaseSqlServerService, IAuthenticationService
     {
-        public SqlServerAuthenticationService(IConnection sqlServerConnection) : base(sqlServerConnection) 
+        public SqlServerAuthenticationService(IConnection sqlServerConnection) : base(sqlServerConnection)
         {
         }
 
@@ -42,7 +42,7 @@ namespace SimpleStore.DataAccessLayer.Services.AuthenticationServices
                         user.Password = sqlDataReader.GetString(5);
 
                         registeredUsers.Add(user);
-                    }                      
+                    }
                 }
             }
             catch (SqlException ex)

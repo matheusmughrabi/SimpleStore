@@ -7,6 +7,7 @@ using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Products;
+using SimpleStore.Domain.Products.ProductsLogic;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
@@ -21,22 +22,19 @@ namespace SimpleStore.ConsoleUI
         private IUserLogger _userLogger;
         private IManagerLogger _managerLogger;
         private IUserRegistrator _userRegistrator;
-        private ICategoryService _categoryService;
-        private IProductsService _productService;
+        private IProductsLogic _productsLogic;
         private AccountsLogic _accountsLogic;
         private readonly ICategoryOperator _categoryOperator;
         private readonly IProductsOperator _productsOperator;
         private readonly IManagerCreator _managerCreator;
         private IRegisteredUsersInfo _registeredUsersInfo;
 
-        public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator, ICategoryService categoryService,
-            IProductsService productService, AccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator, IManagerCreator managerCreator, IRegisteredUsersInfo registeredUsersInfo)
+        public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator,IProductsLogic productsLogic, AccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator, IManagerCreator managerCreator, IRegisteredUsersInfo registeredUsersInfo)
         {
             _userLogger = userLogger;
             _managerLogger = managerLogger;
             _userRegistrator = userRegistrator;
-            _categoryService = categoryService;
-            _productService = productService;
+            _productsLogic = productsLogic;
             _accountsLogic = accountsLogic;
             _categoryOperator = categoryOperator;
             _productsOperator = productsOperator;
@@ -49,13 +47,14 @@ namespace SimpleStore.ConsoleUI
             var initialMenu = new SimpleNavigatorMenu("Initial Menu", null);
             var loginMenu = new SimpleActionMenu("Login Menu", initialMenu);
             var managerLoginMenu = new SimpleActionMenu("Manager Login Menu", initialMenu);
-            var registerMenu = new SimpleActionMenu("Register Menu", initialMenu);           
+            var registerMenu = new SimpleActionMenu("Register Menu", initialMenu);
             var mainMenu = new MasterNavigatorMenu("Main Menu", initialMenu);
             var managerMainMenu = new MasterNavigatorMenu("Manager Main Menu", initialMenu);
             var managerCreateManagerMenu = new SimpleActionMenu("Create Manager Menu", managerMainMenu);
             var managerRegisteredUsersMenu = new SimpleActionMenu("Registered Users Menu", managerMainMenu);
             var managerAddCategoryMenu = new SimpleActionMenu("Add Category Menu", managerMainMenu);
             var managerAddProductMenu = new SimpleActionMenu("Add Product Menu", managerMainMenu);
+            var managerBuyProductMenu = new SimpleActionMenu("Buy Product Menu", managerMainMenu);
             var accountMenu = new SimpleNavigatorMenu("Account Menu", mainMenu);
             var makeDepositMenu = new SimpleActionMenu("Make Deposit Menu", accountMenu);
             var makeWithdrawalMenu = new SimpleActionMenu("Make Withdrawal Menu", accountMenu);
@@ -63,8 +62,8 @@ namespace SimpleStore.ConsoleUI
 
             initialMenu.AddChildMenu(loginMenu);
             initialMenu.AddChildMenu(managerLoginMenu);
-            initialMenu.AddChildMenu(registerMenu);         
-            initialMenu.SetReturnOption("0 - Exit");         
+            initialMenu.AddChildMenu(registerMenu);
+            initialMenu.SetReturnOption("0 - Exit");
 
             loginMenu.AddTextBox("Username");
             loginMenu.AddTextBox("Password");
@@ -94,6 +93,7 @@ namespace SimpleStore.ConsoleUI
             managerMainMenu.AddTextBlock("Welcome Manager");
             managerMainMenu.AddChildMenu(managerAddCategoryMenu);
             managerMainMenu.AddChildMenu(managerAddProductMenu);
+            managerMainMenu.AddChildMenu(managerBuyProductMenu);
             managerMainMenu.AddChildMenu(managerCreateManagerMenu);
             managerMainMenu.AddChildMenu(managerRegisteredUsersMenu);
             managerMainMenu.SetReturnOption("0 - Logout");
@@ -117,7 +117,11 @@ namespace SimpleStore.ConsoleUI
             managerAddProductMenu.AddTextBox("Discounted Price");
             managerAddProductMenu.AddTextBox("Description");
             managerAddProductMenu.Func = new ManagerLogic(_categoryOperator, _productsOperator).InsertProduct;
-    
+
+            managerBuyProductMenu.AddTextBox("Name");
+            managerBuyProductMenu.AddTextBox("Amount");
+            managerBuyProductMenu.Func = new ManagerLogic(_categoryOperator, _productsOperator).BuyProduct;
+
             accountMenu.AddChildMenu(makeDepositMenu);
             accountMenu.AddChildMenu(makeWithdrawalMenu);
 
@@ -129,12 +133,12 @@ namespace SimpleStore.ConsoleUI
             makeWithdrawalMenu.SetRenavigateMenu(accountMenu);
             makeWithdrawalMenu.Func = new MakeWithdrawalLogic(_accountsLogic).MakeWithdrawal;
 
-            List<CategoryModel> categories = _categoryService.GetCategories();
+            List<CategoryModel> categories = _productsLogic.GetCategories();
             foreach (var category in categories)
             {
                 SimpleActionMenu productMenu = new SimpleActionMenu($"{category.CategoryName} Menu", storeCategoriesMenu);
-                productMenu.Func = new BuyProductLogic(_accountsLogic, category, _productService).BuyProduct;
-                storeCategoriesMenu.AddChildMenu(productMenu);  
+                productMenu.Func = new BuyProductLogic(_accountsLogic, category, _productsLogic).BuyProduct;
+                storeCategoriesMenu.AddChildMenu(productMenu);
             }
 
             initialMenu.Run();

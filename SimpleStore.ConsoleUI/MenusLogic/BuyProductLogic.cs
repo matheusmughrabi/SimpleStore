@@ -1,9 +1,10 @@
-﻿using SimpleStore.Domain.Products;
+﻿using SimpleStore.ConsoleUI.MenuFrame.MenuItems;
+using SimpleStore.Domain.Products;
+using SimpleStore.Domain.Products.ProductsLogic;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.MenusAction
 {
@@ -11,37 +12,41 @@ namespace SimpleStore.ConsoleUI.MenusAction
     {
         private readonly AccountsLogic _accountLogic;
         private readonly CategoryModel _category;
-        private readonly IProductsService _productsService;
+        private readonly IProductsLogic _productsLogic;
 
-        public BuyProductLogic(AccountsLogic accountLogic, CategoryModel category, IProductsService productsService)
+        public BuyProductLogic(AccountsLogic accountLogic, CategoryModel category, IProductsLogic productsLogic)
         {
             _accountLogic = accountLogic;
             _category = category;
-            _productsService = productsService;
+            _productsLogic = productsLogic;
         }
 
         public bool BuyProduct(List<string> inputs)
         {
-            List<ProductModel> products = _productsService.GetProductsByCategory(_category.Id);
+            List<ProductModel> productsInCategory = _productsLogic.GetProductsByCategory(_category.Id);
 
             _accountLogic.ReloadCurrentAccount();
             Console.WriteLine($"{ _accountLogic.CurrentAccount.User.FirstName } your balance is { _accountLogic.CurrentAccount.Balance }");
 
-            int i = 1;
-            foreach (var product in products)
+
+            List<Tuple<string, string, decimal, string>> products = new List<Tuple<string, string, decimal, string>>();
+            foreach (var product in productsInCategory)
             {
-                Console.WriteLine($"{ i } - { product.Name } price { product.RegularPrice }");
-                i += 1;
+                products.Add(Tuple.Create(product.Name, product.Brand, product.RegularPrice, product.Description));
             }
+
+            Console.WriteLine(products.ToStringTable(
+              new[] { "Name", "Brand", "Price", "Description" },
+              a => a.Item1, a => a.Item2, a => a.Item3, a => a.Item4));
 
             Console.WriteLine("Select a product");
 
             string selectedProduct = Console.ReadLine();
             bool isInputValidUint = uint.TryParse(selectedProduct, out uint parsedSelectedProduct);
 
-            if (isInputValidUint && parsedSelectedProduct <= products.Count)
+            if (isInputValidUint && parsedSelectedProduct <= productsInCategory.Count)
             {
-                if (_accountLogic.CurrentAccount.Balance < products[(int)parsedSelectedProduct - 1].RegularPrice)
+                if (_accountLogic.CurrentAccount.Balance < productsInCategory[(int)parsedSelectedProduct - 1].RegularPrice)
                 {
                     Console.WriteLine("You don't have enough credit to buy this product");
                     Console.ReadLine();
@@ -49,7 +54,7 @@ namespace SimpleStore.ConsoleUI.MenusAction
                 }
                 else
                 {
-                    _accountLogic.MakePurchase(products[(int)parsedSelectedProduct - 1].RegularPrice);
+                    _accountLogic.MakePurchase(productsInCategory[(int)parsedSelectedProduct - 1].RegularPrice);
 
                     Console.WriteLine("Purchase successful");
                     Console.ReadLine();

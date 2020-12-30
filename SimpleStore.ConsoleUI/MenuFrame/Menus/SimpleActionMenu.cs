@@ -86,7 +86,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame
         }
 
         private void GetTextBoxInput()
-        {  
+        {
             textBoxInputs.Add(Console.ReadLine());
         }
     }

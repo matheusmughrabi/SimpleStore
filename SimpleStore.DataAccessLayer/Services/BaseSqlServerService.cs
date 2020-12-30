@@ -1,8 +1,5 @@
 ﻿using SimpleStore.Domain.Services;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace SimpleStore.DataAccessLayer.Services
 {

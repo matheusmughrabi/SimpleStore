@@ -1,11 +1,9 @@
-﻿using SimpleStore.Domain.Services.AuthenticationServices;
-using SimpleStore.Domain.UsersAuthenticator.Users;
-using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using SimpleStore.Domain.UsersAccounts.AccountsModel;
+﻿using Microsoft.AspNet.Identity;
 using SimpleStore.Domain.Services.AccountServices;
+using SimpleStore.Domain.Services.AuthenticationServices;
+using SimpleStore.Domain.UsersAccounts.AccountsModel;
+using SimpleStore.Domain.UsersAuthenticator.Users;
+using System.Collections.Generic;
 
 namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
 {

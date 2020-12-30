@@ -1,11 +1,9 @@
-﻿using SimpleStore.Domain.Services.AccountServices;
+﻿using Microsoft.AspNet.Identity;
+using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Users;
-using Microsoft.AspNet.Identity;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
 {
@@ -26,7 +24,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
         public bool RegisterUser(UserModel newUser)
         {
             _registeredUsers = _authenticationService.GetRegisteredUsers();
-            _newUser = newUser;           
+            _newUser = newUser;
 
             bool isLoginUnique = VerifyLogin();
             bool isEmailUnique = VerifyEmail();
@@ -82,7 +80,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
 
         private bool CheckForNullData()
         {
-            if (string.IsNullOrEmpty(_newUser.FirstName) || string.IsNullOrEmpty(_newUser.LastName) || string.IsNullOrEmpty(_newUser.Username) || 
+            if (string.IsNullOrEmpty(_newUser.FirstName) || string.IsNullOrEmpty(_newUser.LastName) || string.IsNullOrEmpty(_newUser.Username) ||
                 string.IsNullOrEmpty(_newUser.Password))
             {
                 return false;

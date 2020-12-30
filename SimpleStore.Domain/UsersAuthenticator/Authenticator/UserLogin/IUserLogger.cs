@@ -1,8 +1,4 @@
-﻿using SimpleStore.Domain.UsersAccounts.AccountsModel;
-using SimpleStore.Domain.UsersAuthenticator.Users;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SimpleStore.Domain.UsersAuthenticator.Users;
 
 namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
 {
