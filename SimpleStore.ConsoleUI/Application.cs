@@ -121,6 +121,7 @@ namespace SimpleStore.ConsoleUI
             managerAddProductMenu.MenuFuncLogic = new ManagerLogic(_categoryOperator, _productsOperator).InsertProduct;
 
             managerDeleteProductMenu.AddTextBox("Name");
+            managerDeleteProductMenu.AccessAllowedFunc = new AccessValidatorLogic().AllowSuperAdminOnly;
             managerDeleteProductMenu.MenuFuncLogic = new ManagerLogic(_categoryOperator, _productsOperator).DeleteProduct;
 
             managerBuyProductMenu.AddTextBox("Name");
