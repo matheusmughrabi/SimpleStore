@@ -7,6 +7,7 @@ using SimpleStore.DataAccessLayer.Services.ProductsServices;
 using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
+using SimpleStore.Domain.Products.ProductsLogic;
 using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
@@ -38,6 +39,7 @@ namespace SimpleStore.ConsoleUI
             builder.RegisterType<UserRegistrator>().As<IUserRegistrator>();
             builder.RegisterType<ManagerCreator>().As<IManagerCreator>();
             builder.RegisterType<RegisteredUsersInfo>().As<IRegisteredUsersInfo>();
+            builder.RegisterType<ProductsLogic>().As<IProductsLogic>();
 
             builder.RegisterType<UserModel>().AsSelf().SingleInstance();
             builder.RegisterType<AccountModel>().AsSelf().SingleInstance();

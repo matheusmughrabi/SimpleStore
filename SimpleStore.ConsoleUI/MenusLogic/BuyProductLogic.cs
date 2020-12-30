@@ -1,5 +1,6 @@
 ﻿using SimpleStore.ConsoleUI.MenuFrame.MenuItems;
 using SimpleStore.Domain.Products;
+using SimpleStore.Domain.Products.ProductsLogic;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using System;
@@ -11,18 +12,18 @@ namespace SimpleStore.ConsoleUI.MenusAction
     {
         private readonly AccountsLogic _accountLogic;
         private readonly CategoryModel _category;
-        private readonly IProductsService _productsService;
+        private readonly IProductsLogic _productsLogic;
 
-        public BuyProductLogic(AccountsLogic accountLogic, CategoryModel category, IProductsService productsService)
+        public BuyProductLogic(AccountsLogic accountLogic, CategoryModel category, IProductsLogic productsLogic)
         {
             _accountLogic = accountLogic;
             _category = category;
-            _productsService = productsService;
+            _productsLogic = productsLogic;
         }
 
         public bool BuyProduct(List<string> inputs)
         {
-            List<ProductModel> productsInCategory = _productsService.GetProductsByCategory(_category.Id);
+            List<ProductModel> productsInCategory = _productsLogic.GetProductsByCategory(_category.Id);
 
             _accountLogic.ReloadCurrentAccount();
             Console.WriteLine($"{ _accountLogic.CurrentAccount.User.FirstName } your balance is { _accountLogic.CurrentAccount.Balance }");

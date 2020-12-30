@@ -7,6 +7,7 @@ using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Products;
+using SimpleStore.Domain.Products.ProductsLogic;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
@@ -21,22 +22,19 @@ namespace SimpleStore.ConsoleUI
         private IUserLogger _userLogger;
         private IManagerLogger _managerLogger;
         private IUserRegistrator _userRegistrator;
-        private ICategoryService _categoryService;
-        private IProductsService _productService;
+        private IProductsLogic _productsLogic;
         private AccountsLogic _accountsLogic;
         private readonly ICategoryOperator _categoryOperator;
         private readonly IProductsOperator _productsOperator;
         private readonly IManagerCreator _managerCreator;
         private IRegisteredUsersInfo _registeredUsersInfo;
 
-        public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator, ICategoryService categoryService,
-            IProductsService productService, AccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator, IManagerCreator managerCreator, IRegisteredUsersInfo registeredUsersInfo)
+        public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator,IProductsLogic productsLogic, AccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator, IManagerCreator managerCreator, IRegisteredUsersInfo registeredUsersInfo)
         {
             _userLogger = userLogger;
             _managerLogger = managerLogger;
             _userRegistrator = userRegistrator;
-            _categoryService = categoryService;
-            _productService = productService;
+            _productsLogic = productsLogic;
             _accountsLogic = accountsLogic;
             _categoryOperator = categoryOperator;
             _productsOperator = productsOperator;
@@ -135,11 +133,11 @@ namespace SimpleStore.ConsoleUI
             makeWithdrawalMenu.SetRenavigateMenu(accountMenu);
             makeWithdrawalMenu.Func = new MakeWithdrawalLogic(_accountsLogic).MakeWithdrawal;
 
-            List<CategoryModel> categories = _categoryService.GetCategories();
+            List<CategoryModel> categories = _productsLogic.GetCategories();
             foreach (var category in categories)
             {
                 SimpleActionMenu productMenu = new SimpleActionMenu($"{category.CategoryName} Menu", storeCategoriesMenu);
-                productMenu.Func = new BuyProductLogic(_accountsLogic, category, _productService).BuyProduct;
+                productMenu.Func = new BuyProductLogic(_accountsLogic, category, _productsLogic).BuyProduct;
                 storeCategoriesMenu.AddChildMenu(productMenu);
             }
 
