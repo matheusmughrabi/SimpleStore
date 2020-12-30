@@ -1,4 +1,5 @@
-﻿using SimpleStore.Domain.Products;
+﻿using SimpleStore.Domain.Manager.ManagerLogin;
+using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Services.ProductsServices;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,12 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 
         public bool DeleteProduct(string name)
         {
-            ProductModel product = _productsService.GetProductsByName(name);
+            if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle != "Super Admin")
+            {
+                throw new Exception("Only Super Admin is allowed");
+            }
+
+            ProductModel product = _productsService.GetProductByName(name);
             if (product.Id == 0)
             {
                 return false;

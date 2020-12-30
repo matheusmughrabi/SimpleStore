@@ -57,6 +57,42 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
             return categories;
         }
 
+        public CategoryModel GetCategoryByName(string categoryName)
+        {
+            CategoryModel category = new CategoryModel();
+
+            try
+            {
+                _sqlCommand.Parameters.Clear();
+                _sqlCommand.CommandText = "spGetCategoryByName";
+                _sqlCommand.Parameters.AddWithValue("@Category", categoryName);
+
+                _sqlServerConnection.OpenConnection();
+
+                var sqlDataReader = _sqlCommand.ExecuteReader();
+                if (sqlDataReader.HasRows)
+                {
+                    sqlDataReader.Read();
+
+                    category.Id = sqlDataReader.GetInt32(0);
+                    category.CategoryName = sqlDataReader.GetString(1);
+                    category.ParentCategoryId = sqlDataReader.SafeGetInt(2);
+                    category.InsertedAt = sqlDataReader.GetDateTime(3);
+                    category.UpdatedAt = sqlDataReader.SafeGetDateTime(4);
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                _sqlServerConnection.CloseConnection();
+            }
+            return category;
+        }
+
         public CategoryModel InsertCategory(CategoryModel category)
         {
             try
@@ -93,6 +129,30 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
             }
 
             return category;
+        }
+
+        public bool DeleteCategory(int id)
+        {
+            try
+            {
+                _sqlCommand.Parameters.Clear();
+                _sqlCommand.CommandText = "spDeleteCategory";
+
+                _sqlCommand.Parameters.AddWithValue("@Id", id);
+
+                _sqlServerConnection.OpenConnection();
+                _sqlCommand.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _sqlServerConnection.CloseConnection();
+            }
+
+            return true;
         }
     }
 }

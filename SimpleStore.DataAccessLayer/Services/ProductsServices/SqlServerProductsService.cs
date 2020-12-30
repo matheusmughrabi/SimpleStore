@@ -63,7 +63,7 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
             return products;
         }
 
-        public ProductModel GetProductsByName(string name)
+        public ProductModel GetProductByName(string name)
         {
             ProductModel product = new ProductModel();
             product.Category = new CategoryModel();

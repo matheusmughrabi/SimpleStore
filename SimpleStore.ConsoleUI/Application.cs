@@ -8,7 +8,6 @@ using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Products.ProductsLogic;
-using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
@@ -53,6 +52,7 @@ namespace SimpleStore.ConsoleUI
             var managerCreateManagerMenu = new SimpleActionMenu("Create Manager Menu", managerMainMenu);
             var managerRegisteredUsersMenu = new SimpleActionMenu("Registered Users Menu", managerMainMenu);
             var managerAddCategoryMenu = new SimpleActionMenu("Add Category Menu", managerMainMenu);
+            var managerDeleteCategoryMenu = new SimpleActionMenu("Delete Category Menu", managerMainMenu);
             var managerAddProductMenu = new SimpleActionMenu("Add Product Menu", managerMainMenu);
             var managerDeleteProductMenu = new SimpleActionMenu("Delete Product Menu", managerMainMenu);
             var managerBuyProductMenu = new SimpleActionMenu("Buy Product Menu", managerMainMenu);
@@ -93,6 +93,7 @@ namespace SimpleStore.ConsoleUI
 
             managerMainMenu.AddTextBlock("Welcome Manager");
             managerMainMenu.AddChildMenu(managerAddCategoryMenu);
+            managerMainMenu.AddChildMenu(managerDeleteCategoryMenu);
             managerMainMenu.AddChildMenu(managerAddProductMenu);
             managerMainMenu.AddChildMenu(managerDeleteProductMenu);
             managerMainMenu.AddChildMenu(managerBuyProductMenu);
@@ -111,6 +112,10 @@ namespace SimpleStore.ConsoleUI
             managerAddCategoryMenu.AddTextBox("Category Name");
             managerAddCategoryMenu.AccessAllowedFunc = new AccessValidatorLogic().AllowSuperAdminOnly;
             managerAddCategoryMenu.MenuFuncLogic = new ManagerLogic(_categoryOperator, _productsOperator).InsertCategory;
+
+            managerDeleteCategoryMenu.AddTextBox("Category");
+            managerDeleteCategoryMenu.AccessAllowedFunc = new AccessValidatorLogic().AllowSuperAdminOnly;
+            managerDeleteCategoryMenu.MenuFuncLogic = new ManagerLogic(_categoryOperator, _productsOperator).DeleteCategory;
 
             managerAddProductMenu.AddTextBox("Name");
             managerAddProductMenu.AddTextBox("Brand");

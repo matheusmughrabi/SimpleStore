@@ -1,5 +1,4 @@
-﻿using SimpleStore.Domain.Manager.ManagerLogin;
-using SimpleStore.Domain.Manager.ManagerOperations;
+﻿using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Products;
 using System;
 using System.Collections.Generic;
@@ -36,6 +35,22 @@ namespace SimpleStore.ConsoleUI.MenusLogic
 
             Console.ReadLine();
             return success;
+        }
+
+        public bool DeleteCategory(List<string> inputs)
+        {           
+            bool isDeletionSuccess = _categoryOperator.DeleteCategory(inputs[0]);
+            if (isDeletionSuccess == true)
+            {
+                Console.WriteLine($"{inputs[0] } has been deleted");
+            }
+            else
+            {
+                Console.WriteLine("Deletion failed");
+            }
+
+            Console.ReadLine();
+            return isDeletionSuccess;
         }
 
         public bool InsertProduct(List<string> inputs)
@@ -93,11 +108,6 @@ namespace SimpleStore.ConsoleUI.MenusLogic
 
         public bool DeleteProduct(List<string> inputs)
         {
-            if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle != "Super Admin")
-            {
-                throw new Exception("Only Super Admin is allowed");
-            }
-
             bool isDeletionSuccess = _productsOperator.DeleteProduct(inputs[0]);
             if (isDeletionSuccess == true)
             {
