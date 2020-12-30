@@ -44,7 +44,6 @@ namespace SimpleStore.ConsoleUI.MenusLogic
             product.RegularPrice = decimal.Parse(inputs[3]);
             product.DiscountedPrice = decimal.Parse(inputs[4]);
             product.Description = inputs[5];
-            //product.ProductStatus.Status = inputs[6];
 
             _productsOperator.InsertProduct(product);
 

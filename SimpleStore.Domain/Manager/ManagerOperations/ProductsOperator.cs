@@ -20,6 +20,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
         {
             CategoryModel category = GetCategoryByName(product.Category.CategoryName);
             product.Category.Id = category.Id;
+            product.QuantityInStock = 0;
             _productsService.InsertProduct(product);
 
             return true;

@@ -43,8 +43,9 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                         product.RegularPrice = sqlDataReader.GetDecimal(4);
                         product.DiscountedPrice = sqlDataReader.GetDecimal(5);
                         product.Description = sqlDataReader.GetString(6);
-                        product.InsertedAt = sqlDataReader.GetDateTime(7);
-                        product.UpdatedAt = sqlDataReader.SafeGetDateTime(8);
+                        product.QuantityInStock = sqlDataReader.GetInt32(7);
+                        product.InsertedAt = sqlDataReader.GetDateTime(8);
+                        product.UpdatedAt = sqlDataReader.SafeGetDateTime(9);
 
                         products.Add(product);
                     }
@@ -91,8 +92,9 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                         product.RegularPrice = sqlDataReader.GetDecimal(4);
                         product.DiscountedPrice = sqlDataReader.GetDecimal(5);
                         product.Description = sqlDataReader.GetString(6);
-                        product.InsertedAt = sqlDataReader.GetDateTime(7);
-                        product.UpdatedAt = sqlDataReader.SafeGetDateTime(8);
+                        product.QuantityInStock = sqlDataReader.GetInt32(7);
+                        product.InsertedAt = sqlDataReader.GetDateTime(8);
+                        product.UpdatedAt = sqlDataReader.SafeGetDateTime(9);
 
                         products.Add(product);
                     }
@@ -123,6 +125,7 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                 _sqlCommand.Parameters.AddWithValue("@RegularPrice", product.RegularPrice);
                 _sqlCommand.Parameters.AddWithValue("@DiscountedPrice", product.DiscountedPrice);
                 _sqlCommand.Parameters.AddWithValue("@Description", product.Description);
+                _sqlCommand.Parameters.AddWithValue("@QuantityInStock", product.QuantityInStock);
                 _sqlCommand.Parameters.AddWithValue("@InsertedAt", DateTime.Now);
                 _sqlCommand.Parameters.AddWithValue("@UpdatedAt", DBNull.Value);
                 _sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Direction = ParameterDirection.Output;
