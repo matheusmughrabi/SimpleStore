@@ -18,7 +18,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame
 
         public override void Run()
         {
-            PrintMenu();
+            base.Run();
 
             uint userInput = GetValidOptionInput();
 

@@ -32,6 +32,7 @@ namespace SimpleStore.ConsoleUI.MenusLogic
                 Console.WriteLine("Category added successfuly");
             }
 
+
             Console.ReadLine();
             return success;
         }

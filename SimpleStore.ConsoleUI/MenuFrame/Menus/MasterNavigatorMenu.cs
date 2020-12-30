@@ -20,18 +20,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame.Menus
 
         public override void Run()
         {
-            //bool isAccessAllowed = true;
-            //if (AccessAllowedFunc != null)
-            //{
-            //    isAccessAllowed = AccessAllowedFunc();
-            //}
-
-            //if (isAccessAllowed == false)
-            //{
-            //    return;
-            //}
-
-            PrintMenu();
+            base.Run();
 
             uint userInput = GetValidOptionInput();
 
