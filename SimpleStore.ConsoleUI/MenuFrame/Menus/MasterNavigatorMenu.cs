@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.MenuFrame.Menus
 {
@@ -63,7 +62,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame.Menus
             {
                 Action();
             }
-            
+
             PrintTextBlocks();
             Console.WriteLine();
             PrintChildMenus();

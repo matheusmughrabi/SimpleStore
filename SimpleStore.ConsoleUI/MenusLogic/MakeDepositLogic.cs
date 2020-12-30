@@ -1,9 +1,6 @@
-﻿using SimpleStore.Domain.Services.AccountServices;
-using SimpleStore.Domain.UsersAccounts.AccountsLogic;
-using SimpleStore.Domain.UsersAccounts.AccountsModel;
+﻿using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.MenusAction
 {

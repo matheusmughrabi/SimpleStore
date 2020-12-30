@@ -1,10 +1,7 @@
 ﻿using SimpleStore.Domain.Services;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace SimpleStore.DataAccessLayer.Connections
 {
@@ -19,7 +16,7 @@ namespace SimpleStore.DataAccessLayer.Connections
         }
 
         public void GetConnection()
-        {      
+        {
             string stringConexao = ConfigurationManager.ConnectionStrings["sqlServerExtFactory"].ConnectionString;
             _sqlConnection = new SqlConnection(stringConexao);
         }
@@ -32,8 +29,8 @@ namespace SimpleStore.DataAccessLayer.Connections
         public void CloseConnection()
         {
             _sqlConnection.Close();
-        }   
-        
+        }
+
         public SqlCommand GetSqlCommand()
         {
             _sqlCommand = new SqlCommand();

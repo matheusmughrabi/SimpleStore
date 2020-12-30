@@ -1,7 +1,4 @@
 ﻿using SimpleStore.Domain.BaseModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.Domain.Products
 {

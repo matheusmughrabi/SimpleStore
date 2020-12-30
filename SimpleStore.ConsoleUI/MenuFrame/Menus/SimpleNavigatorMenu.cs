@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.MenuFrame
 {
@@ -30,7 +29,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame
                     if (ReturnMenuAction != null)
                     {
                         ReturnMenuAction();
-                    }             
+                    }
                     _root.Run();
                 }
             }

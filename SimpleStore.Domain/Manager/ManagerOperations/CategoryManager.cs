@@ -6,12 +6,12 @@ using System.Collections.Generic;
 
 namespace SimpleStore.Domain.Manager.ManagerOperations
 {
-    public class CategoryOperator : ICategoryOperator
+    public class CategoryManager : ICategoryOperator
     {
         private readonly ICategoryService _categoryService;
         private List<CategoryModel> _registeredCategories;
 
-        public CategoryOperator(ICategoryService categoryService)
+        public CategoryManager(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }

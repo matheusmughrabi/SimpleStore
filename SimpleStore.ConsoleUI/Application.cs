@@ -49,7 +49,7 @@ namespace SimpleStore.ConsoleUI
             var initialMenu = new SimpleNavigatorMenu("Initial Menu", null);
             var loginMenu = new SimpleActionMenu("Login Menu", initialMenu);
             var managerLoginMenu = new SimpleActionMenu("Manager Login Menu", initialMenu);
-            var registerMenu = new SimpleActionMenu("Register Menu", initialMenu);           
+            var registerMenu = new SimpleActionMenu("Register Menu", initialMenu);
             var mainMenu = new MasterNavigatorMenu("Main Menu", initialMenu);
             var managerMainMenu = new MasterNavigatorMenu("Manager Main Menu", initialMenu);
             var managerCreateManagerMenu = new SimpleActionMenu("Create Manager Menu", managerMainMenu);
@@ -63,8 +63,8 @@ namespace SimpleStore.ConsoleUI
 
             initialMenu.AddChildMenu(loginMenu);
             initialMenu.AddChildMenu(managerLoginMenu);
-            initialMenu.AddChildMenu(registerMenu);         
-            initialMenu.SetReturnOption("0 - Exit");         
+            initialMenu.AddChildMenu(registerMenu);
+            initialMenu.SetReturnOption("0 - Exit");
 
             loginMenu.AddTextBox("Username");
             loginMenu.AddTextBox("Password");
@@ -117,7 +117,7 @@ namespace SimpleStore.ConsoleUI
             managerAddProductMenu.AddTextBox("Discounted Price");
             managerAddProductMenu.AddTextBox("Description");
             managerAddProductMenu.Func = new ManagerLogic(_categoryOperator, _productsOperator).InsertProduct;
-    
+
             accountMenu.AddChildMenu(makeDepositMenu);
             accountMenu.AddChildMenu(makeWithdrawalMenu);
 
@@ -134,7 +134,7 @@ namespace SimpleStore.ConsoleUI
             {
                 SimpleActionMenu productMenu = new SimpleActionMenu($"{category.CategoryName} Menu", storeCategoriesMenu);
                 productMenu.Func = new BuyProductLogic(_accountsLogic, category, _productService).BuyProduct;
-                storeCategoriesMenu.AddChildMenu(productMenu);  
+                storeCategoriesMenu.AddChildMenu(productMenu);
             }
 
             initialMenu.Run();

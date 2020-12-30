@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace SimpleStore.Domain.Manager.ManagerOperations
 {
-    public class ProductsOperator : IProductsOperator
+    public class ProductManager : IProductsOperator
     {
         private readonly IProductsService _productsService;
         private readonly ICategoryService _categoryService;
 
-        public ProductsOperator(IProductsService productsService, ICategoryService categoryService)
+        public ProductManager(IProductsService productsService, ICategoryService categoryService)
         {
             _productsService = productsService;
             _categoryService = categoryService;
