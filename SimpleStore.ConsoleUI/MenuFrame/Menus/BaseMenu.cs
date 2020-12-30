@@ -22,7 +22,23 @@ namespace SimpleStore.ConsoleUI.MenuFrame
             _root = root;
         }
 
-        public abstract void Run();
+        public virtual void Run()
+        {
+            bool isAccessAllowed = true;
+            if (AccessAllowedFunc != null)
+            {
+                isAccessAllowed = AccessAllowedFunc();
+            }
+
+            if (isAccessAllowed == false)
+            {
+                Console.WriteLine("Access denied");
+                Console.ReadLine();
+                _root.Run();
+            }
+
+            PrintMenu();
+        }
 
         protected abstract void PrintMenu();
 
