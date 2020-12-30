@@ -38,7 +38,7 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
 
                         product.Id = sqlDataReader.GetInt32(0);
                         product.Name = sqlDataReader.GetString(1);
-                        product.Brand = sqlDataReader.GetString(1);
+                        product.Brand = sqlDataReader.GetString(2);
                         product.Category.Id = sqlDataReader.GetInt32(3);
                         product.RegularPrice = sqlDataReader.GetDecimal(4);
                         product.DiscountedPrice = sqlDataReader.GetDecimal(5);
@@ -87,7 +87,7 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
 
                         product.Id = sqlDataReader.GetInt32(0);
                         product.Name = sqlDataReader.GetString(1);
-                        product.Brand = sqlDataReader.GetString(1);
+                        product.Brand = sqlDataReader.GetString(2);
                         product.Category.Id = sqlDataReader.GetInt32(3);
                         product.RegularPrice = sqlDataReader.GetDecimal(4);
                         product.DiscountedPrice = sqlDataReader.GetDecimal(5);
