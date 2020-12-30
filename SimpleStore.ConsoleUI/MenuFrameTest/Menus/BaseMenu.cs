@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.MenuFrameTest
 {
     public abstract class BaseMenu
     {
         private readonly string _menuName;
-        private readonly BaseMenu _root; 
+        private readonly BaseMenu _root;
 
         public BaseMenu ReloadMenu { get; set; }
         public Action Action { get; set; }
@@ -30,7 +28,7 @@ namespace SimpleStore.ConsoleUI.MenuFrameTest
             else
             {
                 Run();
-            }           
+            }
         }
 
         protected abstract void PrintMenu();

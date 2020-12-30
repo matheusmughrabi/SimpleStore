@@ -1,7 +1,6 @@
 ﻿using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.MenusAction
 {
@@ -31,7 +30,7 @@ namespace SimpleStore.ConsoleUI.MenusAction
                 bool isWithdrawalSuccessful = _accountLogic.MakeWithdrawal(amount);
                 if (isWithdrawalSuccessful)
                 {
-                    Console.WriteLine("Withdrawal successful");  
+                    Console.WriteLine("Withdrawal successful");
                 }
                 else
                 {

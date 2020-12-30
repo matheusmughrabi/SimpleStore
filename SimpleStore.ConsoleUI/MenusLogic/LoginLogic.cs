@@ -1,8 +1,6 @@
-﻿using SimpleStore.ConsoleUI.MenuFrame;
-using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
+﻿using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.MenusAction
 {

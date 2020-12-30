@@ -60,7 +60,7 @@ namespace SimpleStore.Domain.MailService
                 {
                     smtpClient.Connect(Configuration["Smtp:Host"], int.Parse(Configuration["Smtp:Port"]));
                     smtpClient.Authenticate(Configuration["Smtp:Email"], Configuration["Smtp:Password"]);
-                    smtpClient.Send(mailMessage);                   
+                    smtpClient.Send(mailMessage);
                 }
                 catch (Exception)
                 {

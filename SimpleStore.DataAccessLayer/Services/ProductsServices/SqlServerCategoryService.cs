@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace SimpleStore.DataAccessLayer.Services.ProductsServices
 {
@@ -73,7 +72,7 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                 else
                 {
                     _sqlCommand.Parameters.AddWithValue("@ParentId", category.ParentCategoryId);
-                }                
+                }
                 _sqlCommand.Parameters.AddWithValue("@InsertedAt", DateTime.Now);
                 _sqlCommand.Parameters.AddWithValue("@UpdatedAt", DBNull.Value);
                 _sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Direction = ParameterDirection.Output;

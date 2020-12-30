@@ -1,7 +1,5 @@
 ﻿using SimpleStore.Domain.Products;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.Domain.Services.ProductsServices
 {
@@ -10,5 +8,6 @@ namespace SimpleStore.Domain.Services.ProductsServices
         List<ProductModel> GetProducts();
         List<ProductModel> GetProductsByCategory(int categoryId);
         ProductModel InsertProduct(ProductModel product);
+        bool UpdateProductQuantityInStock(int id, int quantity);
     }
 }

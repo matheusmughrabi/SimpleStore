@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.ConsoleUI.MenuFrame
 {
@@ -23,7 +22,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame
             _root = root;
         }
 
-        public abstract void Run();                
+        public abstract void Run();
 
         protected abstract void PrintMenu();
 
