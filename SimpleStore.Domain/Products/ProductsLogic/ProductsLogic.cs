@@ -1,7 +1,5 @@
 ﻿using SimpleStore.Domain.Services.ProductsServices;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStore.Domain.Products.ProductsLogic
 {
@@ -18,7 +16,7 @@ namespace SimpleStore.Domain.Products.ProductsLogic
 
         public List<ProductModel> GetProductsByCategory(int categoryId)
         {
-            List<ProductModel>  products = _productsService.GetProductsByCategory(categoryId);
+            List<ProductModel> products = _productsService.GetProductsByCategory(categoryId);
             return products;
         }
 

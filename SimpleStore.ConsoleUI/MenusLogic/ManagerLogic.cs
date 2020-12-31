@@ -25,7 +25,7 @@ namespace SimpleStore.ConsoleUI.MenusLogic
 
             if (success == false)
             {
-                Console.WriteLine("Category name cannot be null or already exist");               
+                Console.WriteLine("Category name cannot be null or already exist");
             }
             else
             {
@@ -38,7 +38,7 @@ namespace SimpleStore.ConsoleUI.MenusLogic
         }
 
         public bool DeleteCategory(List<string> inputs)
-        {           
+        {
             bool isDeletionSuccess = _categoryOperator.DeleteCategory(inputs[0]);
             if (isDeletionSuccess == true)
             {
