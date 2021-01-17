@@ -28,7 +28,7 @@ namespace SimpleStore.ConsoleUI
         private readonly IManagerCreator _managerCreator;
         private IRegisteredUsersInfo _registeredUsersInfo;
 
-        public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator,IProductsLogic productsLogic, AccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator, IManagerCreator managerCreator, IRegisteredUsersInfo registeredUsersInfo)
+        public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator, IProductsLogic productsLogic, AccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator, IManagerCreator managerCreator, IRegisteredUsersInfo registeredUsersInfo)
         {
             _userLogger = userLogger;
             _managerLogger = managerLogger;
