@@ -1,5 +1,6 @@
 ﻿using SimpleStore.DataAccessLayer.Helpers;
 using SimpleStore.Domain.Products;
+using SimpleStore.Models.Models;
 using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.ProductsServices;
 using System;
@@ -15,9 +16,9 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
         {
         }
 
-        public List<ProductModel> GetProducts()
+        public List<Product> GetProducts()
         {
-            List<ProductModel> products = new List<ProductModel>();
+            List<Product> products = new List<Product>();
 
             try
             {
@@ -29,12 +30,12 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                 var sqlDataReader = _sqlCommand.ExecuteReader();
                 if (sqlDataReader.HasRows)
                 {
-                    ProductModel product;
+                    Product product;
 
                     while (sqlDataReader.Read())
                     {
-                        product = new ProductModel();
-                        product.Category = new CategoryModel();
+                        product = new Product();
+                        product.Category = new Category();
 
                         product.Id = sqlDataReader.GetInt32(0);
                         product.Name = sqlDataReader.GetString(1);
@@ -63,10 +64,10 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
             return products;
         }
 
-        public ProductModel GetProductByName(string name)
+        public Product GetProductByName(string name)
         {
-            ProductModel product = new ProductModel();
-            product.Category = new CategoryModel();
+            Product product = new Product();
+            product.Category = new Category();
 
             try
             {
@@ -105,9 +106,9 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
             return product;
         }
 
-        public List<ProductModel> GetProductsByCategory(int categoryId)
+        public List<Product> GetProductsByCategory(int categoryId)
         {
-            List<ProductModel> products = new List<ProductModel>();
+            List<Product> products = new List<Product>();
 
             try
             {
@@ -120,12 +121,12 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                 var sqlDataReader = _sqlCommand.ExecuteReader();
                 if (sqlDataReader.HasRows)
                 {
-                    ProductModel product;
+                    Product product;
 
                     while (sqlDataReader.Read())
                     {
-                        product = new ProductModel();
-                        product.Category = new CategoryModel();
+                        product = new Product();
+                        product.Category = new Category();
 
                         product.Id = sqlDataReader.GetInt32(0);
                         product.Name = sqlDataReader.GetString(1);
@@ -154,7 +155,7 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
             return products;
         }
 
-        public ProductModel InsertProduct(ProductModel product)
+        public Product InsertProduct(Product product)
         {
             try
             {

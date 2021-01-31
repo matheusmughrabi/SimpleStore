@@ -1,5 +1,6 @@
 ﻿using SimpleStore.DataAccessLayer.Helpers;
 using SimpleStore.Domain.Products;
+using SimpleStore.Models.Models;
 using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.ProductsServices;
 using System;
@@ -15,9 +16,9 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
         {
         }
 
-        public List<CategoryModel> GetCategories()
+        public List<Category> GetCategories()
         {
-            List<CategoryModel> categories = new List<CategoryModel>();
+            List<Category> categories = new List<Category>();
 
             try
             {
@@ -29,14 +30,14 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                 var sqlDataReader = _sqlCommand.ExecuteReader();
                 if (sqlDataReader.HasRows)
                 {
-                    CategoryModel category;
+                    Category category;
 
                     while (sqlDataReader.Read())
                     {
-                        category = new CategoryModel();
+                        category = new Category();
 
                         category.Id = sqlDataReader.GetInt32(0);
-                        category.CategoryName = sqlDataReader.GetString(1);
+                        category.Name = sqlDataReader.GetString(1);
                         category.ParentCategoryId = sqlDataReader.SafeGetInt(2);
                         category.InsertedAt = sqlDataReader.GetDateTime(3);
                         category.UpdatedAt = sqlDataReader.SafeGetDateTime(4);
@@ -57,9 +58,9 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
             return categories;
         }
 
-        public CategoryModel GetCategoryByName(string categoryName)
+        public Category GetCategoryByName(string categoryName)
         {
-            CategoryModel category = new CategoryModel();
+            Category category = new Category();
 
             try
             {
@@ -75,7 +76,7 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
                     sqlDataReader.Read();
 
                     category.Id = sqlDataReader.GetInt32(0);
-                    category.CategoryName = sqlDataReader.GetString(1);
+                    category.Name = sqlDataReader.GetString(1);
                     category.ParentCategoryId = sqlDataReader.SafeGetInt(2);
                     category.InsertedAt = sqlDataReader.GetDateTime(3);
                     category.UpdatedAt = sqlDataReader.SafeGetDateTime(4);
@@ -93,14 +94,14 @@ namespace SimpleStore.DataAccessLayer.Services.ProductsServices
             return category;
         }
 
-        public CategoryModel InsertCategory(CategoryModel category)
+        public Category InsertCategory(Category category)
         {
             try
             {
                 _sqlCommand.Parameters.Clear();
                 _sqlCommand.CommandText = "spInsertCategory";
 
-                _sqlCommand.Parameters.AddWithValue("@Category", category.CategoryName);
+                _sqlCommand.Parameters.AddWithValue("@Category", category.Name);
                 if (category.ParentCategoryId == null)
                 {
                     _sqlCommand.Parameters.AddWithValue("@ParentId", DBNull.Value);

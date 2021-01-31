@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using SimpleStore.Domain.IRepository;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Models.Models;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
@@ -12,12 +11,10 @@ namespace SimpleStore.Domain.UsersAccounts.AccountsLogic
     {
         public Account CurrentAccount { get; private set; }
         private IAccountsService _accountsService;
-        private IRepositorySPCall _repository;
 
-        public AccountsLogic(IAccountsService accountService, IRepositorySPCall repository)
+        public AccountsLogic(IAccountsService accountService)
         {
             _accountsService = accountService;
-            _repository = repository;
         }
 
         public void ReloadCurrentAccount()
@@ -32,16 +29,16 @@ namespace SimpleStore.Domain.UsersAccounts.AccountsLogic
             if (CurrentAccount.Balance >= price)
             {
                 CurrentAccount.Balance -= price;
-                //_accountsService.UpdateAccountBalanceByUserId(CurrentAccount);
+                _accountsService.UpdateAccountBalanceByUserId(CurrentAccount);
 
-                var dictionary = new Dictionary<string, object>
-                {
-                    { "@UserId", CurrentAccount.AccountOwner.Id},
-                    { "@Balance", CurrentAccount.Balance}
-                };
+                //var dictionary = new Dictionary<string, object>
+                //{
+                //    { "@UserId", CurrentAccount.AccountOwner.Id},
+                //    { "@Balance", CurrentAccount.Balance}
+                //};
 
-                DynamicParameters parameters = new DynamicParameters(dictionary);
-                _repository.ExecuteWithoutReturn("spUpdateAccountBalance", parameters);
+                //DynamicParameters parameters = new DynamicParameters(dictionary);
+                //_repository.ExecuteWithoutReturn("spUpdateAccountBalance", parameters);
                 return true;
             }
             else

@@ -1,5 +1,6 @@
 ﻿using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Domain.Products;
+using SimpleStore.Models.Models;
 using SimpleStore.Domain.Services.ProductsServices;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             _categoryService = categoryService;
         }
 
-        public bool InsertProduct(ProductModel product)
+        public bool InsertProduct(Product product)
         {
-            CategoryModel category = GetCategoryByName(product.Category.CategoryName);
+            Category category = GetCategoryByName(product.Category.Name);
             product.Category.Id = category.Id;
             product.QuantityInStock = 0;
             _productsService.InsertProduct(product);
@@ -29,7 +30,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 
         public bool BuyProduct(string name, int quantity)
         {
-            ProductModel product = GetProductIdByName(name);
+            Product product = GetProductIdByName(name);
             if (product == null)
             {
                 return false;
@@ -47,7 +48,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 throw new Exception("Only Super Admin is allowed");
             }
 
-            ProductModel product = _productsService.GetProductByName(name);
+            Product product = _productsService.GetProductByName(name);
             if (product.Id == 0)
             {
                 return false;
@@ -58,9 +59,9 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             return true;
         }
 
-        private ProductModel GetProductIdByName(string name)
+        private Product GetProductIdByName(string name)
         {
-            List<ProductModel> products = _productsService.GetProducts();
+            List<Product> products = _productsService.GetProducts();
             foreach (var product in products)
             {
                 if (product.Name == name)
@@ -72,13 +73,13 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             return null;
         }
 
-        private CategoryModel GetCategoryByName(string categoryName)
+        private Category GetCategoryByName(string name)
         {
-            List<CategoryModel> registeredCategories = _categoryService.GetCategories();
+            List<Category> registeredCategories = _categoryService.GetCategories();
 
             foreach (var category in registeredCategories)
             {
-                if (category.CategoryName == categoryName)
+                if (category.Name == name)
                 {
                     return category;
                 }

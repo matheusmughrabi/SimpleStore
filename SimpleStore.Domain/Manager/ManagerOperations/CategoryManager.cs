@@ -1,5 +1,6 @@
 ﻿using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Domain.Products;
+using SimpleStore.Models.Models;
 using SimpleStore.Domain.Services.ProductsServices;
 using System;
 using System.Collections.Generic;
@@ -9,14 +10,14 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
     public class CategoryManager : ICategoryOperator
     {
         private readonly ICategoryService _categoryService;
-        private List<CategoryModel> _registeredCategories;
+        private List<Category> _registeredCategories;
 
         public CategoryManager(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }
 
-        public bool InsertCategory(CategoryModel category)
+        public bool InsertCategory(Category category)
         {
             if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle != "Super Admin")
             {
@@ -27,11 +28,11 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 
             foreach (var registeredCategory in _registeredCategories)
             {
-                if (registeredCategory.CategoryName == category.CategoryName)
+                if (registeredCategory.Name == category.Name)
                 {
                     return false;
                 }
-                if (string.IsNullOrEmpty(category.CategoryName))
+                if (string.IsNullOrEmpty(category.Name))
                 {
                     return false;
                 }
@@ -48,7 +49,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 throw new Exception("Only Super Admin is allowed");
             }
 
-            CategoryModel category = _categoryService.GetCategoryByName(categoryName);
+            Category category = _categoryService.GetCategoryByName(categoryName);
             if (category.Id == 0)
             {
                 return false;

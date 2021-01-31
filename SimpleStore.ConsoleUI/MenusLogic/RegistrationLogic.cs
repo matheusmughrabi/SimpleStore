@@ -1,4 +1,4 @@
-﻿using SimpleStore.Domain.MailService;
+﻿using SimpleStore.Utils.Services;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Models.Models;
 using System;

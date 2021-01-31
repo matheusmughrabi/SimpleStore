@@ -2,6 +2,7 @@
 using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Products.ProductsLogic;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
+using SimpleStore.Models.Models;
 using System;
 using System.Collections.Generic;
 
@@ -10,10 +11,10 @@ namespace SimpleStore.ConsoleUI.MenusAction
     public class BuyProductLogic
     {
         private readonly AccountsLogic _accountLogic;
-        private readonly CategoryModel _category;
+        private readonly Category _category;
         private readonly IProductsLogic _productsLogic;
 
-        public BuyProductLogic(AccountsLogic accountLogic, CategoryModel category, IProductsLogic productsLogic)
+        public BuyProductLogic(AccountsLogic accountLogic, Category category, IProductsLogic productsLogic)
         {
             _accountLogic = accountLogic;
             _category = category;
@@ -22,7 +23,7 @@ namespace SimpleStore.ConsoleUI.MenusAction
 
         public bool BuyProduct(List<string> inputs)
         {
-            List<ProductModel> productsInCategory = _productsLogic.GetProductsByCategory(_category.Id);
+            List<Product> productsInCategory = _productsLogic.GetProductsByCategory(_category.Id);
 
             _accountLogic.ReloadCurrentAccount();
             Console.WriteLine($"{ _accountLogic.CurrentAccount.AccountOwner.FirstName } your balance is { _accountLogic.CurrentAccount.Balance }");

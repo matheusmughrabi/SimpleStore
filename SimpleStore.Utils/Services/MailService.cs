@@ -4,7 +4,7 @@ using MimeKit;
 using System;
 using System.IO;
 
-namespace SimpleStore.Domain.MailService
+namespace SimpleStore.Utils.Services
 {
     public static class MailService
     {

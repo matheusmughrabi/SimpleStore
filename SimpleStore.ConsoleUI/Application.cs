@@ -144,10 +144,10 @@ namespace SimpleStore.ConsoleUI
             makeWithdrawalMenu.SetRenavigateMenu(accountMenu);
             makeWithdrawalMenu.MenuFuncLogic = new MakeWithdrawalLogic(_accountsLogic).MakeWithdrawal;
 
-            List<CategoryModel> categories = _productsLogic.GetCategories();
+            List<Category> categories = _productsLogic.GetCategories();
             foreach (var category in categories)
             {
-                SimpleActionMenu productMenu = new SimpleActionMenu($"{category.CategoryName} Menu", storeCategoriesMenu);
+                SimpleActionMenu productMenu = new SimpleActionMenu($"{category.Name} Menu", storeCategoriesMenu);
                 productMenu.MenuFuncLogic = new BuyProductLogic(_accountsLogic, category, _productsLogic).BuyProduct;
                 storeCategoriesMenu.AddChildMenu(productMenu);
             }

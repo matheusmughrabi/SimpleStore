@@ -1,4 +1,5 @@
 ﻿using SimpleStore.Domain.Services.ProductsServices;
+using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
 namespace SimpleStore.Domain.Products.ProductsLogic
@@ -14,15 +15,15 @@ namespace SimpleStore.Domain.Products.ProductsLogic
             _categoriesService = categoriesService;
         }
 
-        public List<ProductModel> GetProductsByCategory(int categoryId)
+        public List<Product> GetProductsByCategory(int categoryId)
         {
-            List<ProductModel> products = _productsService.GetProductsByCategory(categoryId);
+            List<Product> products = _productsService.GetProductsByCategory(categoryId);
             return products;
         }
 
-        public List<CategoryModel> GetCategories()
+        public List<Category> GetCategories()
         {
-            List<CategoryModel> categories = _categoriesService.GetCategories();
+            List<Category> categories = _categoriesService.GetCategories();
             return categories;
         }
     }
