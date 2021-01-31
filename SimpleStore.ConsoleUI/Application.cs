@@ -83,7 +83,7 @@ namespace SimpleStore.ConsoleUI
             registerMenu.AddTextBox("Password");
             registerMenu.AddTextBox("Confirm Password");
             registerMenu.SetRenavigateMenu(initialMenu);
-            registerMenu.MenuFuncLogic = new RegistrationLogic(_userRegistrator, new UserModel()).Register;
+            registerMenu.MenuFuncLogic = new RegistrationLogic(_userRegistrator, new AccountOwner()).Register;
 
             mainMenu.AddChildMenu(accountMenu);
             mainMenu.AddChildMenu(storeCategoriesMenu);

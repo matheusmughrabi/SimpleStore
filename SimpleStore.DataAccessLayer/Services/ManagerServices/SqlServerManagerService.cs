@@ -35,7 +35,7 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
                     while (sqlDataReader.Read())
                     {
                         manager = new ManagerModel();
-                        manager.User = new UserModel();
+                        manager.User = new AccountOwner();
                         manager.ManagerPermission = new ManagerPermissionModel();
 
                         manager.Id = sqlDataReader.GetInt32(0);
@@ -82,7 +82,7 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
                     while (sqlDataReader.Read())
                     {
                         manager = new ManagerModel();
-                        manager.User = new UserModel();
+                        manager.User = new AccountOwner();
                         manager.ManagerPermission = new ManagerPermissionModel();
 
                         manager.User.Id = sqlDataReader.GetInt32(0);

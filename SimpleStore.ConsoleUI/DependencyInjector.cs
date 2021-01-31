@@ -45,7 +45,7 @@ namespace SimpleStore.ConsoleUI
             builder.RegisterType<RegisteredUsersInfo>().As<IRegisteredUsersInfo>();
             builder.RegisterType<ProductsLogic>().As<IProductsLogic>();
 
-            builder.RegisterType<UserModel>().AsSelf().SingleInstance();
+            builder.RegisterType<AccountOwner>().AsSelf().SingleInstance();
             builder.RegisterType<AccountModel>().AsSelf().SingleInstance();
 
             builder.RegisterType<AccountsLogic>().AsSelf();

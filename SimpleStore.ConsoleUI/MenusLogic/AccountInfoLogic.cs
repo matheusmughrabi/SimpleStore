@@ -15,7 +15,7 @@ namespace SimpleStore.ConsoleUI.MenusAction
         public void PrintAccountInfoLogic()
         {
             _accountLogic.ReloadCurrentAccount();
-            Console.WriteLine($"{ _accountLogic.CurrentAccount.User.FirstName } your balance is { _accountLogic.CurrentAccount.Balance }");
+            Console.WriteLine($"{ _accountLogic.CurrentAccount.AccountOwner.FirstName } your balance is { _accountLogic.CurrentAccount.Balance }");
         }
     }
 }

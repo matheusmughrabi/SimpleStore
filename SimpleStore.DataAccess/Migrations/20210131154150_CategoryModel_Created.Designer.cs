@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpleStore.DataAccess;
 
 namespace SimpleStore.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210131154150_CategoryModel_Created")]
+    partial class CategoryModel_Created
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,84 +107,6 @@ namespace SimpleStore.DataAccess.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("SimpleStore.Models.Models.Manager", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("AccountOwnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ManagerPermissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountOwnerId");
-
-                    b.HasIndex("ManagerPermissionId");
-
-                    b.ToTable("Manager");
-                });
-
-            modelBuilder.Entity("SimpleStore.Models.Models.ManagerPermission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("PermissionTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ManagerPermission");
-                });
-
-            modelBuilder.Entity("SimpleStore.Models.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Brand")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("DiscountedPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("InsertedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuantityInStock")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("RegularPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Product");
-                });
-
             modelBuilder.Entity("SimpleStore.Models.Models.Account", b =>
                 {
                     b.HasOne("SimpleStore.Models.Models.AccountOwner", "AccountOwner")
@@ -190,30 +114,6 @@ namespace SimpleStore.DataAccess.Migrations
                         .HasForeignKey("AccountOwnerId");
 
                     b.Navigation("AccountOwner");
-                });
-
-            modelBuilder.Entity("SimpleStore.Models.Models.Manager", b =>
-                {
-                    b.HasOne("SimpleStore.Models.Models.AccountOwner", "AccountOwner")
-                        .WithMany()
-                        .HasForeignKey("AccountOwnerId");
-
-                    b.HasOne("SimpleStore.Models.Models.ManagerPermission", "ManagerPermission")
-                        .WithMany()
-                        .HasForeignKey("ManagerPermissionId");
-
-                    b.Navigation("AccountOwner");
-
-                    b.Navigation("ManagerPermission");
-                });
-
-            modelBuilder.Entity("SimpleStore.Models.Models.Product", b =>
-                {
-                    b.HasOne("SimpleStore.Models.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
-
-                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

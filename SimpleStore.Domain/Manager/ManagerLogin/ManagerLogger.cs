@@ -12,7 +12,7 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
         private IPasswordHasher _passwordHasher;
         private List<ManagerModel> _registeredManagers;
         private ManagerModel _manager;
-        public static ManagerModel CurrentManager { get; private set; } = new ManagerModel(new UserModel());
+        public static ManagerModel CurrentManager { get; private set; } = new ManagerModel(new AccountOwner());
 
         public ManagerLogger(IManagerService managerAuthenticationService)
         {

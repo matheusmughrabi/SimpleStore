@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStore.Models.Models
+namespace SimpleStore.Models.Models.Base
 {
     public abstract class BaseModel
     {

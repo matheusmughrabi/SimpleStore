@@ -19,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{74A9D903
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Front", "Front", "{A147E010-DFB1-41C9-A781-EF85FECA9281}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStore.Teste", "SimpleStore.Teste\SimpleStore.Teste.csproj", "{8A021503-2886-4221-8A74-4D48D38F267F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{4683703F-A68B-4DDD-93B9-1789F93E6043}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4683703F-A68B-4DDD-93B9-1789F93E6043}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4683703F-A68B-4DDD-93B9-1789F93E6043}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A021503-2886-4221-8A74-4D48D38F267F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A021503-2886-4221-8A74-4D48D38F267F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A021503-2886-4221-8A74-4D48D38F267F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A021503-2886-4221-8A74-4D48D38F267F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

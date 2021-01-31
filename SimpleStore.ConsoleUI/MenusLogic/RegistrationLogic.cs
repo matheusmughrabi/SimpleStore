@@ -9,9 +9,9 @@ namespace SimpleStore.ConsoleUI.MenusAction
     public class RegistrationLogic
     {
         private IUserRegistrator _userRegistrator;
-        private UserModel _userModel;
+        private AccountOwner _userModel;
 
-        public RegistrationLogic(IUserRegistrator userLogger, UserModel userModel)
+        public RegistrationLogic(IUserRegistrator userLogger, AccountOwner userModel)
         {
             _userRegistrator = userLogger;
             _userModel = userModel;

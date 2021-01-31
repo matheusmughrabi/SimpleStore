@@ -11,16 +11,16 @@ namespace SimpleStore.DataAccessLayer.Services.AuthenticationServices
 {
     public class SqliteAuthenticatorService : IAuthenticationService
     {
-        public List<UserModel> GetRegisteredUsers()
+        public List<AccountOwner> GetRegisteredUsers()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                IEnumerable<UserModel> output = cnn.Query<UserModel>("select * from Users", new DynamicParameters());
+                IEnumerable<AccountOwner> output = cnn.Query<AccountOwner>("select * from Users", new DynamicParameters());
                 return output.ToList();
             }
         }
 
-        public UserModel RegisterUser(UserModel newUser)
+        public AccountOwner RegisterUser(AccountOwner newUser)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {

@@ -12,9 +12,9 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
         private IAuthenticationService _authenticationService;
         private IAccountsService _accountsService;
         private IPasswordHasher _passwordHasher;
-        private List<UserModel> _registeredUsers;
-        private UserModel _user;
-        public static AccountModel CurrentAccount { get; private set; } = new AccountModel(new UserModel());
+        private List<AccountOwner> _registeredUsers;
+        private AccountOwner _user;
+        public static AccountModel CurrentAccount { get; private set; } = new AccountModel(new AccountOwner());
 
         public UserLogger(IAuthenticationService authenticationService, IAccountsService accountsService)
         {
@@ -50,7 +50,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
 
         private bool GetUser(string username)
         {
-            foreach (UserModel registeredUser in _registeredUsers)
+            foreach (AccountOwner registeredUser in _registeredUsers)
             {
                 if (username == registeredUser.Username)
                 {

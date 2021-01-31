@@ -10,8 +10,8 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
     public class UserRegistrator : IUserRegistrator
     {
         private static IPasswordHasher _passwordHasher = new PasswordHasher();
-        private List<UserModel> _registeredUsers;
-        private UserModel _newUser;
+        private List<AccountOwner> _registeredUsers;
+        private AccountOwner _newUser;
         private IAuthenticationService _authenticationService;
         private IAccountsService _accountsService;
 
@@ -21,7 +21,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
             _accountsService = accountsService;
         }
 
-        public bool RegisterUser(UserModel newUser)
+        public bool RegisterUser(AccountOwner newUser)
         {
             _registeredUsers = _authenticationService.GetRegisteredUsers();
             _newUser = newUser;
@@ -44,7 +44,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
 
         private bool VerifyLogin()
         {
-            foreach (UserModel registeredUser in _registeredUsers)
+            foreach (AccountOwner registeredUser in _registeredUsers)
             {
                 if (registeredUser.Username == _newUser.Username)
                 {
@@ -57,7 +57,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
 
         private bool VerifyEmail()
         {
-            foreach (UserModel registeredUser in _registeredUsers)
+            foreach (AccountOwner registeredUser in _registeredUsers)
             {
                 if (registeredUser.Email == _newUser.Email)
                 {

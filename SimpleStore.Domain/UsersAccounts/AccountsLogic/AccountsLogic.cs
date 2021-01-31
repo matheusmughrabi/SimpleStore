@@ -36,7 +36,7 @@ namespace SimpleStore.Domain.UsersAccounts.AccountsLogic
 
                 var dictionary = new Dictionary<string, object>
                 {
-                    { "@UserId", CurrentAccount.User.Id},
+                    { "@UserId", CurrentAccount.AccountOwner.Id},
                     { "@Balance", CurrentAccount.Balance}
                 };
 

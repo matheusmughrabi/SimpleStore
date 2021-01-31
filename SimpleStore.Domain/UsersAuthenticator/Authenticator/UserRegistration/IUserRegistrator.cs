@@ -4,6 +4,6 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration
 {
     public interface IUserRegistrator
     {
-        bool RegisterUser(UserModel newUser);
+        bool RegisterUser(AccountOwner newUser);
     }
 }

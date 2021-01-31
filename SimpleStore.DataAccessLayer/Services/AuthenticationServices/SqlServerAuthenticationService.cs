@@ -14,9 +14,9 @@ namespace SimpleStore.DataAccessLayer.Services.AuthenticationServices
         {
         }
 
-        public List<UserModel> GetRegisteredUsers()
+        public List<AccountOwner> GetRegisteredUsers()
         {
-            List<UserModel> registeredUsers = new List<UserModel>();
+            List<AccountOwner> registeredUsers = new List<AccountOwner>();
 
             try
             {
@@ -28,11 +28,11 @@ namespace SimpleStore.DataAccessLayer.Services.AuthenticationServices
                 var sqlDataReader = _sqlCommand.ExecuteReader();
                 if (sqlDataReader.HasRows)
                 {
-                    UserModel user;
+                    AccountOwner user;
 
                     while (sqlDataReader.Read())
                     {
-                        user = new UserModel();
+                        user = new AccountOwner();
 
                         user.Id = sqlDataReader.GetInt32(0);
                         user.FirstName = sqlDataReader.GetString(1);
@@ -57,7 +57,7 @@ namespace SimpleStore.DataAccessLayer.Services.AuthenticationServices
             return registeredUsers;
         }
 
-        public UserModel RegisterUser(UserModel user)
+        public AccountOwner RegisterUser(AccountOwner user)
         {
             try
             {

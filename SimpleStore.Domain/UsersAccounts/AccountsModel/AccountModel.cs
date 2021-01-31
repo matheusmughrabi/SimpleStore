@@ -5,7 +5,7 @@ namespace SimpleStore.Domain.UsersAccounts.AccountsModel
     public class AccountModel
     {
         public int Id { get; set; }
-        public UserModel User { get; set; }
+        public AccountOwner AccountOwner { get; set; }
         public decimal Balance { get; set; }
 
         public AccountModel()
@@ -13,9 +13,9 @@ namespace SimpleStore.Domain.UsersAccounts.AccountsModel
 
         }
 
-        public AccountModel(UserModel user)
+        public AccountModel(AccountOwner user)
         {
-            User = user;
+            AccountOwner = user;
         }
     }
 }

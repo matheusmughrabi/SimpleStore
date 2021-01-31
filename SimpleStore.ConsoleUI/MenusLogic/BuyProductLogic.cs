@@ -25,7 +25,7 @@ namespace SimpleStore.ConsoleUI.MenusAction
             List<ProductModel> productsInCategory = _productsLogic.GetProductsByCategory(_category.Id);
 
             _accountLogic.ReloadCurrentAccount();
-            Console.WriteLine($"{ _accountLogic.CurrentAccount.User.FirstName } your balance is { _accountLogic.CurrentAccount.Balance }");
+            Console.WriteLine($"{ _accountLogic.CurrentAccount.AccountOwner.FirstName } your balance is { _accountLogic.CurrentAccount.Balance }");
 
 
             List<Tuple<string, string, decimal, string>> products = new List<Tuple<string, string, decimal, string>>();

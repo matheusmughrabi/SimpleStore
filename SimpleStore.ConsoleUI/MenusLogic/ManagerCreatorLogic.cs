@@ -18,7 +18,7 @@ namespace SimpleStore.ConsoleUI.MenusLogic
         public bool CreateManager(List<string> inputs)
         {
             ManagerModel manager = new ManagerModel();
-            manager.User = new UserModel();
+            manager.User = new AccountOwner();
             manager.ManagerPermission = new ManagerPermissionModel();
 
             manager.User.Username = inputs[0];

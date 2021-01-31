@@ -5,8 +5,8 @@ namespace SimpleStore.Domain.Services.AuthenticationServices
 {
     public interface IAuthenticationService
     {
-        List<UserModel> GetRegisteredUsers();
+        List<AccountOwner> GetRegisteredUsers();
 
-        UserModel RegisterUser(UserModel newUser);
+        AccountOwner RegisterUser(AccountOwner newUser);
     }
 }

@@ -31,14 +31,14 @@ namespace SimpleStore.DataAccessLayer.Services.AccountsServices
 
                     while (sqlDataReader.Read())
                     {
-                        account = new AccountModel(new UserModel());
+                        account = new AccountModel(new AccountOwner());
 
                         account.Id = sqlDataReader.GetInt32(0);
-                        account.User.Id = sqlDataReader.GetInt32(1);
-                        account.User.FirstName = sqlDataReader.GetString(2);
-                        account.User.LastName = sqlDataReader.GetString(3);
-                        account.User.Email = sqlDataReader.GetString(4);
-                        account.User.Username = sqlDataReader.GetString(5);
+                        account.AccountOwner.Id = sqlDataReader.GetInt32(1);
+                        account.AccountOwner.FirstName = sqlDataReader.GetString(2);
+                        account.AccountOwner.LastName = sqlDataReader.GetString(3);
+                        account.AccountOwner.Email = sqlDataReader.GetString(4);
+                        account.AccountOwner.Username = sqlDataReader.GetString(5);
                         account.Balance = sqlDataReader.GetDecimal(6);
 
                         accounts.Add(account);
@@ -59,7 +59,7 @@ namespace SimpleStore.DataAccessLayer.Services.AccountsServices
 
         public AccountModel GetAccountByUserId(int userId)
         {
-            AccountModel account = new AccountModel(new UserModel());
+            AccountModel account = new AccountModel(new AccountOwner());
 
             try
             {
@@ -75,10 +75,10 @@ namespace SimpleStore.DataAccessLayer.Services.AccountsServices
                     sqlDataReader.Read();
 
                     account.Id = sqlDataReader.GetInt32(0);
-                    account.User.Id = sqlDataReader.GetInt32(1);
-                    account.User.FirstName = sqlDataReader.GetString(2);
-                    account.User.LastName = sqlDataReader.GetString(3);
-                    account.User.Username = sqlDataReader.GetString(4);
+                    account.AccountOwner.Id = sqlDataReader.GetInt32(1);
+                    account.AccountOwner.FirstName = sqlDataReader.GetString(2);
+                    account.AccountOwner.LastName = sqlDataReader.GetString(3);
+                    account.AccountOwner.Username = sqlDataReader.GetString(4);
                     account.Balance = sqlDataReader.GetDecimal(5);
                 }
             }
@@ -101,7 +101,7 @@ namespace SimpleStore.DataAccessLayer.Services.AccountsServices
             {
                 _sqlCommand.Parameters.Clear();
                 _sqlCommand.CommandText = "spUpdateAccountBalance";
-                _sqlCommand.Parameters.AddWithValue("@UserId", account.User.Id);
+                _sqlCommand.Parameters.AddWithValue("@UserId", account.AccountOwner.Id);
                 _sqlCommand.Parameters.AddWithValue("@Balance", account.Balance);
 
                 _sqlServerConnection.OpenConnection();

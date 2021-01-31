@@ -12,7 +12,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
     {
         private readonly IManagerService _managerService;
         private readonly IAuthenticationService _authenticationService;
-        private List<UserModel> _registeredUsers;
+        private List<AccountOwner> _registeredUsers;
         private List<ManagerModel> _registeredManagers;
         private List<ManagerPermissionModel> _registeredManagerPermissions;
 
