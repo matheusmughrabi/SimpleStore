@@ -12,5 +12,6 @@ namespace SimpleStore.DataAccess.Data.Repository.IRepository
 
         public IAccountOwnerRepository AccountOwner { get; }
         public IAccountRepository Account { get; }
+        public ICategoryRepository Category { get; }
     }
 }

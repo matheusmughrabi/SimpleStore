@@ -1,7 +1,6 @@
-﻿using SimpleStore.Domain.Manager.ManagerLogin;
-using SimpleStore.Domain.Products;
+﻿using SimpleStore.DataAccess.Data.Repository.IRepository;
+using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Models.Models;
-using SimpleStore.Domain.Services.ProductsServices;
 using System;
 using System.Collections.Generic;
 
@@ -9,12 +8,12 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 {
     public class ManagerCategoryCreator : ICategoryOperator
     {
-        private readonly ICategoryService _categoryService;
-        private List<Category> _registeredCategories;
+        private readonly IUnityOfWork _unityOfWork;
+        private IEnumerable<Category> _registeredCategories;
 
-        public ManagerCategoryCreator(ICategoryService categoryService)
+        public ManagerCategoryCreator(IUnityOfWork unityOfWork)
         {
-            _categoryService = categoryService;
+            _unityOfWork = unityOfWork;
         }
 
         public bool InsertCategory(Category category)
@@ -24,7 +23,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 throw new Exception("Only Super Admin is allowed");
             }
 
-            _registeredCategories = _categoryService.GetCategories();
+            _registeredCategories = _unityOfWork.Category.GetAll();
 
             foreach (var registeredCategory in _registeredCategories)
             {
@@ -38,24 +37,28 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 }
             }
 
-            _categoryService.InsertCategory(category);
+            _unityOfWork.Category.Add(category);
+
             return true;
         }
 
-        public bool DeleteCategory(string categoryName)
+        public bool DeleteCategory(string name)
         {
             if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle != "Super Admin")
             {
                 throw new Exception("Only Super Admin is allowed");
             }
 
-            Category category = _categoryService.GetCategoryByName(categoryName);
+            //Category category = _categoryService.GetCategoryByName(name);
+            Category category = _unityOfWork.Category.GetFirstOrDefault(c => c.Name == name);
+
             if (category.Id == 0)
             {
                 return false;
             }
 
-            _categoryService.DeleteCategory(category.Id);
+            //_categoryService.DeleteCategory(category.Id);
+            _unityOfWork.Category.Remove(category);
 
             return true;
         }

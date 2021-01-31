@@ -31,7 +31,6 @@ namespace SimpleStore.Domain.Accounts
             if (CurrentAccount.Balance >= price)
             {
                 CurrentAccount.Balance -= price;
-                //_accountsService.UpdateAccountBalanceByUserId(CurrentAccount);
                 _unityOfWork.Account.UpdateBalance(CurrentAccount);
 
                 return true;
@@ -52,7 +51,6 @@ namespace SimpleStore.Domain.Accounts
             }
 
             CurrentAccount.Balance += amount;
-            //_accountsService.UpdateAccountBalanceByUserId(CurrentAccount);
             _unityOfWork.Account.UpdateBalance(CurrentAccount);
 
             return true;
@@ -70,7 +68,6 @@ namespace SimpleStore.Domain.Accounts
             if (CurrentAccount.Balance >= amount)
             {
                 CurrentAccount.Balance -= amount;
-                //_accountsService.UpdateAccountBalanceByUserId(CurrentAccount);
                 _unityOfWork.Account.UpdateBalance(CurrentAccount);
 
                 return true;
