@@ -16,9 +16,11 @@ namespace SimpleStore.DataAccess.Data.Repository
             _dbContext = dbContext;
 
             AccountOwner = new AccountOwnerRepository(_dbContext);
+            Account = new AccountRepository(_dbContext);
         }
 
         public IAccountOwnerRepository AccountOwner { get; private set; }
+        public IAccountRepository Account { get; private set; }
 
         public void Dispose()
         {

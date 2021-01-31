@@ -131,7 +131,6 @@ namespace SimpleStore.DataAccessLayer.Services.AccountsServices
             }
             catch (SqlException ex)
             {
-
                 throw ex;
             }
             finally

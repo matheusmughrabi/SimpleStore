@@ -17,12 +17,13 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
         private IAuthenticationService _authenticationService;
         private IAccountsService _accountsService;
 
-        
+        private readonly IUnityOfWork _unityOfWork;
 
-        public UserRegistrator(IAuthenticationService authenticationService, IAccountsService accountsService)
+        public UserRegistrator(IAuthenticationService authenticationService, IAccountsService accountsService, IUnityOfWork unityOfWork)
         {
             _authenticationService = authenticationService;
             _accountsService = accountsService;
+            _unityOfWork = unityOfWork;
         }
 
         public bool RegisterUser(AccountOwner newUser)
@@ -41,15 +42,19 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
             }
 
             newUser.Password = _passwordHasher.HashPassword(newUser.Password);
-            //newUser = _authenticationService.RegisterUser(newUser);
 
-
-            IUnityOfWork _unityOfWork = new UnityOfWork(new DataAccess.ApplicationDbContext());
+            //IUnityOfWork _unityOfWork = new UnityOfWork(new DataAccess.ApplicationDbContext());
             _unityOfWork.AccountOwner.Add(newUser);
+
+            Account account = new Account();
+            account.AccountOwner = newUser;
+            account.Balance = 0;
+
+            _unityOfWork.Account.Add(account);
 
             _unityOfWork.Save();
 
-            _accountsService.CreateAccount(newUser.Id);
+            //_accountsService.CreateAccount(newUser.Id);
 
             return true;
         }

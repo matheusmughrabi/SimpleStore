@@ -20,6 +20,9 @@ using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Products.Interfaces;
 using SimpleStore.Domain.Accounts;
 using SimpleStore.Domain.Accounts.Interfaces;
+using SimpleStore.DataAccess.Data.Repository;
+using SimpleStore.DataAccess.Data.Repository.IRepository;
+using SimpleStore.DataAccess;
 
 namespace SimpleStore.ConsoleUI
 {
@@ -35,6 +38,9 @@ namespace SimpleStore.ConsoleUI
             builder.RegisterType<SqlServerAccountsService>().As<IAccountsService>();
             builder.RegisterType<SqlServerCategoryService>().As<ICategoryService>();
             builder.RegisterType<SqlServerProductsService>().As<IProductsService>();
+
+            builder.RegisterType<UnityOfWork>().As<IUnityOfWork>();
+            builder.RegisterType<ApplicationDbContext>().AsSelf();
 
             builder.RegisterType<UserLogger>().As<IUserLogger>().SingleInstance();
             builder.RegisterType<ManagerLogger>().As<IManagerLogger>().SingleInstance();

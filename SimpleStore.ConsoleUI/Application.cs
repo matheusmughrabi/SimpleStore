@@ -3,6 +3,7 @@ using SimpleStore.ConsoleUI.MenuFrame.Menus;
 using SimpleStore.ConsoleUI.MenusAction;
 using SimpleStore.ConsoleUI.MenusLogic;
 using SimpleStore.ConsoleUI.MenusLogic.AccessPermissions;
+using SimpleStore.DataAccess.Data.Repository.IRepository;
 using SimpleStore.Domain.Accounts;
 using SimpleStore.Domain.Accounts.Interfaces;
 using SimpleStore.Domain.Manager.ManagerLogin;
@@ -20,6 +21,8 @@ namespace SimpleStore.ConsoleUI
 {
     public class Application
     {
+        //private readonly IUnityOfWork _unityOfWork;
+
         private readonly IUserLogger _userLogger;
         private readonly IManagerLogger _managerLogger;
         private readonly IUserRegistrator _userRegistrator;
@@ -28,7 +31,7 @@ namespace SimpleStore.ConsoleUI
         private readonly ICategoryOperator _categoryOperator;
         private readonly IProductsOperator _productsOperator;
         private readonly IManagerCreator _managerCreator;
-        private readonly IRegisteredUsersInfo _registeredUsersInfo;
+        private readonly IRegisteredUsersInfo _registeredUsersInfo;     
 
         public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator, IProductsLogic productsLogic, IAccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator, IManagerCreator managerCreator, IRegisteredUsersInfo registeredUsersInfo)
         {
@@ -40,7 +43,7 @@ namespace SimpleStore.ConsoleUI
             _categoryOperator = categoryOperator;
             _productsOperator = productsOperator;
             _managerCreator = managerCreator;
-            _registeredUsersInfo = registeredUsersInfo;
+            _registeredUsersInfo = registeredUsersInfo;           
         }
 
         public void RunApp()

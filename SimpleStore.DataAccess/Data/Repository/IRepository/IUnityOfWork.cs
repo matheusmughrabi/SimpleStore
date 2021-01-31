@@ -11,5 +11,6 @@ namespace SimpleStore.DataAccess.Data.Repository.IRepository
         void Save();
 
         public IAccountOwnerRepository AccountOwner { get; }
+        public IAccountRepository Account { get; }
     }
 }
