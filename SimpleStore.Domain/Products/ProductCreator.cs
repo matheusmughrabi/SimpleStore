@@ -1,29 +1,29 @@
-﻿using SimpleStore.Domain.Manager.ManagerLogin;
+﻿using SimpleStore.DataAccess.Data.Repository.IRepository;
+using SimpleStore.Domain.Manager.ManagerLogin;
+using SimpleStore.Domain.Products.Interfaces;
 using SimpleStore.Models.Models;
-using SimpleStore.Domain.Services.ProductsServices;
 using System;
 using System.Collections.Generic;
-using SimpleStore.Domain.Products.Interfaces;
 
 namespace SimpleStore.Domain.Products
 {
     public class ProductCreator : IProductsOperator
     {
-        private readonly IProductsService _productsService;
-        private readonly ICategoryService _categoryService;
+        private readonly IUnityOfWork _unityOfWork;
 
-        public ProductCreator(IProductsService productsService, ICategoryService categoryService)
+        public ProductCreator(IUnityOfWork unityOfWork)
         {
-            _productsService = productsService;
-            _categoryService = categoryService;
+            _unityOfWork = unityOfWork;
         }
 
         public bool InsertProduct(Product product)
         {
             Category category = GetCategoryByName(product.Category.Name);
-            product.Category.Id = category.Id;
+            product.CategoryId = category.Id;
             product.QuantityInStock = 0;
-            _productsService.InsertProduct(product);
+
+            _unityOfWork.Product.Add(product);
+            _unityOfWork.Save();
 
             return true;
         }
@@ -36,7 +36,7 @@ namespace SimpleStore.Domain.Products
                 return false;
             }
 
-            _productsService.UpdateProductQuantityInStock(product.Id, quantity);
+            _unityOfWork.Product.UpdateQuantityInStock(product);
 
             return true;
         }
@@ -48,20 +48,23 @@ namespace SimpleStore.Domain.Products
                 throw new Exception("Only Super Admin is allowed");
             }
 
-            Product product = _productsService.GetProductByName(name);
+            Product product = _unityOfWork.Product.GetFirstOrDefault(p => p.Name == name);
             if (product.Id == 0)
             {
                 return false;
             }
 
-            _productsService.DeleteProduct(product.Id);
+            _unityOfWork.Product.Remove(product);
+            _unityOfWork.Save();
 
             return true;
         }
 
         private Product GetProductIdByName(string name)
         {
-            List<Product> products = _productsService.GetProducts();
+            IEnumerable<Product> products = _unityOfWork.Product.GetAll();
+
+
             foreach (var product in products)
             {
                 if (product.Name == name)
@@ -75,14 +78,12 @@ namespace SimpleStore.Domain.Products
 
         private Category GetCategoryByName(string name)
         {
-            List<Category> registeredCategories = _categoryService.GetCategories();
+            Category registeredCategories = _unityOfWork.Category.GetFirstOrDefault(
+                c => c.Name == name);
 
-            foreach (var category in registeredCategories)
+            if (registeredCategories != null)
             {
-                if (category.Name == name)
-                {
-                    return category;
-                }
+                return registeredCategories;
             }
 
             throw new Exception();

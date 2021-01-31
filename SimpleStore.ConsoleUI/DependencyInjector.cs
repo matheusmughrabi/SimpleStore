@@ -30,8 +30,8 @@ namespace SimpleStore.ConsoleUI
             var builder = new ContainerBuilder();
 
             builder.RegisterType<SqlServerConnection>().As<IConnection>();
-            builder.RegisterType<SqlServerCategoryService>().As<ICategoryService>();
-            builder.RegisterType<SqlServerProductsService>().As<IProductsService>();
+            //builder.RegisterType<SqlServerCategoryService>().As<ICategoryService>();
+            //builder.RegisterType<SqlServerProductsService>().As<IProductsService>();
 
             builder.RegisterType<UnityOfWork>().As<IUnityOfWork>();
             builder.RegisterType<ApplicationDbContext>().AsSelf();

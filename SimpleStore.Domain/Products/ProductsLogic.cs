@@ -1,4 +1,5 @@
-﻿using SimpleStore.Domain.Services.ProductsServices;
+﻿using SimpleStore.DataAccess.Data.Repository.IRepository;
+using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
@@ -6,24 +7,22 @@ namespace SimpleStore.Domain.Products.ProductsLogic
 {
     public class ProductsLogic : IProductsLogic
     {
-        private readonly IProductsService _productsService;
-        private readonly ICategoryService _categoriesService;
+        private readonly IUnityOfWork _unityOfWork;
 
-        public ProductsLogic(IProductsService productsService, ICategoryService categoriesService)
+        public ProductsLogic(IUnityOfWork unityOfWork)
         {
-            _productsService = productsService;
-            _categoriesService = categoriesService;
+            _unityOfWork = unityOfWork;
         }
 
-        public List<Product> GetProductsByCategory(int categoryId)
+        public IEnumerable<Product> GetProductsByCategory(int categoryId)
         {
-            List<Product> products = _productsService.GetProductsByCategory(categoryId);
+            IEnumerable<Product> products = _unityOfWork.Product.GetAll(p => p.CategoryId == categoryId, null, "Category");
             return products;
         }
 
-        public List<Category> GetCategories()
+        public IEnumerable<Category> GetCategories()
         {
-            List<Category> categories = _categoriesService.GetCategories();
+            IEnumerable<Category> categories = _unityOfWork.Category.GetAll();
             return categories;
         }
     }

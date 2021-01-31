@@ -28,7 +28,16 @@ namespace SimpleStore.ConsoleUI
         private readonly IManagerCreator _managerCreator;
         private readonly IRegisteredUsersInfo _registeredUsersInfo;
 
-        public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator, IProductsLogic productsLogic, IAccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator, IManagerCreator managerCreator, IRegisteredUsersInfo registeredUsersInfo)
+        public Application(
+            IUserLogger userLogger, 
+            IManagerLogger managerLogger, 
+            IUserRegistrator userRegistrator, 
+            IProductsLogic productsLogic, 
+            IAccountsLogic accountsLogic, 
+            ICategoryOperator categoryOperator, 
+            IProductsOperator productsOperator, 
+            IManagerCreator managerCreator, 
+            IRegisteredUsersInfo registeredUsersInfo)
         {
             _userLogger = userLogger;
             _managerLogger = managerLogger;
@@ -144,7 +153,7 @@ namespace SimpleStore.ConsoleUI
             makeWithdrawalMenu.SetRenavigateMenu(accountMenu);
             makeWithdrawalMenu.MenuFuncLogic = new MakeWithdrawalLogic(_accountsLogic).MakeWithdrawal;
 
-            List<Category> categories = _productsLogic.GetCategories();
+            IEnumerable<Category> categories = _productsLogic.GetCategories();
             foreach (var category in categories)
             {
                 SimpleActionMenu productMenu = new SimpleActionMenu($"{category.Name} Menu", storeCategoriesMenu);

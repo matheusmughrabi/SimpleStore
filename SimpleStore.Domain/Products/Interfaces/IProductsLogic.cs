@@ -5,7 +5,7 @@ namespace SimpleStore.Domain.Products.ProductsLogic
 {
     public interface IProductsLogic
     {
-        List<Product> GetProductsByCategory(int categoryId);
-        List<Category> GetCategories();
+        IEnumerable<Product> GetProductsByCategory(int categoryId);
+        IEnumerable<Category> GetCategories();
     }
 }

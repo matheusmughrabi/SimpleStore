@@ -24,7 +24,7 @@ namespace SimpleStore.ConsoleUI.MenusAction
 
         public bool BuyProduct(List<string> inputs)
         {
-            List<Product> productsInCategory = _productsLogic.GetProductsByCategory(_category.Id);
+            List<Product> productsInCategory = (List<Product>)_productsLogic.GetProductsByCategory(_category.Id);
 
             _accountLogic.ReloadCurrentAccount();
             Console.WriteLine($"{ _accountLogic.CurrentAccount.AccountOwner.FirstName } your balance is { _accountLogic.CurrentAccount.Balance }");
