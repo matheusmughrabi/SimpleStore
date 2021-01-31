@@ -1,5 +1,7 @@
 ﻿using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Products;
+using SimpleStore.Domain.Products.Interfaces;
+using SimpleStore.Models.Models;
 using System;
 using System.Collections.Generic;
 
@@ -18,8 +20,8 @@ namespace SimpleStore.ConsoleUI.MenusLogic
 
         public bool InsertCategory(List<string> inputs)
         {
-            CategoryModel category = new CategoryModel();
-            category.CategoryName = inputs[0];
+            Category category = new Category();
+            category.Name = inputs[0];
 
             bool success = _categoryOperator.InsertCategory(category);
 
@@ -65,12 +67,12 @@ namespace SimpleStore.ConsoleUI.MenusLogic
                 return false;
             }
 
-            ProductModel product = new ProductModel();
-            product.Category = new CategoryModel();
+            Product product = new Product();
+            product.Category = new Category();
 
             product.Name = inputs[0];
             product.Brand = inputs[1];
-            product.Category.CategoryName = inputs[2];
+            product.Category.Name = inputs[2];
             product.RegularPrice = regularPrice;
             product.DiscountedPrice = discountedPrice;
             product.Description = inputs[5];

@@ -1,13 +1,13 @@
-﻿using SimpleStore.Domain.Manager.ManagerModels;
+﻿using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
 namespace SimpleStore.Domain.Services.AuthenticationServices
 {
     public interface IManagerService
     {
-        List<ManagerModel> GetRegisteredManagers();
-        List<ManagerModel> GetUsersAndTitles();
-        List<ManagerPermissionModel> GetRegisteredManagerPermissions();
-        ManagerModel CreateManager(ManagerModel manager);
+        List<ManagerAccount> GetRegisteredManagers();
+        List<ManagerAccount> GetUsersAndTitles();
+        List<ManagerPermission> GetRegisteredManagerPermissions();
+        ManagerAccount CreateManager(ManagerAccount manager);
     }
 }
