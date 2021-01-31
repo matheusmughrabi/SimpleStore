@@ -3,12 +3,14 @@ using SimpleStore.ConsoleUI.MenuFrame.Menus;
 using SimpleStore.ConsoleUI.MenusAction;
 using SimpleStore.ConsoleUI.MenusLogic;
 using SimpleStore.ConsoleUI.MenusLogic.AccessPermissions;
+using SimpleStore.Domain.Accounts;
+using SimpleStore.Domain.Accounts.Interfaces;
 using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Products;
+using SimpleStore.Domain.Products.Interfaces;
 using SimpleStore.Domain.Products.ProductsLogic;
-using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Models.Models;
@@ -18,17 +20,17 @@ namespace SimpleStore.ConsoleUI
 {
     public class Application
     {
-        private IUserLogger _userLogger;
-        private IManagerLogger _managerLogger;
-        private IUserRegistrator _userRegistrator;
-        private IProductsLogic _productsLogic;
-        private AccountsLogic _accountsLogic;
+        private readonly IUserLogger _userLogger;
+        private readonly IManagerLogger _managerLogger;
+        private readonly IUserRegistrator _userRegistrator;
+        private readonly IProductsLogic _productsLogic;
+        private readonly IAccountsLogic _accountsLogic;
         private readonly ICategoryOperator _categoryOperator;
         private readonly IProductsOperator _productsOperator;
         private readonly IManagerCreator _managerCreator;
-        private IRegisteredUsersInfo _registeredUsersInfo;
+        private readonly IRegisteredUsersInfo _registeredUsersInfo;
 
-        public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator, IProductsLogic productsLogic, AccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator, IManagerCreator managerCreator, IRegisteredUsersInfo registeredUsersInfo)
+        public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator, IProductsLogic productsLogic, IAccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator, IManagerCreator managerCreator, IRegisteredUsersInfo registeredUsersInfo)
         {
             _userLogger = userLogger;
             _managerLogger = managerLogger;

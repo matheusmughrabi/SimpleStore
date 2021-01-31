@@ -1,13 +1,14 @@
-﻿using SimpleStore.Domain.UsersAccounts.AccountsLogic;
+﻿using SimpleStore.Domain.Accounts;
+using SimpleStore.Domain.Accounts.Interfaces;
 using System;
 
 namespace SimpleStore.ConsoleUI.MenusAction
 {
     public class AccountInfoLogic
     {
-        private readonly AccountsLogic _accountLogic;
+        private readonly IAccountsLogic _accountLogic;
 
-        public AccountInfoLogic(AccountsLogic accountLogic)
+        public AccountInfoLogic(IAccountsLogic accountLogic)
         {
             _accountLogic = accountLogic;
         }

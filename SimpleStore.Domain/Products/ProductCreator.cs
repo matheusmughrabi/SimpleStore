@@ -1,11 +1,11 @@
 ﻿using SimpleStore.Domain.Manager.ManagerLogin;
-using SimpleStore.Domain.Products;
 using SimpleStore.Models.Models;
 using SimpleStore.Domain.Services.ProductsServices;
 using System;
 using System.Collections.Generic;
+using SimpleStore.Domain.Products.Interfaces;
 
-namespace SimpleStore.Domain.Manager.ManagerOperations
+namespace SimpleStore.Domain.Products
 {
     public class ProductCreator : IProductsOperator
     {

@@ -1,5 +1,6 @@
 ﻿using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Products;
+using SimpleStore.Domain.Products.Interfaces;
 using SimpleStore.Models.Models;
 using System;
 using System.Collections.Generic;

@@ -1,7 +1,8 @@
 ﻿using SimpleStore.ConsoleUI.MenuFrame.MenuItems;
+using SimpleStore.Domain.Accounts;
+using SimpleStore.Domain.Accounts.Interfaces;
 using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Products.ProductsLogic;
-using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Models.Models;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ namespace SimpleStore.ConsoleUI.MenusAction
 {
     public class BuyProductLogic
     {
-        private readonly AccountsLogic _accountLogic;
+        private readonly IAccountsLogic _accountLogic;
         private readonly Category _category;
         private readonly IProductsLogic _productsLogic;
 
-        public BuyProductLogic(AccountsLogic accountLogic, Category category, IProductsLogic productsLogic)
+        public BuyProductLogic(IAccountsLogic accountLogic, Category category, IProductsLogic productsLogic)
         {
             _accountLogic = accountLogic;
             _category = category;

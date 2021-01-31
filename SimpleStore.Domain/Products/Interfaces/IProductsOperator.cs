@@ -1,7 +1,7 @@
 ﻿using SimpleStore.Domain.Products;
 using SimpleStore.Models.Models;
 
-namespace SimpleStore.Domain.Manager.ManagerOperations
+namespace SimpleStore.Domain.Products.Interfaces
 {
     public interface IProductsOperator
     {

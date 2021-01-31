@@ -4,10 +4,11 @@ using SimpleStore.Models.Models;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using System;
 using System.Collections.Generic;
+using SimpleStore.Domain.Accounts.Interfaces;
 
-namespace SimpleStore.Domain.UsersAccounts.AccountsLogic
+namespace SimpleStore.Domain.Accounts
 {
-    public class AccountsLogic
+    public class AccountsLogic : IAccountsLogic
     {
         public Account CurrentAccount { get; private set; }
         private IAccountsService _accountsService;
