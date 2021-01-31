@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
-using SimpleStore.DataAccess.Data.Repository;
 using SimpleStore.DataAccess.Data.Repository.IRepository;
-using SimpleStore.Domain.Services.AccountServices;
-using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Models.Models;
 using System.Collections.Generic;
@@ -11,24 +8,19 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
 {
     public class UserRegistrator : IUserRegistrator
     {
-        private static IPasswordHasher _passwordHasher = new PasswordHasher();
-        private List<AccountOwner> _registeredUsers;
-        private AccountOwner _newUser;
-        private IAuthenticationService _authenticationService;
-        private IAccountsService _accountsService;
-
         private readonly IUnityOfWork _unityOfWork;
+        private static IPasswordHasher _passwordHasher = new PasswordHasher();
+        private IEnumerable<AccountOwner> _registeredUsers;
+        private AccountOwner _newUser;     
 
-        public UserRegistrator(IAuthenticationService authenticationService, IAccountsService accountsService, IUnityOfWork unityOfWork)
+        public UserRegistrator(IUnityOfWork unityOfWork)
         {
-            _authenticationService = authenticationService;
-            _accountsService = accountsService;
             _unityOfWork = unityOfWork;
         }
 
         public bool RegisterUser(AccountOwner newUser)
         {
-            _registeredUsers = _authenticationService.GetRegisteredUsers();
+            _registeredUsers = _unityOfWork.AccountOwner.GetAll();
             _newUser = newUser;
 
             bool isLoginUnique = VerifyLogin();
@@ -43,7 +35,6 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
 
             newUser.Password = _passwordHasher.HashPassword(newUser.Password);
 
-            //IUnityOfWork _unityOfWork = new UnityOfWork(new DataAccess.ApplicationDbContext());
             _unityOfWork.AccountOwner.Add(newUser);
 
             Account account = new Account();
@@ -53,8 +44,6 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
             _unityOfWork.Account.Add(account);
 
             _unityOfWork.Save();
-
-            //_accountsService.CreateAccount(newUser.Id);
 
             return true;
         }

@@ -35,7 +35,7 @@ namespace SimpleStore.DataAccess.Data.Repository
                 query = query.Where(filter);
             }
 
-            if (true)
+            if (includeProperties != null)
             {
                 foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
@@ -65,7 +65,7 @@ namespace SimpleStore.DataAccess.Data.Repository
                 query = query.Where(filter);
             }
 
-            if (true)
+            if (includeProperties != null)
             {
                 foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
