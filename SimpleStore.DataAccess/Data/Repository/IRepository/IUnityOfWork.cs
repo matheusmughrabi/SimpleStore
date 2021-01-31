@@ -8,6 +8,8 @@ namespace SimpleStore.DataAccess.Data.Repository.IRepository
 {
     public interface IUnityOfWork : IDisposable
     {
+        void Save();
+
         public IAccountOwnerRepository AccountOwner { get; }
     }
 }

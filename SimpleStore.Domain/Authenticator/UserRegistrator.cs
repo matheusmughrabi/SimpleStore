@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
+using SimpleStore.DataAccess.Data.Repository;
+using SimpleStore.DataAccess.Data.Repository.IRepository;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
@@ -14,6 +16,8 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
         private AccountOwner _newUser;
         private IAuthenticationService _authenticationService;
         private IAccountsService _accountsService;
+
+        
 
         public UserRegistrator(IAuthenticationService authenticationService, IAccountsService accountsService)
         {
@@ -37,8 +41,16 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
             }
 
             newUser.Password = _passwordHasher.HashPassword(newUser.Password);
-            newUser = _authenticationService.RegisterUser(newUser);
+            //newUser = _authenticationService.RegisterUser(newUser);
+
+
+            IUnityOfWork _unityOfWork = new UnityOfWork(new DataAccess.ApplicationDbContext());
+            _unityOfWork.AccountOwner.Add(newUser);
+
+            _unityOfWork.Save();
+
             _accountsService.CreateAccount(newUser.Id);
+
             return true;
         }
 

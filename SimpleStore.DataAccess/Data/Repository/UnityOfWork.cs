@@ -15,7 +15,7 @@ namespace SimpleStore.DataAccess.Data.Repository
         {
             _dbContext = dbContext;
 
-            IAccountOwnerRepository AccountOwner = new AccountOwnerRepository(_dbContext);
+            AccountOwner = new AccountOwnerRepository(_dbContext);
         }
 
         public IAccountOwnerRepository AccountOwner { get; private set; }

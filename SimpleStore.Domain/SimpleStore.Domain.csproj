@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SimpleStore.DataAccess\SimpleStore.DataAccess.csproj" />
     <ProjectReference Include="..\SimpleStore.Models\SimpleStore.Models.csproj" />
   </ItemGroup>
 
