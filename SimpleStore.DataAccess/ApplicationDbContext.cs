@@ -14,7 +14,7 @@ namespace SimpleStore.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESSNOVA;Database=extfactory;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESSNOVA;Database=simplestore;Trusted_Connection=True;");
         }
 
         public DbSet<AccountOwner> AccountOwner { get; set; }
