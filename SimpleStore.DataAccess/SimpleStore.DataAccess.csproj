@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Data\DataSeed\" />
-    <Folder Include="Data\Repository\IRepository\" />
   </ItemGroup>
 
   <ItemGroup>
