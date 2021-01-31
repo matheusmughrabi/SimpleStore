@@ -4,21 +4,22 @@ using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using System;
 using System.Collections.Generic;
+using SimpleStore.DataAccess.Data.Repository.IRepository;
 
 namespace SimpleStore.Domain.Manager.ManagerOperations
 {
     public class ManagerCreator : IManagerCreator
     {
+        private readonly IUnityOfWork _unityOfWork;
         private readonly IManagerService _managerService;
-        private readonly IAuthenticationService _authenticationService;
-        private List<AccountOwner> _registeredUsers;
+        private IEnumerable<AccountOwner> _registeredUsers;
         private List<ManagerAccount> _registeredManagers;
         private List<ManagerPermission> _registeredManagerPermissions;
 
-        public ManagerCreator(IManagerService managerService, IAuthenticationService authenticationService)
+        public ManagerCreator(IManagerService managerService, IUnityOfWork unityOfWork)
         {
             _managerService = managerService;
-            _authenticationService = authenticationService;
+            _unityOfWork = unityOfWork;
         }
 
         public bool RegisterManager(ManagerAccount manager)
@@ -28,7 +29,9 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 throw new Exception("Only Super Admin is allowed");
             }
 
-            _registeredUsers = _authenticationService.GetRegisteredUsers();
+            //_registeredUsers = _authenticationService.GetRegisteredUsers();
+            _registeredUsers = _unityOfWork.AccountOwner.GetAll();
+
             _registeredManagerPermissions = _managerService.GetRegisteredManagerPermissions();
             _registeredManagers = _managerService.GetRegisteredManagers();
 

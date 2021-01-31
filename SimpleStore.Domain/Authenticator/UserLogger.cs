@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
-using SimpleStore.Domain.Services.AccountServices;
-using SimpleStore.Domain.Services.AuthenticationServices;
+using SimpleStore.DataAccess.Data.Repository.IRepository;
 using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
@@ -8,23 +7,21 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
 {
     public class UserLogger : IUserLogger
     {
-        private IAuthenticationService _authenticationService;
-        private IAccountsService _accountsService;
+        private readonly IUnityOfWork _unityOfWork;
         private IPasswordHasher _passwordHasher;
-        private List<AccountOwner> _registeredUsers;
+        private IEnumerable<AccountOwner> _registeredUsers;
         private AccountOwner _user;
         public static Account CurrentAccount { get; private set; } = new Account(new AccountOwner());
 
-        public UserLogger(IAuthenticationService authenticationService, IAccountsService accountsService)
+        public UserLogger(IUnityOfWork unityOfWork)
         {
-            _authenticationService = authenticationService;
-            _accountsService = accountsService;
             _passwordHasher = new PasswordHasher();
+            _unityOfWork = unityOfWork;
         }
 
         public bool LoginUser(string username, string password)
         {
-            _registeredUsers = _authenticationService.GetRegisteredUsers();
+            _registeredUsers = _unityOfWork.AccountOwner.GetAll();
 
             bool userExists = GetUser(username);
             bool isUsernamePasswordCorrect = false;
@@ -35,7 +32,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
 
                 if (isUsernamePasswordCorrect)
                 {
-                    CurrentAccount = _accountsService.GetAccountByUserId(_user.Id);
+                    CurrentAccount = _unityOfWork.Account.GetById(_user.Id);
                 }
             }
 

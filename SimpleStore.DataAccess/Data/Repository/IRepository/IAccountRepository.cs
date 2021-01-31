@@ -9,5 +9,6 @@ namespace SimpleStore.DataAccess.Data.Repository.IRepository
 {
     public interface IAccountRepository : IRepository<Account>
     {
+        void UpdateBalance(Account entity);
     }
 }

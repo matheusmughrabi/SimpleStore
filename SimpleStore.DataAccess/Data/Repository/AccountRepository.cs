@@ -16,5 +16,14 @@ namespace SimpleStore.DataAccess.Data.Repository
         {
             _dbContext = dbContext;
         }
+
+        public void UpdateBalance(Account entity)
+        {
+            var objFromBd = GetById(entity.AccountOwnerId);
+
+            objFromBd.Balance = entity.Balance;
+
+            _dbContext.SaveChanges();
+        }
     }
 }

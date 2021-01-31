@@ -5,17 +5,18 @@ using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using System;
 using System.Collections.Generic;
 using SimpleStore.Domain.Accounts.Interfaces;
+using SimpleStore.DataAccess.Data.Repository.IRepository;
 
 namespace SimpleStore.Domain.Accounts
 {
     public class AccountsLogic : IAccountsLogic
     {
+        private readonly IUnityOfWork _unityOfWork;
         public Account CurrentAccount { get; private set; }
-        private IAccountsService _accountsService;
 
-        public AccountsLogic(IAccountsService accountService)
+        public AccountsLogic(IUnityOfWork unityOfWork)
         {
-            _accountsService = accountService;
+            _unityOfWork = unityOfWork;
         }
 
         public void ReloadCurrentAccount()
@@ -30,16 +31,9 @@ namespace SimpleStore.Domain.Accounts
             if (CurrentAccount.Balance >= price)
             {
                 CurrentAccount.Balance -= price;
-                _accountsService.UpdateAccountBalanceByUserId(CurrentAccount);
+                //_accountsService.UpdateAccountBalanceByUserId(CurrentAccount);
+                _unityOfWork.Account.UpdateBalance(CurrentAccount);
 
-                //var dictionary = new Dictionary<string, object>
-                //{
-                //    { "@UserId", CurrentAccount.AccountOwner.Id},
-                //    { "@Balance", CurrentAccount.Balance}
-                //};
-
-                //DynamicParameters parameters = new DynamicParameters(dictionary);
-                //_repository.ExecuteWithoutReturn("spUpdateAccountBalance", parameters);
                 return true;
             }
             else
@@ -58,11 +52,12 @@ namespace SimpleStore.Domain.Accounts
             }
 
             CurrentAccount.Balance += amount;
-            _accountsService.UpdateAccountBalanceByUserId(CurrentAccount);
+            //_accountsService.UpdateAccountBalanceByUserId(CurrentAccount);
+            _unityOfWork.Account.UpdateBalance(CurrentAccount);
+
             return true;
         }
 
-        // TODO - Evaluate if this method is really necessary. Since it is the exact same as MakePurchase, it might be better to avoid the repetition, but I'm gonna leave it here for now in case I want to change its logic in the future without any impact in the places where MakePurchase is being used
         public bool MakeWithdrawal(decimal amount)
         {
             CurrentAccount = UserLogger.CurrentAccount;
@@ -75,7 +70,9 @@ namespace SimpleStore.Domain.Accounts
             if (CurrentAccount.Balance >= amount)
             {
                 CurrentAccount.Balance -= amount;
-                _accountsService.UpdateAccountBalanceByUserId(CurrentAccount);
+                //_accountsService.UpdateAccountBalanceByUserId(CurrentAccount);
+                _unityOfWork.Account.UpdateBalance(CurrentAccount);
+
                 return true;
             }
             else
