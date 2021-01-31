@@ -18,11 +18,15 @@ namespace SimpleStore.DataAccess.Data.Repository
             AccountOwner = new AccountOwnerRepository(_dbContext);
             Account = new AccountRepository(_dbContext);
             Category = new CategoryRepository(_dbContext);
+            Manager = new ManagerRepository(_dbContext);
+            ManagerPermission = new ManagerPermissionRepository(_dbContext);
         }
 
         public IAccountOwnerRepository AccountOwner { get; private set; }
         public IAccountRepository Account { get; private set; }
         public ICategoryRepository Category { get; private set; }
+        public IManagerRepository Manager { get; private set; }
+        public IManagerPermissionRepository ManagerPermission { get; private set; }
 
         public void Dispose()
         {

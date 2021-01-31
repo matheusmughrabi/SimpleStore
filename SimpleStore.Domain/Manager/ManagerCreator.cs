@@ -11,14 +11,12 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
     public class ManagerCreator : IManagerCreator
     {
         private readonly IUnityOfWork _unityOfWork;
-        private readonly IManagerService _managerService;
         private IEnumerable<AccountOwner> _registeredUsers;
-        private List<ManagerAccount> _registeredManagers;
-        private List<ManagerPermission> _registeredManagerPermissions;
+        private IEnumerable<ManagerAccount> _registeredManagers;
+        private IEnumerable<ManagerPermission> _registeredManagerPermissions;
 
-        public ManagerCreator(IManagerService managerService, IUnityOfWork unityOfWork)
+        public ManagerCreator(IUnityOfWork unityOfWork)
         {
-            _managerService = managerService;
             _unityOfWork = unityOfWork;
         }
 
@@ -29,11 +27,11 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 throw new Exception("Only Super Admin is allowed");
             }
 
-            //_registeredUsers = _authenticationService.GetRegisteredUsers();
             _registeredUsers = _unityOfWork.AccountOwner.GetAll();
 
-            _registeredManagerPermissions = _managerService.GetRegisteredManagerPermissions();
-            _registeredManagers = _managerService.GetRegisteredManagers();
+            _registeredManagerPermissions = _unityOfWork.ManagerPermission.GetAll();
+
+            _registeredManagers = _unityOfWork.Manager.GetAll();
 
             bool userExists = false;
             foreach (var registeredUser in _registeredUsers)
@@ -70,7 +68,9 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 }
             }
 
-            _managerService.CreateManager(manager);
+            _unityOfWork.Manager.Add(manager);
+            _unityOfWork.Save();
+
             return true;
         }
     }

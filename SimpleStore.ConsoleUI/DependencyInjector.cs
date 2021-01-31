@@ -1,28 +1,25 @@
 ﻿using Autofac;
+using SimpleStore.DataAccess;
+using SimpleStore.DataAccess.Data.Repository;
+using SimpleStore.DataAccess.Data.Repository.IRepository;
 using SimpleStore.DataAccessLayer.Connections;
-using SimpleStore.DataAccessLayer.Services.AccountsServices;
-using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
 using SimpleStore.DataAccessLayer.Services.ManagerServices;
 using SimpleStore.DataAccessLayer.Services.ProductsServices;
+using SimpleStore.Domain.Accounts;
+using SimpleStore.Domain.Accounts.Interfaces;
 using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
+using SimpleStore.Domain.Products;
+using SimpleStore.Domain.Products.Interfaces;
 using SimpleStore.Domain.Products.ProductsLogic;
 using SimpleStore.Domain.Services;
-using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.Services.ProductsServices;
-using SimpleStore.Models.Models;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration;
-using SimpleStore.Domain.Products;
-using SimpleStore.Domain.Products.Interfaces;
-using SimpleStore.Domain.Accounts;
-using SimpleStore.Domain.Accounts.Interfaces;
-using SimpleStore.DataAccess.Data.Repository;
-using SimpleStore.DataAccess.Data.Repository.IRepository;
-using SimpleStore.DataAccess;
+using SimpleStore.Models.Models;
 
 namespace SimpleStore.ConsoleUI
 {
@@ -33,7 +30,6 @@ namespace SimpleStore.ConsoleUI
             var builder = new ContainerBuilder();
 
             builder.RegisterType<SqlServerConnection>().As<IConnection>();
-            builder.RegisterType<SqlServerManagerService>().As<IManagerService>();
             builder.RegisterType<SqlServerCategoryService>().As<ICategoryService>();
             builder.RegisterType<SqlServerProductsService>().As<IProductsService>();
 

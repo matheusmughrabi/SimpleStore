@@ -17,7 +17,7 @@ namespace SimpleStore.ConsoleUI.MenusLogic
 
         public bool DisplayRegisteredUsers(List<string> inputs)
         {
-            List<ManagerAccount> registeredUsersAndTitles = _registeredUsersInfo.GetRegisteredUsers();
+            IEnumerable <ManagerAccount> registeredUsersAndTitles = _registeredUsersInfo.GetRegisteredUsers();
 
             List<Tuple<string, string, string, string>> users = new List<Tuple<string, string, string, string>>();
             foreach (var user in registeredUsersAndTitles)

@@ -2,21 +2,23 @@
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using System.Collections.Generic;
+using SimpleStore.DataAccess.Data.Repository.IRepository;
 
 namespace SimpleStore.Domain.Manager.ManagerOperations
 {
     public class RegisteredUsersInfo : IRegisteredUsersInfo
     {
-        private readonly IManagerService _managerService;
+        private readonly IUnityOfWork _unityOfWork;
 
-        public RegisteredUsersInfo(IManagerService managerService)
+        public RegisteredUsersInfo(IUnityOfWork unityOfWork)
         {
-            _managerService = managerService;
+            _unityOfWork = unityOfWork;
         }
 
-        public List<ManagerAccount> GetRegisteredUsers()
+        public IEnumerable<ManagerAccount> GetRegisteredUsers()
         {
-            List<ManagerAccount> registeredUsersAndTitles = _managerService.GetUsersAndTitles();
+            IEnumerable<ManagerAccount> registeredUsersAndTitles = _unityOfWork.Manager.GetAll(
+                includeProperties : "AccountOwner,ManagerPermission");
 
             return registeredUsersAndTitles;
         }

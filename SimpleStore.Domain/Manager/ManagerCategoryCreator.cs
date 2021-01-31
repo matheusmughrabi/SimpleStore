@@ -38,6 +38,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             }
 
             _unityOfWork.Category.Add(category);
+            _unityOfWork.Save();
 
             return true;
         }
@@ -49,7 +50,6 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 throw new Exception("Only Super Admin is allowed");
             }
 
-            //Category category = _categoryService.GetCategoryByName(name);
             Category category = _unityOfWork.Category.GetFirstOrDefault(c => c.Name == name);
 
             if (category.Id == 0)
@@ -57,8 +57,8 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 return false;
             }
 
-            //_categoryService.DeleteCategory(category.Id);
             _unityOfWork.Category.Remove(category);
+            _unityOfWork.Save();
 
             return true;
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using SimpleStore.DataAccess.Data.Repository.IRepository;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Models.Models;
 using System.Collections.Generic;
@@ -7,21 +8,21 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
 {
     public class ManagerLogger : IManagerLogger
     {
-        private IManagerService _managerAuthenticationService;
+        private readonly IUnityOfWork _unityOfWork;
         private IPasswordHasher _passwordHasher;
-        private List<ManagerAccount> _registeredManagers;
+        private IEnumerable<ManagerAccount> _registeredManagers;
         private ManagerAccount _manager;
         public static ManagerAccount CurrentManager { get; private set; } = new ManagerAccount(new AccountOwner());
 
-        public ManagerLogger(IManagerService managerAuthenticationService)
+        public ManagerLogger(IUnityOfWork unityOfWork)
         {
-            _managerAuthenticationService = managerAuthenticationService;
             _passwordHasher = new PasswordHasher();
+            _unityOfWork = unityOfWork;
         }
 
         public bool LoginManager(string username, string password)
         {
-            _registeredManagers = _managerAuthenticationService.GetRegisteredManagers();
+            _registeredManagers = _unityOfWork.Manager.GetAll(includeProperties : "AccountOwner,ManagerPermission");
 
             bool userExists = GetManager(username);
             bool isUsernamePasswordCorrect = false;
