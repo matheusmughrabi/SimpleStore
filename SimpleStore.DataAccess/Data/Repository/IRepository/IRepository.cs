@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SimpleStore.DataAccess.Data.Repository.IRepository
 {
-    interface IRepository<T> where T : BaseModel
+    public interface IRepository<T> where T : BaseModel
     {
         T GetById(int id);
 
