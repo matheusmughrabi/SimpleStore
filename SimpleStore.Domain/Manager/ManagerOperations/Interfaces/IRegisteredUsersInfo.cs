@@ -1,10 +1,10 @@
-﻿using SimpleStore.Domain.Manager.ManagerModels;
+﻿using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
 namespace SimpleStore.Domain.Manager.ManagerOperations.Interfaces
 {
     public interface IRegisteredUsersInfo
     {
-        List<ManagerModel> GetRegisteredUsers();
+        List<ManagerAccount> GetRegisteredUsers();
     }
 }

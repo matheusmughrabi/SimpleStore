@@ -1,7 +1,6 @@
 ﻿using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.AccountServices;
-using SimpleStore.Domain.UsersAccounts.AccountsModel;
-using SimpleStore.Domain.UsersAuthenticator.Users;
+using SimpleStore.Models.Models;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
@@ -13,9 +12,9 @@ namespace SimpleStore.DataAccessLayer.Services.AccountsServices
         {
         }
 
-        public List<AccountModel> GetAccounts()
+        public List<Account> GetAccounts()
         {
-            List<AccountModel> accounts = new List<AccountModel>();
+            List<Account> accounts = new List<Account>();
 
             try
             {
@@ -27,11 +26,11 @@ namespace SimpleStore.DataAccessLayer.Services.AccountsServices
                 var sqlDataReader = _sqlCommand.ExecuteReader();
                 if (sqlDataReader.HasRows)
                 {
-                    AccountModel account;
+                    Account account;
 
                     while (sqlDataReader.Read())
                     {
-                        account = new AccountModel(new AccountOwner());
+                        account = new Account(new AccountOwner());
 
                         account.Id = sqlDataReader.GetInt32(0);
                         account.AccountOwner.Id = sqlDataReader.GetInt32(1);
@@ -57,9 +56,9 @@ namespace SimpleStore.DataAccessLayer.Services.AccountsServices
             return accounts;
         }
 
-        public AccountModel GetAccountByUserId(int userId)
+        public Account GetAccountByUserId(int userId)
         {
-            AccountModel account = new AccountModel(new AccountOwner());
+            Account account = new Account(new AccountOwner());
 
             try
             {
@@ -95,7 +94,7 @@ namespace SimpleStore.DataAccessLayer.Services.AccountsServices
             return account;
         }
 
-        public AccountModel UpdateAccountBalanceByUserId(AccountModel account)
+        public Account UpdateAccountBalanceByUserId(Account account)
         {
             try
             {

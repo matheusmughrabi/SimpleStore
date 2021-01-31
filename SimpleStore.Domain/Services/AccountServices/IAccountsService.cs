@@ -1,13 +1,13 @@
-﻿using SimpleStore.Domain.UsersAccounts.AccountsModel;
+﻿using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
 namespace SimpleStore.Domain.Services.AccountServices
 {
     public interface IAccountsService
     {
-        List<AccountModel> GetAccounts();
-        AccountModel GetAccountByUserId(int userId);
-        AccountModel UpdateAccountBalanceByUserId(AccountModel account);
+        List<Account> GetAccounts();
+        Account GetAccountByUserId(int userId);
+        Account UpdateAccountBalanceByUserId(Account account);
         bool CreateAccount(int UserId);
     }
 }

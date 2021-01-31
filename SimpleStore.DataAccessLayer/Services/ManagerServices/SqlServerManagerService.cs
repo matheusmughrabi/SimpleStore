@@ -1,8 +1,8 @@
 ﻿using SimpleStore.DataAccessLayer.Helpers;
-using SimpleStore.Domain.Manager.ManagerModels;
+using SimpleStore.Models.Models;
 using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.AuthenticationServices;
-using SimpleStore.Domain.UsersAuthenticator.Users;
+using SimpleStore.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,9 +16,9 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
         {
         }
 
-        public List<ManagerModel> GetRegisteredManagers()
+        public List<ManagerAccount> GetRegisteredManagers()
         {
-            List<ManagerModel> registeredManagers = new List<ManagerModel>();
+            List<ManagerAccount> registeredManagers = new List<ManagerAccount>();
 
             try
             {
@@ -30,21 +30,21 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
                 var sqlDataReader = _sqlCommand.ExecuteReader();
                 if (sqlDataReader.HasRows)
                 {
-                    ManagerModel manager;
+                    ManagerAccount manager;
 
                     while (sqlDataReader.Read())
                     {
-                        manager = new ManagerModel();
-                        manager.User = new AccountOwner();
-                        manager.ManagerPermission = new ManagerPermissionModel();
+                        manager = new ManagerAccount();
+                        manager.AccountOwner = new AccountOwner();
+                        manager.ManagerPermission = new ManagerPermission();
 
                         manager.Id = sqlDataReader.GetInt32(0);
-                        manager.User.Id = sqlDataReader.GetInt32(1);
-                        manager.User.FirstName = sqlDataReader.GetString(2);
-                        manager.User.LastName = sqlDataReader.GetString(3);
-                        manager.User.Email = sqlDataReader.GetString(4);
-                        manager.User.Username = sqlDataReader.GetString(5);
-                        manager.User.Password = sqlDataReader.GetString(6);
+                        manager.AccountOwner.Id = sqlDataReader.GetInt32(1);
+                        manager.AccountOwner.FirstName = sqlDataReader.GetString(2);
+                        manager.AccountOwner.LastName = sqlDataReader.GetString(3);
+                        manager.AccountOwner.Email = sqlDataReader.GetString(4);
+                        manager.AccountOwner.Username = sqlDataReader.GetString(5);
+                        manager.AccountOwner.Password = sqlDataReader.GetString(6);
                         manager.ManagerPermission.PermissionTitle = sqlDataReader.GetString(7);
 
                         registeredManagers.Add(manager);
@@ -63,9 +63,9 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
             return registeredManagers;
         }
 
-        public List<ManagerModel> GetUsersAndTitles()
+        public List<ManagerAccount> GetUsersAndTitles()
         {
-            List<ManagerModel> registeredManagers = new List<ManagerModel>();
+            List<ManagerAccount> registeredManagers = new List<ManagerAccount>();
 
             try
             {
@@ -77,19 +77,19 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
                 var sqlDataReader = _sqlCommand.ExecuteReader();
                 if (sqlDataReader.HasRows)
                 {
-                    ManagerModel manager;
+                    ManagerAccount manager;
 
                     while (sqlDataReader.Read())
                     {
-                        manager = new ManagerModel();
-                        manager.User = new AccountOwner();
-                        manager.ManagerPermission = new ManagerPermissionModel();
+                        manager = new ManagerAccount();
+                        manager.AccountOwner = new AccountOwner();
+                        manager.ManagerPermission = new ManagerPermission();
 
-                        manager.User.Id = sqlDataReader.GetInt32(0);
-                        manager.User.FirstName = sqlDataReader.GetString(1);
-                        manager.User.LastName = sqlDataReader.GetString(2);
-                        manager.User.Email = sqlDataReader.GetString(3);
-                        manager.User.Username = sqlDataReader.GetString(4);
+                        manager.AccountOwner.Id = sqlDataReader.GetInt32(0);
+                        manager.AccountOwner.FirstName = sqlDataReader.GetString(1);
+                        manager.AccountOwner.LastName = sqlDataReader.GetString(2);
+                        manager.AccountOwner.Email = sqlDataReader.GetString(3);
+                        manager.AccountOwner.Username = sqlDataReader.GetString(4);
                         manager.ManagerPermission.PermissionTitle = sqlDataReader.SafeGetString(5);
 
                         registeredManagers.Add(manager);
@@ -108,9 +108,9 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
             return registeredManagers;
         }
 
-        public List<ManagerPermissionModel> GetRegisteredManagerPermissions()
+        public List<ManagerPermission> GetRegisteredManagerPermissions()
         {
-            List<ManagerPermissionModel> registeredManagerPermissions = new List<ManagerPermissionModel>();
+            List<ManagerPermission> registeredManagerPermissions = new List<ManagerPermission>();
 
             try
             {
@@ -122,11 +122,11 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
                 var sqlDataReader = _sqlCommand.ExecuteReader();
                 if (sqlDataReader.HasRows)
                 {
-                    ManagerPermissionModel managerPermission;
+                    ManagerPermission managerPermission;
 
                     while (sqlDataReader.Read())
                     {
-                        managerPermission = new ManagerPermissionModel();
+                        managerPermission = new ManagerPermission();
 
                         managerPermission.Id = sqlDataReader.GetInt32(0);
                         managerPermission.PermissionTitle = sqlDataReader.GetString(1);
@@ -147,14 +147,14 @@ namespace SimpleStore.DataAccessLayer.Services.ManagerServices
             return registeredManagerPermissions;
         }
 
-        public ManagerModel CreateManager(ManagerModel manager)
+        public ManagerAccount CreateManager(ManagerAccount manager)
         {
             try
             {
                 _sqlCommand.Parameters.Clear();
                 _sqlCommand.CommandText = "spCreateManager";
 
-                _sqlCommand.Parameters.AddWithValue("@UserId", manager.User.Id);
+                _sqlCommand.Parameters.AddWithValue("@UserId", manager.AccountOwner.Id);
                 _sqlCommand.Parameters.AddWithValue("@ManagerPermissionId", manager.ManagerPermission.Id);
                 _sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Direction = ParameterDirection.Output;
 

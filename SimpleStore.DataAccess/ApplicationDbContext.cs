@@ -21,7 +21,7 @@ namespace SimpleStore.DataAccess
         public DbSet<Account> Account { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }
-        public DbSet<Manager> Manager { get; set; }
+        public DbSet<ManagerAccount> Manager { get; set; }
         public DbSet<ManagerPermission> ManagerPermission { get; set; }
     }
 }

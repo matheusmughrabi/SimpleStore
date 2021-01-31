@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using SimpleStore.Domain.Services.AuthenticationServices;
-using SimpleStore.Domain.UsersAuthenticator.Users;
+using SimpleStore.Models.Models;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;

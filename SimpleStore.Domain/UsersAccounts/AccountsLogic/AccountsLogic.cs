@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using SimpleStore.Domain.IRepository;
 using SimpleStore.Domain.Services.AccountServices;
-using SimpleStore.Domain.UsersAccounts.AccountsModel;
+using SimpleStore.Models.Models;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace SimpleStore.Domain.UsersAccounts.AccountsLogic
 {
     public class AccountsLogic
     {
-        public AccountModel CurrentAccount { get; private set; }
+        public Account CurrentAccount { get; private set; }
         private IAccountsService _accountsService;
         private IRepositorySPCall _repository;
 

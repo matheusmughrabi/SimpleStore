@@ -1,8 +1,7 @@
 ﻿using SimpleStore.Domain.Manager.ManagerLogin;
-using SimpleStore.Domain.Manager.ManagerModels;
+using SimpleStore.Models.Models;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Services.AuthenticationServices;
-using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
 using System.Collections.Generic;
 
@@ -13,8 +12,8 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
         private readonly IManagerService _managerService;
         private readonly IAuthenticationService _authenticationService;
         private List<AccountOwner> _registeredUsers;
-        private List<ManagerModel> _registeredManagers;
-        private List<ManagerPermissionModel> _registeredManagerPermissions;
+        private List<ManagerAccount> _registeredManagers;
+        private List<ManagerPermission> _registeredManagerPermissions;
 
         public ManagerCreator(IManagerService managerService, IAuthenticationService authenticationService)
         {
@@ -22,7 +21,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             _authenticationService = authenticationService;
         }
 
-        public bool RegisterManager(ManagerModel manager)
+        public bool RegisterManager(ManagerAccount manager)
         {
             if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle != "Super Admin")
             {
@@ -36,9 +35,9 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             bool userExists = false;
             foreach (var registeredUser in _registeredUsers)
             {
-                if (registeredUser.Username == manager.User.Username)
+                if (registeredUser.Username == manager.AccountOwner.Username)
                 {
-                    manager.User.Id = registeredUser.Id;
+                    manager.AccountOwner.Id = registeredUser.Id;
                     userExists = true;
                     break;
                 }
@@ -62,7 +61,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 
             foreach (var registeredManger in _registeredManagers)
             {
-                if (registeredManger.User.Username == manager.User.Username)
+                if (registeredManger.AccountOwner.Username == manager.AccountOwner.Username)
                 {
                     return false;
                 }

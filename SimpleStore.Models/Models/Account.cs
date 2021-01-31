@@ -9,5 +9,15 @@ namespace SimpleStore.Models.Models
     {
         public AccountOwner AccountOwner { get; set; }
         public decimal Balance { get; set; }
+
+        public Account()
+        {
+
+        }
+
+        public Account(AccountOwner accountOwner)
+        {
+            AccountOwner = accountOwner;
+        }       
     }
 }

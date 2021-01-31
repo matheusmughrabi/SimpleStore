@@ -1,6 +1,6 @@
 ﻿using SimpleStore.Domain.Services;
 using SimpleStore.Domain.Services.AuthenticationServices;
-using SimpleStore.Domain.UsersAuthenticator.Users;
+using SimpleStore.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;

@@ -1,9 +1,9 @@
-﻿using SimpleStore.Domain.Manager.ManagerModels;
+﻿using SimpleStore.Models.Models;
 
 namespace SimpleStore.Domain.Manager.ManagerOperations.Interfaces
 {
     public interface IManagerCreator
     {
-        bool RegisterManager(ManagerModel manager);
+        bool RegisterManager(ManagerAccount manager);
     }
 }

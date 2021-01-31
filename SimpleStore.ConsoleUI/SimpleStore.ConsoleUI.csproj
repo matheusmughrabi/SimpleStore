@@ -32,8 +32,4 @@
     <ProjectReference Include="..\SimpleStore.Domain\SimpleStore.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="MenuFrameTest\Actions\" />
-  </ItemGroup>
-
 </Project>

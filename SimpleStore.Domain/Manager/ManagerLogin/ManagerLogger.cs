@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
-using SimpleStore.Domain.Manager.ManagerModels;
 using SimpleStore.Domain.Services.AuthenticationServices;
-using SimpleStore.Domain.UsersAuthenticator.Users;
+using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
 namespace SimpleStore.Domain.Manager.ManagerLogin
@@ -10,9 +9,9 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
     {
         private IManagerService _managerAuthenticationService;
         private IPasswordHasher _passwordHasher;
-        private List<ManagerModel> _registeredManagers;
-        private ManagerModel _manager;
-        public static ManagerModel CurrentManager { get; private set; } = new ManagerModel(new AccountOwner());
+        private List<ManagerAccount> _registeredManagers;
+        private ManagerAccount _manager;
+        public static ManagerAccount CurrentManager { get; private set; } = new ManagerAccount(new AccountOwner());
 
         public ManagerLogger(IManagerService managerAuthenticationService)
         {
@@ -47,9 +46,9 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
 
         private bool GetManager(string username)
         {
-            foreach (ManagerModel registeredManager in _registeredManagers)
+            foreach (ManagerAccount registeredManager in _registeredManagers)
             {
-                if (username == registeredManager.User.Username)
+                if (username == registeredManager.AccountOwner.Username)
                 {
                     _manager = registeredManager;
                     return true;
@@ -60,7 +59,7 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
 
         private bool CheckPassword(string password)
         {
-            PasswordVerificationResult verifyPassword = _passwordHasher.VerifyHashedPassword(_manager.User.Password, password);
+            PasswordVerificationResult verifyPassword = _passwordHasher.VerifyHashedPassword(_manager.AccountOwner.Password, password);
 
             if (verifyPassword == PasswordVerificationResult.Success)
             {

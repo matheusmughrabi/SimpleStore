@@ -1,6 +1,6 @@
 ﻿using SimpleStore.Domain.MailService;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
-using SimpleStore.Domain.UsersAuthenticator.Users;
+using SimpleStore.Models.Models;
 using System;
 using System.Collections.Generic;
 

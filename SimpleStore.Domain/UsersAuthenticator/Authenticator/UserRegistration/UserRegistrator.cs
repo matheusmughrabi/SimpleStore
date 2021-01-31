@@ -2,7 +2,7 @@
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
-using SimpleStore.Domain.UsersAuthenticator.Users;
+using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
 namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration

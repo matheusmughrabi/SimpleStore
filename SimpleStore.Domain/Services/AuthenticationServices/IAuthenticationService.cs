@@ -1,4 +1,4 @@
-﻿using SimpleStore.Domain.UsersAuthenticator.Users;
+﻿using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
 namespace SimpleStore.Domain.Services.AuthenticationServices

@@ -1,6 +1,5 @@
-﻿using SimpleStore.Domain.Manager.ManagerModels;
+﻿using SimpleStore.Models.Models;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
-using SimpleStore.Domain.UsersAuthenticator.Users;
 using System;
 using System.Collections.Generic;
 
@@ -17,17 +16,17 @@ namespace SimpleStore.ConsoleUI.MenusLogic
 
         public bool CreateManager(List<string> inputs)
         {
-            ManagerModel manager = new ManagerModel();
-            manager.User = new AccountOwner();
-            manager.ManagerPermission = new ManagerPermissionModel();
+            ManagerAccount manager = new ManagerAccount();
+            manager.AccountOwner = new AccountOwner();
+            manager.ManagerPermission = new ManagerPermission();
 
-            manager.User.Username = inputs[0];
+            manager.AccountOwner.Username = inputs[0];
             manager.ManagerPermission.PermissionTitle = inputs[1];
 
             bool isRegistrationSuccess = _managerCreator.RegisterManager(manager);
             if (isRegistrationSuccess == true)
             {
-                Console.WriteLine($"{manager.User.Username} registered successfuly");
+                Console.WriteLine($"{manager.AccountOwner.Username} registered successfuly");
             }
             else
             {

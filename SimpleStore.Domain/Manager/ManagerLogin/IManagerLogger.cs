@@ -1,10 +1,10 @@
-﻿using SimpleStore.Domain.Manager.ManagerModels;
+﻿using SimpleStore.Models.Models;
 
 namespace SimpleStore.Domain.Manager.ManagerLogin
 {
     public interface IManagerLogger
     {
-        static ManagerModel CurrentManager { get; }
+        static ManagerAccount CurrentManager { get; }
         bool LoginManager(string username, string password);
         void LogoutManager();
     }

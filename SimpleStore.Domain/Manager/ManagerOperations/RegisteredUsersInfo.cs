@@ -1,4 +1,4 @@
-﻿using SimpleStore.Domain.Manager.ManagerModels;
+﻿using SimpleStore.Models.Models;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using System.Collections.Generic;
@@ -14,9 +14,9 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             _managerService = managerService;
         }
 
-        public List<ManagerModel> GetRegisteredUsers()
+        public List<ManagerAccount> GetRegisteredUsers()
         {
-            List<ManagerModel> registeredUsersAndTitles = _managerService.GetUsersAndTitles();
+            List<ManagerAccount> registeredUsersAndTitles = _managerService.GetUsersAndTitles();
 
             return registeredUsersAndTitles;
         }

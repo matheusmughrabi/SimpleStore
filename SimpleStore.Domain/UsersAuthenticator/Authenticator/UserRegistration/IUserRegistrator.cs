@@ -1,4 +1,4 @@
-﻿using SimpleStore.Domain.UsersAuthenticator.Users;
+﻿using SimpleStore.Models.Models;
 
 namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration
 {

@@ -11,7 +11,7 @@ using SimpleStore.Domain.Products.ProductsLogic;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
-using SimpleStore.Domain.UsersAuthenticator.Users;
+using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
 namespace SimpleStore.ConsoleUI

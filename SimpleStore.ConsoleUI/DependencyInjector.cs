@@ -15,11 +15,10 @@ using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAccounts.AccountsLogic;
-using SimpleStore.Domain.UsersAccounts.AccountsModel;
+using SimpleStore.Models.Models;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration;
-using SimpleStore.Domain.UsersAuthenticator.Users;
 
 namespace SimpleStore.ConsoleUI
 {
@@ -46,7 +45,7 @@ namespace SimpleStore.ConsoleUI
             builder.RegisterType<ProductsLogic>().As<IProductsLogic>();
 
             builder.RegisterType<AccountOwner>().AsSelf().SingleInstance();
-            builder.RegisterType<AccountModel>().AsSelf().SingleInstance();
+            builder.RegisterType<Account>().AsSelf().SingleInstance();
 
             builder.RegisterType<AccountsLogic>().AsSelf();
             builder.RegisterType<CategoryManager>().As<ICategoryOperator>();

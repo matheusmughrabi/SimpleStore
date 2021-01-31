@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using SimpleStore.Domain.Services.AccountServices;
 using SimpleStore.Domain.Services.AuthenticationServices;
-using SimpleStore.Domain.UsersAccounts.AccountsModel;
-using SimpleStore.Domain.UsersAuthenticator.Users;
+using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
 namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
@@ -14,7 +13,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
         private IPasswordHasher _passwordHasher;
         private List<AccountOwner> _registeredUsers;
         private AccountOwner _user;
-        public static AccountModel CurrentAccount { get; private set; } = new AccountModel(new AccountOwner());
+        public static Account CurrentAccount { get; private set; } = new Account(new AccountOwner());
 
         public UserLogger(IAuthenticationService authenticationService, IAccountsService accountsService)
         {
