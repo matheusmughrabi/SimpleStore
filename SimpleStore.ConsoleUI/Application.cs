@@ -3,32 +3,41 @@ using SimpleStore.ConsoleUI.MenuFrame.Menus;
 using SimpleStore.ConsoleUI.MenusAction;
 using SimpleStore.ConsoleUI.MenusLogic;
 using SimpleStore.ConsoleUI.MenusLogic.AccessPermissions;
+using SimpleStore.Domain.Accounts.Interfaces;
 using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
-using SimpleStore.Domain.Products;
+using SimpleStore.Domain.Products.Interfaces;
 using SimpleStore.Domain.Products.ProductsLogic;
-using SimpleStore.Domain.UsersAccounts.AccountsLogic;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
-using SimpleStore.Domain.UsersAuthenticator.Users;
+using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
 namespace SimpleStore.ConsoleUI
 {
     public class Application
     {
-        private IUserLogger _userLogger;
-        private IManagerLogger _managerLogger;
-        private IUserRegistrator _userRegistrator;
-        private IProductsLogic _productsLogic;
-        private AccountsLogic _accountsLogic;
+        private readonly IUserLogger _userLogger;
+        private readonly IManagerLogger _managerLogger;
+        private readonly IUserRegistrator _userRegistrator;
+        private readonly IProductsLogic _productsLogic;
+        private readonly IAccountsLogic _accountsLogic;
         private readonly ICategoryOperator _categoryOperator;
         private readonly IProductsOperator _productsOperator;
         private readonly IManagerCreator _managerCreator;
-        private IRegisteredUsersInfo _registeredUsersInfo;
+        private readonly IRegisteredUsersInfo _registeredUsersInfo;
 
-        public Application(IUserLogger userLogger, IManagerLogger managerLogger, IUserRegistrator userRegistrator, IProductsLogic productsLogic, AccountsLogic accountsLogic, ICategoryOperator categoryOperator, IProductsOperator productsOperator, IManagerCreator managerCreator, IRegisteredUsersInfo registeredUsersInfo)
+        public Application(
+            IUserLogger userLogger, 
+            IManagerLogger managerLogger, 
+            IUserRegistrator userRegistrator, 
+            IProductsLogic productsLogic, 
+            IAccountsLogic accountsLogic, 
+            ICategoryOperator categoryOperator, 
+            IProductsOperator productsOperator, 
+            IManagerCreator managerCreator, 
+            IRegisteredUsersInfo registeredUsersInfo)
         {
             _userLogger = userLogger;
             _managerLogger = managerLogger;
@@ -83,7 +92,7 @@ namespace SimpleStore.ConsoleUI
             registerMenu.AddTextBox("Password");
             registerMenu.AddTextBox("Confirm Password");
             registerMenu.SetRenavigateMenu(initialMenu);
-            registerMenu.MenuFuncLogic = new RegistrationLogic(_userRegistrator, new UserModel()).Register;
+            registerMenu.MenuFuncLogic = new RegistrationLogic(_userRegistrator, new AccountOwner()).Register;
 
             mainMenu.AddChildMenu(accountMenu);
             mainMenu.AddChildMenu(storeCategoriesMenu);
@@ -144,10 +153,10 @@ namespace SimpleStore.ConsoleUI
             makeWithdrawalMenu.SetRenavigateMenu(accountMenu);
             makeWithdrawalMenu.MenuFuncLogic = new MakeWithdrawalLogic(_accountsLogic).MakeWithdrawal;
 
-            List<CategoryModel> categories = _productsLogic.GetCategories();
+            IEnumerable<Category> categories = _productsLogic.GetCategories();
             foreach (var category in categories)
             {
-                SimpleActionMenu productMenu = new SimpleActionMenu($"{category.CategoryName} Menu", storeCategoriesMenu);
+                SimpleActionMenu productMenu = new SimpleActionMenu($"{category.Name} Menu", storeCategoriesMenu);
                 productMenu.MenuFuncLogic = new BuyProductLogic(_accountsLogic, category, _productsLogic).BuyProduct;
                 storeCategoriesMenu.AddChildMenu(productMenu);
             }

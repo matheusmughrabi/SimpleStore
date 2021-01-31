@@ -1,6 +1,6 @@
-﻿using SimpleStore.Domain.MailService;
+﻿using SimpleStore.Utils.Services;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
-using SimpleStore.Domain.UsersAuthenticator.Users;
+using SimpleStore.Models.Models;
 using System;
 using System.Collections.Generic;
 
@@ -9,9 +9,9 @@ namespace SimpleStore.ConsoleUI.MenusAction
     public class RegistrationLogic
     {
         private IUserRegistrator _userRegistrator;
-        private UserModel _userModel;
+        private AccountOwner _userModel;
 
-        public RegistrationLogic(IUserRegistrator userLogger, UserModel userModel)
+        public RegistrationLogic(IUserRegistrator userLogger, AccountOwner userModel)
         {
             _userRegistrator = userLogger;
             _userModel = userModel;

@@ -1,4 +1,5 @@
-﻿using SimpleStore.Domain.UsersAccounts.AccountsLogic;
+﻿using SimpleStore.Domain.Accounts;
+using SimpleStore.Domain.Accounts.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -6,9 +7,9 @@ namespace SimpleStore.ConsoleUI.MenusAction
 {
     public class MakeDepositLogic
     {
-        private AccountsLogic _accountLogic;
+        private IAccountsLogic _accountLogic;
 
-        public MakeDepositLogic(AccountsLogic accountLogic)
+        public MakeDepositLogic(IAccountsLogic accountLogic)
         {
             _accountLogic = accountLogic;
         }

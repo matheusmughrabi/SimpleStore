@@ -1,13 +1,14 @@
-﻿using SimpleStore.Domain.UsersAccounts.AccountsLogic;
+﻿using SimpleStore.Domain.Accounts;
+using SimpleStore.Domain.Accounts.Interfaces;
 using System;
 
 namespace SimpleStore.ConsoleUI.MenusAction
 {
     public class AccountInfoLogic
     {
-        private readonly AccountsLogic _accountLogic;
+        private readonly IAccountsLogic _accountLogic;
 
-        public AccountInfoLogic(AccountsLogic accountLogic)
+        public AccountInfoLogic(IAccountsLogic accountLogic)
         {
             _accountLogic = accountLogic;
         }
@@ -15,7 +16,7 @@ namespace SimpleStore.ConsoleUI.MenusAction
         public void PrintAccountInfoLogic()
         {
             _accountLogic.ReloadCurrentAccount();
-            Console.WriteLine($"{ _accountLogic.CurrentAccount.User.FirstName } your balance is { _accountLogic.CurrentAccount.Balance }");
+            Console.WriteLine($"{ _accountLogic.CurrentAccount.AccountOwner.FirstName } your balance is { _accountLogic.CurrentAccount.Balance }");
         }
     }
 }
