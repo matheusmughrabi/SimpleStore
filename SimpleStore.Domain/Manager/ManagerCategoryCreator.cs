@@ -52,6 +52,11 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 
             Category category = _unityOfWork.Category.GetFirstOrDefault(c => c.Name == name);
 
+            if (category == null)
+            {
+                return false;
+            }
+
             if (category.Id == 0)
             {
                 return false;
