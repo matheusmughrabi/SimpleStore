@@ -1,9 +1,11 @@
 ﻿using Autofac;
 using SimpleStore.DataAccessLayer.Connections;
+using SimpleStore.DataAccessLayer.Data.Repository;
 using SimpleStore.DataAccessLayer.Services.AccountsServices;
 using SimpleStore.DataAccessLayer.Services.AuthenticationServices;
 using SimpleStore.DataAccessLayer.Services.ManagerServices;
 using SimpleStore.DataAccessLayer.Services.ProductsServices;
+using SimpleStore.Domain.IRepository;
 using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Domain.Manager.ManagerOperations;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
@@ -33,6 +35,8 @@ namespace SimpleStore.ConsoleUI
             builder.RegisterType<SqlServerAccountsService>().As<IAccountsService>();
             builder.RegisterType<SqlServerCategoryService>().As<ICategoryService>();
             builder.RegisterType<SqlServerProductsService>().As<IProductsService>();
+
+            builder.RegisterType<RepositorySPCallSqlServer>().As<IRepositorySPCall>();
 
             builder.RegisterType<UserLogger>().As<IUserLogger>().SingleInstance();
             builder.RegisterType<ManagerLogger>().As<IManagerLogger>().SingleInstance();
