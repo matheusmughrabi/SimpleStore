@@ -2,9 +2,6 @@
 using SimpleStore.DataAccess;
 using SimpleStore.DataAccess.Data.Repository;
 using SimpleStore.DataAccess.Data.Repository.IRepository;
-using SimpleStore.DataAccessLayer.Connections;
-using SimpleStore.DataAccessLayer.Services.ManagerServices;
-using SimpleStore.DataAccessLayer.Services.ProductsServices;
 using SimpleStore.Domain.Accounts;
 using SimpleStore.Domain.Accounts.Interfaces;
 using SimpleStore.Domain.Manager.ManagerLogin;
@@ -14,8 +11,6 @@ using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Products.Interfaces;
 using SimpleStore.Domain.Products.ProductsLogic;
 using SimpleStore.Domain.Services;
-using SimpleStore.Domain.Services.AuthenticationServices;
-using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration;
@@ -28,10 +23,6 @@ namespace SimpleStore.ConsoleUI
         public IContainer CreateContainer()
         {
             var builder = new ContainerBuilder();
-
-            builder.RegisterType<SqlServerConnection>().As<IConnection>();
-            //builder.RegisterType<SqlServerCategoryService>().As<ICategoryService>();
-            //builder.RegisterType<SqlServerProductsService>().As<IProductsService>();
 
             builder.RegisterType<UnityOfWork>().As<IUnityOfWork>();
             builder.RegisterType<ApplicationDbContext>().AsSelf();
