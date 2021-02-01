@@ -30,8 +30,6 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 
             _registeredManagerPermissions = _unityOfWork.Roles.GetAll();
 
-            _registeredManagers = _unityOfWork.AccountOwner.GetAll(a => a.RoleId == 1 || a.RoleId == 2);
-
             bool userExists = false;
             foreach (var registeredUser in _registeredUsers)
             {
@@ -57,14 +55,6 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             if (!userExists || !permissionExists)
             {
                 return false;
-            }
-
-            foreach (var registeredManager in _registeredManagers)
-            {
-                if (registeredManager.Username == manager.Username)
-                {
-                    return false;
-                }
             }
 
             Roles permission = _unityOfWork.Roles.GetFirstOrDefault(p => p.PermissionTitle == manager.Role.PermissionTitle);
