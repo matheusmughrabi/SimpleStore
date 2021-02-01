@@ -43,7 +43,7 @@ namespace SimpleStore.Domain.Products
 
         public bool DeleteProduct(string name)
         {
-            if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle != "Super Admin")
+            if (ManagerLogger.CurrentManager.Role.PermissionTitle != "Super Admin")
             {
                 throw new Exception("Only Super Admin is allowed");
             }

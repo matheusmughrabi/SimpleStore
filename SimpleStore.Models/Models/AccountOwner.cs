@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace SimpleStore.Models.Models
@@ -28,6 +29,13 @@ namespace SimpleStore.Models.Models
         [Required]
         [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Role")]
+        public int RoleId { get; set; }
+
+        [ForeignKey(nameof(RoleId))]
+        public virtual Roles Role { get; set; }
 
         public string FullName
         {

@@ -14,7 +14,6 @@ namespace SimpleStore.DataAccess.Data.Repository.IRepository
         public IAccountRepository Account { get; }
         public ICategoryRepository Category { get; }
         public IProductRepository Product { get; }
-        public IManagerRepository Manager { get; }
-        public IManagerPermissionRepository ManagerPermission { get; }
+        public IRolesRepository Roles { get; }
     }
 }

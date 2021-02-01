@@ -1,5 +1,4 @@
 ﻿using SimpleStore.DataAccess.Data.Repository.IRepository;
-using SimpleStore.Domain.Services.ProductsServices;
 using SimpleStore.Models.Models;
 using System.Collections.Generic;
 

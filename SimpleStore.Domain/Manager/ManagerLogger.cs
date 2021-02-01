@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using SimpleStore.DataAccess.Data.Repository.IRepository;
-using SimpleStore.Domain.Services.AuthenticationServices;
 using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
@@ -10,9 +9,9 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
     {
         private readonly IUnityOfWork _unityOfWork;
         private IPasswordHasher _passwordHasher;
-        private IEnumerable<ManagerAccount> _registeredManagers;
-        private ManagerAccount _manager;
-        public static ManagerAccount CurrentManager { get; private set; } = new ManagerAccount(new AccountOwner());
+        private IEnumerable<AccountOwner> _registeredManagers;
+        private AccountOwner _manager;
+        public static AccountOwner CurrentManager { get; private set; } = new AccountOwner();
 
         public ManagerLogger(IUnityOfWork unityOfWork)
         {
@@ -22,7 +21,7 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
 
         public bool LoginManager(string username, string password)
         {
-            _registeredManagers = _unityOfWork.Manager.GetAll(includeProperties : "AccountOwner,ManagerPermission");
+            _registeredManagers = _unityOfWork.AccountOwner.GetAll(a => a.RoleId == 1 || a.RoleId == 2, null, includeProperties : "Role");
 
             bool userExists = GetManager(username);
             bool isUsernamePasswordCorrect = false;
@@ -47,9 +46,9 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
 
         private bool GetManager(string username)
         {
-            foreach (ManagerAccount registeredManager in _registeredManagers)
+            foreach (var registeredManager in _registeredManagers)
             {
-                if (username == registeredManager.AccountOwner.Username)
+                if (username == registeredManager.Username)
                 {
                     _manager = registeredManager;
                     return true;
@@ -60,7 +59,7 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
 
         private bool CheckPassword(string password)
         {
-            PasswordVerificationResult verifyPassword = _passwordHasher.VerifyHashedPassword(_manager.AccountOwner.Password, password);
+            PasswordVerificationResult verifyPassword = _passwordHasher.VerifyHashedPassword(_manager.Password, password);
 
             if (verifyPassword == PasswordVerificationResult.Success)
             {

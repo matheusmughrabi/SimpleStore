@@ -1,5 +1,4 @@
-﻿using SimpleStore.ConsoleUI.MenuFrame;
-using SimpleStore.ConsoleUI.MenuFrame.Menus;
+﻿using SimpleStore.ConsoleUI.MenuFramework.Menus;
 using SimpleStore.ConsoleUI.MenusAction;
 using SimpleStore.ConsoleUI.MenusLogic;
 using SimpleStore.ConsoleUI.MenusLogic.AccessPermissions;

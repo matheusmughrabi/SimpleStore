@@ -11,7 +11,7 @@ namespace SimpleStore.ConsoleUI.MenusLogic.AccessPermissions
 
         public bool AllowSuperAdminOnly()
         {
-            if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle == "Super Admin")
+            if (ManagerLogger.CurrentManager.Role.PermissionTitle == "Super Admin")
             {
                 return true;
             }

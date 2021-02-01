@@ -17,5 +17,14 @@ namespace SimpleStore.DataAccess.Data.Repository
         {
             _dbContext = dbContext;
         }
+
+        public void UpdateRole(AccountOwner accountOwner)
+        {
+            var objFromDb = GetById(accountOwner.Id);
+
+            objFromDb.RoleId = accountOwner.RoleId;
+
+            _dbContext.SaveChanges();
+        }
     }
 }

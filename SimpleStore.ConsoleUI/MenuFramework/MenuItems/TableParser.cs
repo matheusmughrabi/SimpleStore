@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace SimpleStore.ConsoleUI.MenuFrame.MenuItems
+namespace SimpleStore.ConsoleUI.MenuFramework.MenuItems
 {
     public static class TableParser
     {
@@ -13,7 +13,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame.MenuItems
             string[] columnHeaders,
             params Func<T, object>[] valueSelectors)
         {
-            return ToStringTable(values.ToArray(), columnHeaders, valueSelectors);
+            return values.ToArray().ToStringTable(columnHeaders, valueSelectors);
         }
 
         public static string ToStringTable<T>(
@@ -41,7 +41,7 @@ namespace SimpleStore.ConsoleUI.MenuFrame.MenuItems
                 }
             }
 
-            return ToStringTable(arrValues);
+            return arrValues.ToStringTable();
         }
 
         public static string ToStringTable(this string[,] arrValues)

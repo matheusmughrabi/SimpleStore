@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStore.Domain", "Simpl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStore.ConsoleUI", "SimpleStore.ConsoleUI\SimpleStore.ConsoleUI.csproj", "{9787AE00-1C2E-4BD5-8FDF-77F98DC6B595}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStore.DataAccess", "SimpleStore.DataAccess\SimpleStore.DataAccess.csproj", "{58689940-EE92-4EBA-A136-FDDB542A63C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStore.DataAccess", "SimpleStore.DataAccess\SimpleStore.DataAccess.csproj", "{58689940-EE92-4EBA-A136-FDDB542A63C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStore.Models", "SimpleStore.Models\SimpleStore.Models.csproj", "{4683703F-A68B-4DDD-93B9-1789F93E6043}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStore.Models", "SimpleStore.Models\SimpleStore.Models.csproj", "{4683703F-A68B-4DDD-93B9-1789F93E6043}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{58E14BDC-DA1E-4C49-8AD8-900280056775}"
 EndProject
@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{74A9D903
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterface", "UserInterface", "{A147E010-DFB1-41C9-A781-EF85FECA9281}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStore.Utils", "SimpleStore.Utils\SimpleStore.Utils.csproj", "{2CD2F800-E109-40EE-B879-9E6257AED305}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStore.Utils", "SimpleStore.Utils\SimpleStore.Utils.csproj", "{2CD2F800-E109-40EE-B879-9E6257AED305}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
