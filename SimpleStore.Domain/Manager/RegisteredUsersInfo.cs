@@ -1,6 +1,5 @@
 ﻿using SimpleStore.Models.Models;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
-using SimpleStore.Domain.Services.AuthenticationServices;
 using System.Collections.Generic;
 using SimpleStore.DataAccess.Data.Repository.IRepository;
 
@@ -15,10 +14,10 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             _unityOfWork = unityOfWork;
         }
 
-        public IEnumerable<ManagerAccount> GetRegisteredUsers()
+        public IEnumerable<AccountOwner> GetRegisteredUsers()
         {
-            IEnumerable<ManagerAccount> registeredUsersAndTitles = _unityOfWork.Manager.GetAll(
-                includeProperties : "AccountOwner,ManagerPermission");
+            IEnumerable<AccountOwner> registeredUsersAndTitles = _unityOfWork.AccountOwner.GetAll(
+                includeProperties : "Role");
 
             return registeredUsersAndTitles;
         }

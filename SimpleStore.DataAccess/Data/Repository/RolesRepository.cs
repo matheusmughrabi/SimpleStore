@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace SimpleStore.DataAccess.Data.Repository
 {
-    public class ManagerRepository : Repository<ManagerAccount>, IManagerRepository
+    public class RolesRepository : Repository<Roles>, IRolesRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public ManagerRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public RolesRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }

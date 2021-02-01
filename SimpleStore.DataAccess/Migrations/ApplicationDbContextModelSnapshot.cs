@@ -75,6 +75,9 @@ namespace SimpleStore.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -83,6 +86,8 @@ namespace SimpleStore.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("AccountOwner");
                 });
@@ -110,44 +115,6 @@ namespace SimpleStore.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("SimpleStore.Models.Models.ManagerAccount", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("AccountOwnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ManagerPermissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountOwnerId");
-
-                    b.HasIndex("ManagerPermissionId");
-
-                    b.ToTable("Manager");
-                });
-
-            modelBuilder.Entity("SimpleStore.Models.Models.ManagerPermission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("PermissionTitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ManagerPermission");
                 });
 
             modelBuilder.Entity("SimpleStore.Models.Models.Product", b =>
@@ -193,6 +160,22 @@ namespace SimpleStore.DataAccess.Migrations
                     b.ToTable("Product");
                 });
 
+            modelBuilder.Entity("SimpleStore.Models.Models.Roles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("PermissionTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("SimpleStore.Models.Models.Account", b =>
                 {
                     b.HasOne("SimpleStore.Models.Models.AccountOwner", "AccountOwner")
@@ -204,23 +187,15 @@ namespace SimpleStore.DataAccess.Migrations
                     b.Navigation("AccountOwner");
                 });
 
-            modelBuilder.Entity("SimpleStore.Models.Models.ManagerAccount", b =>
+            modelBuilder.Entity("SimpleStore.Models.Models.AccountOwner", b =>
                 {
-                    b.HasOne("SimpleStore.Models.Models.AccountOwner", "AccountOwner")
+                    b.HasOne("SimpleStore.Models.Models.Roles", "Role")
                         .WithMany()
-                        .HasForeignKey("AccountOwnerId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SimpleStore.Models.Models.ManagerPermission", "ManagerPermission")
-                        .WithMany()
-                        .HasForeignKey("ManagerPermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AccountOwner");
-
-                    b.Navigation("ManagerPermission");
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("SimpleStore.Models.Models.Product", b =>

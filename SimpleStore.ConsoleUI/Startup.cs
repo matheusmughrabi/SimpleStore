@@ -10,7 +10,6 @@ using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using SimpleStore.Domain.Products;
 using SimpleStore.Domain.Products.Interfaces;
 using SimpleStore.Domain.Products.ProductsLogic;
-using SimpleStore.Domain.Services;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration;
@@ -18,9 +17,9 @@ using SimpleStore.Models.Models;
 
 namespace SimpleStore.ConsoleUI
 {
-    public class DependencyInjector
+    public class Startup
     {
-        public IContainer CreateContainer()
+        public IContainer ConfigureServices()
         {
             var builder = new ContainerBuilder();
 

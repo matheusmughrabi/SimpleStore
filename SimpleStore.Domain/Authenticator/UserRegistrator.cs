@@ -22,6 +22,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
         {
             _registeredUsers = _unityOfWork.AccountOwner.GetAll();
             _newUser = newUser;
+            _newUser.RoleId = 4;
 
             bool isLoginUnique = VerifyLogin();
             bool isEmailUnique = VerifyEmail();
@@ -33,12 +34,12 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
                 return false;
             }
 
-            newUser.Password = _passwordHasher.HashPassword(newUser.Password);
+            _newUser.Password = _passwordHasher.HashPassword(_newUser.Password);
 
-            _unityOfWork.AccountOwner.Add(newUser);
+            _unityOfWork.AccountOwner.Add(_newUser);
 
             Account account = new Account();
-            account.AccountOwner = newUser;
+            account.AccountOwner = _newUser;
             account.Balance = 0;
 
             _unityOfWork.Account.Add(account);

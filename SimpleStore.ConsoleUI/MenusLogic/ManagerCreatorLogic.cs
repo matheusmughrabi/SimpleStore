@@ -16,17 +16,16 @@ namespace SimpleStore.ConsoleUI.MenusLogic
 
         public bool CreateManager(List<string> inputs)
         {
-            ManagerAccount manager = new ManagerAccount();
-            manager.AccountOwner = new AccountOwner();
-            manager.ManagerPermission = new ManagerPermission();
+            AccountOwner manager = new AccountOwner();
+            manager.Role = new Roles();
 
-            manager.AccountOwner.Username = inputs[0];
-            manager.ManagerPermission.PermissionTitle = inputs[1];
+            manager.Username = inputs[0];
+            manager.Role.PermissionTitle = inputs[1];
 
             bool isRegistrationSuccess = _managerCreator.RegisterManager(manager);
             if (isRegistrationSuccess == true)
             {
-                Console.WriteLine($"{manager.AccountOwner.Username} registered successfuly");
+                Console.WriteLine($"{manager.Username} registered successfuly");
             }
             else
             {

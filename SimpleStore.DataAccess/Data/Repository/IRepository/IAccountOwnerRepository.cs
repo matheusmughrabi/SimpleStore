@@ -9,5 +9,6 @@ namespace SimpleStore.DataAccess.Data.Repository.IRepository
 {
     public interface IAccountOwnerRepository : IRepository<AccountOwner>
     {
+        void UpdateRole(AccountOwner accountOwner);
     }
 }

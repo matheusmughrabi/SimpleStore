@@ -18,7 +18,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 
         public bool InsertCategory(Category category)
         {
-            if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle != "Super Admin")
+            if (ManagerLogger.CurrentManager.Role.PermissionTitle != "Super Admin")
             {
                 throw new Exception("Only Super Admin is allowed");
             }
@@ -45,7 +45,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 
         public bool DeleteCategory(string name)
         {
-            if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle != "Super Admin")
+            if (ManagerLogger.CurrentManager.Role.PermissionTitle != "Super Admin")
             {
                 throw new Exception("Only Super Admin is allowed");
             }

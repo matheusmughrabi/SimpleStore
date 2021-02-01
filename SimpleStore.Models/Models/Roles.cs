@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SimpleStore.Models.Models
 {
-    public class ManagerPermission : BaseModel
+    public class Roles : BaseModel
     {
         [Required]
         public string PermissionTitle { get; set; }

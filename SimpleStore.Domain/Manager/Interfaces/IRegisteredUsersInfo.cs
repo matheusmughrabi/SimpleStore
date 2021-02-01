@@ -5,6 +5,6 @@ namespace SimpleStore.Domain.Manager.ManagerOperations.Interfaces
 {
     public interface IRegisteredUsersInfo
     {
-        IEnumerable<ManagerAccount> GetRegisteredUsers();
+        IEnumerable<AccountOwner> GetRegisteredUsers();
     }
 }

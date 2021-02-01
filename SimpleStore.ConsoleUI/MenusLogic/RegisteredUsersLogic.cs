@@ -1,8 +1,8 @@
-﻿using SimpleStore.ConsoleUI.MenuFrame.MenuItems;
-using SimpleStore.Models.Models;
+﻿using SimpleStore.Models.Models;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using System;
 using System.Collections.Generic;
+using SimpleStore.ConsoleUI.MenuFramework.MenuItems;
 
 namespace SimpleStore.ConsoleUI.MenusLogic
 {
@@ -17,16 +17,16 @@ namespace SimpleStore.ConsoleUI.MenusLogic
 
         public bool DisplayRegisteredUsers(List<string> inputs)
         {
-            IEnumerable <ManagerAccount> registeredUsersAndTitles = _registeredUsersInfo.GetRegisteredUsers();
+            IEnumerable <AccountOwner> registeredUsersAndTitles = _registeredUsersInfo.GetRegisteredUsers();
 
             List<Tuple<string, string, string, string>> users = new List<Tuple<string, string, string, string>>();
             foreach (var user in registeredUsersAndTitles)
             {
-                if (user.ManagerPermission.PermissionTitle == string.Empty)
+                if (user.Role.PermissionTitle == string.Empty)
                 {
-                    user.ManagerPermission.PermissionTitle = "Not a manager";
+                    user.Role.PermissionTitle = "Not a manager";
                 }
-                users.Add(Tuple.Create(user.AccountOwner.FullName, user.AccountOwner.Email, user.AccountOwner.Username, user.ManagerPermission.PermissionTitle));
+                users.Add(Tuple.Create(user.FullName, user.Email, user.Username, user.Role.PermissionTitle));
             }
 
             Console.WriteLine(users.ToStringTable(

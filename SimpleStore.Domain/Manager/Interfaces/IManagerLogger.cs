@@ -4,7 +4,7 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
 {
     public interface IManagerLogger
     {
-        static ManagerAccount CurrentManager { get; }
+        static AccountOwner CurrentManager { get; }
         bool LoginManager(string username, string password);
         void LogoutManager();
     }

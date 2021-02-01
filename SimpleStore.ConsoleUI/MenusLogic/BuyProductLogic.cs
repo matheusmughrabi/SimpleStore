@@ -1,4 +1,4 @@
-﻿using SimpleStore.ConsoleUI.MenuFrame.MenuItems;
+﻿using SimpleStore.ConsoleUI.MenuFramework.MenuItems;
 using SimpleStore.Domain.Accounts;
 using SimpleStore.Domain.Accounts.Interfaces;
 using SimpleStore.Domain.Products;

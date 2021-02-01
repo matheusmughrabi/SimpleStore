@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SimpleStore.ConsoleUI.MenuFrame.Menus
+namespace SimpleStore.ConsoleUI.MenuFramework.Menus
 {
     public class MasterNavigatorMenu : BaseMenu
     {

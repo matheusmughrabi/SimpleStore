@@ -1,7 +1,6 @@
 ﻿using SimpleStore.Domain.Manager.ManagerLogin;
 using SimpleStore.Models.Models;
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
-using SimpleStore.Domain.Services.AuthenticationServices;
 using System;
 using System.Collections.Generic;
 using SimpleStore.DataAccess.Data.Repository.IRepository;
@@ -12,33 +11,33 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
     {
         private readonly IUnityOfWork _unityOfWork;
         private IEnumerable<AccountOwner> _registeredUsers;
-        private IEnumerable<ManagerAccount> _registeredManagers;
-        private IEnumerable<ManagerPermission> _registeredManagerPermissions;
+        private IEnumerable<AccountOwner> _registeredManagers;
+        private IEnumerable<Roles> _registeredManagerPermissions;
 
         public ManagerCreator(IUnityOfWork unityOfWork)
         {
             _unityOfWork = unityOfWork;
         }
 
-        public bool RegisterManager(ManagerAccount manager)
+        public bool RegisterManager(AccountOwner manager)
         {
-            if (ManagerLogger.CurrentManager.ManagerPermission.PermissionTitle != "Super Admin")
+            if (ManagerLogger.CurrentManager.Role.PermissionTitle != "Super Admin")
             {
                 throw new Exception("Only Super Admin is allowed");
             }
 
             _registeredUsers = _unityOfWork.AccountOwner.GetAll();
 
-            _registeredManagerPermissions = _unityOfWork.ManagerPermission.GetAll();
+            _registeredManagerPermissions = _unityOfWork.Roles.GetAll();
 
-            _registeredManagers = _unityOfWork.Manager.GetAll();
+            _registeredManagers = _unityOfWork.AccountOwner.GetAll(a => a.RoleId == 1 || a.RoleId == 2);
 
             bool userExists = false;
             foreach (var registeredUser in _registeredUsers)
             {
-                if (registeredUser.Username == manager.AccountOwner.Username)
+                if (registeredUser.Username == manager.Username)
                 {
-                    manager.AccountOwner.Id = registeredUser.Id;
+                    manager.Id = registeredUser.Id;
                     userExists = true;
                     break;
                 }
@@ -47,9 +46,9 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             bool permissionExists = false;
             foreach (var registeredManagerPermission in _registeredManagerPermissions)
             {
-                if (registeredManagerPermission.PermissionTitle == manager.ManagerPermission.PermissionTitle)
+                if (registeredManagerPermission.PermissionTitle == manager.Role.PermissionTitle)
                 {
-                    manager.ManagerPermission.Id = registeredManagerPermission.Id;
+                    manager.Role.Id = registeredManagerPermission.Id;
                     permissionExists = true;
                     break;
                 }
@@ -60,15 +59,18 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 return false;
             }
 
-            foreach (var registeredManger in _registeredManagers)
+            foreach (var registeredManager in _registeredManagers)
             {
-                if (registeredManger.AccountOwner.Username == manager.AccountOwner.Username)
+                if (registeredManager.Username == manager.Username)
                 {
                     return false;
                 }
             }
 
-            _unityOfWork.Manager.Add(manager);
+            Roles permission = _unityOfWork.Roles.GetFirstOrDefault(p => p.PermissionTitle == manager.Role.PermissionTitle);
+            manager.RoleId = permission.Id;
+
+            _unityOfWork.AccountOwner.UpdateRole(manager);
             _unityOfWork.Save();
 
             return true;

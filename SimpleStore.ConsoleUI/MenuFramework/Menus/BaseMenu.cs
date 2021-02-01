@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SimpleStore.ConsoleUI.MenuFrame
+namespace SimpleStore.ConsoleUI.MenuFramework.Menus
 {
     public abstract class BaseMenu
     {

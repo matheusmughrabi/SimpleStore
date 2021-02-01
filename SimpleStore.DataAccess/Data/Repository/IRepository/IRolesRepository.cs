@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleStore.DataAccess.Data.Repository.IRepository
 {
-    public interface IManagerRepository : IRepository<ManagerAccount>
+    public interface IRolesRepository : IRepository<Roles>
     {
     }
 }
