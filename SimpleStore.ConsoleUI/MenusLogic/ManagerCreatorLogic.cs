@@ -2,6 +2,7 @@
 using SimpleStore.Domain.Manager.ManagerOperations.Interfaces;
 using System;
 using System.Collections.Generic;
+using SimpleStore.Models.Factories;
 
 namespace SimpleStore.ConsoleUI.MenusLogic
 {
@@ -16,8 +17,8 @@ namespace SimpleStore.ConsoleUI.MenusLogic
 
         public bool CreateManager(List<string> inputs)
         {
-            AccountOwner manager = new AccountOwner();
-            manager.Role = new Roles();
+            AccountOwner manager = ModelsFactory.CreateAccountOwnerInstance();
+            manager.Role = ModelsFactory.CreateRolesInstance();
 
             manager.Username = inputs[0];
             manager.Role.PermissionTitle = inputs[1];

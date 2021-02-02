@@ -19,7 +19,7 @@ namespace SimpleStore.ConsoleUI
 
 /*
   0 - Melhorar nomenclatura
-  1 - Alterar tabela Users para conter Roles
+  1 - Alterar tabela Users para conter Roles OK
   2 - Criar NUnits
   3 - Melhorar ConsoleUI framework (e publicar como Nuget)
   4 - Criar User Interface com Razor Pages

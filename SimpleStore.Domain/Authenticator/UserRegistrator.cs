@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using SimpleStore.DataAccess.Data.Repository.IRepository;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
+using SimpleStore.Models.Factories;
 using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
@@ -38,7 +39,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
 
             _unityOfWork.AccountOwner.Add(_newUser);
 
-            Account account = new Account();
+            Account account = ModelsFactory.CreateAccountInstance();
             account.AccountOwner = _newUser;
             account.Balance = 0;
 

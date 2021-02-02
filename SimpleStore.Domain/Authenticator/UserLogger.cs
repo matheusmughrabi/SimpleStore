@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using SimpleStore.DataAccess.Data.Repository.IRepository;
+using SimpleStore.Models.Factories;
 using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
