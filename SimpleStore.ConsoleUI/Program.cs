@@ -18,7 +18,7 @@ namespace SimpleStore.ConsoleUI
 }
 
 /*
-  0 - Melhorar nomenclatura
+  0 - Melhorar nomenclatura OK
   1 - Refatorar OK
   2 - Alterar tabela Users para conter Roles OK
   3 - Criar NUnits

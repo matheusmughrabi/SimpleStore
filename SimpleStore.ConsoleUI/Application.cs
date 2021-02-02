@@ -111,8 +111,8 @@ namespace SimpleStore.ConsoleUI
             managerMainMenu.SetReturnOption("0 - Logout");
             managerMainMenu.ReturnMenuAction = new ManagerLoginLogic(_managerLogger).Logout;
 
-            managerCreateManagerMenu.AddTextBox("Manager username");
-            managerCreateManagerMenu.AddTextBox("Manager permission (Super Admin or Admin)");
+            managerCreateManagerMenu.AddTextBox("Username");
+            managerCreateManagerMenu.AddTextBox("New Role (Super Admin, Admin, Employee or Costumer");
             managerCreateManagerMenu.AccessAllowedFunc = new AccessValidatorLogic().AllowSuperAdminOnly;
             managerCreateManagerMenu.MenuFuncLogic = new ManagerCreatorLogic(_managerCreator).CreateManager;
 
