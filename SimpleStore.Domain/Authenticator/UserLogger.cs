@@ -32,7 +32,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
 
                 if (isUsernamePasswordCorrect)
                 {
-                    CurrentAccount = _unityOfWork.Account.GetById(_user.Id);
+                    CurrentAccount = _unityOfWork.Account.GetFirstOrDefault(a => a.AccountOwnerId == _user.Id);
                 }
             }
 
