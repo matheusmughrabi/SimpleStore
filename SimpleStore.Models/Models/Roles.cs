@@ -9,6 +9,6 @@ namespace SimpleStore.Models.Models
     public class Roles : BaseModel
     {
         [Required]
-        public string PermissionTitle { get; set; }
+        public string RoleTitle { get; set; }
     }
 }

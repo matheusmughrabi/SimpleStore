@@ -11,8 +11,7 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
     {
         private readonly IUnityOfWork _unityOfWork;
         private IEnumerable<AccountOwner> _registeredUsers;
-        private IEnumerable<AccountOwner> _registeredManagers;
-        private IEnumerable<Roles> _registeredManagerPermissions;
+        private IEnumerable<Roles> _registeredRoles;
 
         public ManagerCreator(IUnityOfWork unityOfWork)
         {
@@ -21,14 +20,14 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
 
         public bool RegisterManager(AccountOwner manager)
         {
-            if (ManagerLogger.CurrentManager.Role.PermissionTitle != "Super Admin")
+            if (ManagerLogger.CurrentManager.Role.RoleTitle != "Super Admin")
             {
                 throw new Exception("Only Super Admin is allowed");
             }
 
             _registeredUsers = _unityOfWork.AccountOwner.GetAll();
 
-            _registeredManagerPermissions = _unityOfWork.Roles.GetAll();
+            _registeredRoles = _unityOfWork.Roles.GetAll();
 
             bool userExists = false;
             foreach (var registeredUser in _registeredUsers)
@@ -42,11 +41,11 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
             }
 
             bool permissionExists = false;
-            foreach (var registeredManagerPermission in _registeredManagerPermissions)
+            foreach (var role in _registeredRoles)
             {
-                if (registeredManagerPermission.PermissionTitle == manager.Role.PermissionTitle)
+                if (role.RoleTitle == manager.Role.RoleTitle)
                 {
-                    manager.Role.Id = registeredManagerPermission.Id;
+                    manager.Role.Id = role.Id;
                     permissionExists = true;
                     break;
                 }
@@ -57,8 +56,8 @@ namespace SimpleStore.Domain.Manager.ManagerOperations
                 return false;
             }
 
-            Roles permission = _unityOfWork.Roles.GetFirstOrDefault(p => p.PermissionTitle == manager.Role.PermissionTitle);
-            manager.RoleId = permission.Id;
+            Roles registeredRoles = _unityOfWork.Roles.GetFirstOrDefault(p => p.RoleTitle == manager.Role.RoleTitle);
+            manager.RoleId = registeredRoles.Id;
 
             _unityOfWork.AccountOwner.UpdateRole(manager);
             _unityOfWork.Save();

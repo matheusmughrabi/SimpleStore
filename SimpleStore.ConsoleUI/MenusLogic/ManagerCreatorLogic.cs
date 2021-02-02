@@ -21,7 +21,7 @@ namespace SimpleStore.ConsoleUI.MenusLogic
             manager.Role = ModelsFactory.CreateRolesInstance();
 
             manager.Username = inputs[0];
-            manager.Role.PermissionTitle = inputs[1];
+            manager.Role.RoleTitle = inputs[1];
 
             bool isRegistrationSuccess = _managerCreator.RegisterManager(manager);
             if (isRegistrationSuccess == true)
