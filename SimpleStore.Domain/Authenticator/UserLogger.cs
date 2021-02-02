@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using SimpleStore.DataAccess.Data.Repository.IRepository;
+using SimpleStore.Models.Factories;
 using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
@@ -10,7 +11,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
         private readonly IUnityOfWork _unityOfWork;
         private IPasswordHasher _passwordHasher;
         private IEnumerable<AccountOwner> _registeredUsers;
-        private AccountOwner _user;
+        private AccountOwner _accountOwner;
         public static Account CurrentAccount { get; private set; } = new Account(new AccountOwner());
 
         public UserLogger(IUnityOfWork unityOfWork)
@@ -32,7 +33,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
 
                 if (isUsernamePasswordCorrect)
                 {
-                    CurrentAccount = _unityOfWork.Account.GetById(_user.Id);
+                    CurrentAccount = _unityOfWork.Account.GetFirstOrDefault(a => a.AccountOwnerId == _accountOwner.Id);
                 }
             }
 
@@ -50,7 +51,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
             {
                 if (username == registeredUser.Username)
                 {
-                    _user = registeredUser;
+                    _accountOwner = registeredUser;
                     return true;
                 }
             }
@@ -59,7 +60,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin
 
         private bool CheckPassword(string password)
         {
-            PasswordVerificationResult verifyPassword = _passwordHasher.VerifyHashedPassword(_user.Password, password);
+            PasswordVerificationResult verifyPassword = _passwordHasher.VerifyHashedPassword(_accountOwner.Password, password);
 
             if (verifyPassword == PasswordVerificationResult.Success)
             {

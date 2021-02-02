@@ -19,7 +19,7 @@ namespace SimpleStore.DataAccess.Data.Repository
 
         public void UpdateBalance(Account entity)
         {
-            var objFromBd = GetById(entity.AccountOwnerId);
+            var objFromBd = GetById(entity.Id);
 
             objFromBd.Balance = entity.Balance;
 

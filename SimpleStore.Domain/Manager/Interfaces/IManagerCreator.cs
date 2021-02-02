@@ -4,6 +4,6 @@ namespace SimpleStore.Domain.Manager.ManagerOperations.Interfaces
 {
     public interface IManagerCreator
     {
-        bool RegisterManager(AccountOwner manager);
+        bool RegisterManager(AccountOwner accountOwner);
     }
 }

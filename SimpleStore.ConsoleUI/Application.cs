@@ -10,6 +10,7 @@ using SimpleStore.Domain.Products.Interfaces;
 using SimpleStore.Domain.Products.ProductsLogic;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserLogin;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
+using SimpleStore.Models.Factories;
 using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
@@ -91,7 +92,7 @@ namespace SimpleStore.ConsoleUI
             registerMenu.AddTextBox("Password");
             registerMenu.AddTextBox("Confirm Password");
             registerMenu.SetRenavigateMenu(initialMenu);
-            registerMenu.MenuFuncLogic = new RegistrationLogic(_userRegistrator, new AccountOwner()).Register;
+            registerMenu.MenuFuncLogic = new RegistrationLogic(_userRegistrator, ModelsFactory.CreateAccountOwnerInstance()).Register;
 
             mainMenu.AddChildMenu(accountMenu);
             mainMenu.AddChildMenu(storeCategoriesMenu);
@@ -110,8 +111,8 @@ namespace SimpleStore.ConsoleUI
             managerMainMenu.SetReturnOption("0 - Logout");
             managerMainMenu.ReturnMenuAction = new ManagerLoginLogic(_managerLogger).Logout;
 
-            managerCreateManagerMenu.AddTextBox("Manager username");
-            managerCreateManagerMenu.AddTextBox("Manager permission (Super Admin or Admin)");
+            managerCreateManagerMenu.AddTextBox("Username");
+            managerCreateManagerMenu.AddTextBox("New Role (Super Admin, Admin, Employee or Costumer");
             managerCreateManagerMenu.AccessAllowedFunc = new AccessValidatorLogic().AllowSuperAdminOnly;
             managerCreateManagerMenu.MenuFuncLogic = new ManagerCreatorLogic(_managerCreator).CreateManager;
 

@@ -22,11 +22,11 @@ namespace SimpleStore.ConsoleUI.MenusLogic
             List<Tuple<string, string, string, string>> users = new List<Tuple<string, string, string, string>>();
             foreach (var user in registeredUsersAndTitles)
             {
-                if (user.Role.PermissionTitle == string.Empty)
+                if (user.Role.RoleTitle == string.Empty)
                 {
-                    user.Role.PermissionTitle = "Not a manager";
+                    user.Role.RoleTitle = "Not a manager";
                 }
-                users.Add(Tuple.Create(user.FullName, user.Email, user.Username, user.Role.PermissionTitle));
+                users.Add(Tuple.Create(user.FullName, user.Email, user.Username, user.Role.RoleTitle));
             }
 
             Console.WriteLine(users.ToStringTable(

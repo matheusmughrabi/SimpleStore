@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using SimpleStore.DataAccess.Data.Repository.IRepository;
+using SimpleStore.Models.Factories;
 using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
@@ -11,7 +12,7 @@ namespace SimpleStore.Domain.Manager.ManagerLogin
         private IPasswordHasher _passwordHasher;
         private IEnumerable<AccountOwner> _registeredManagers;
         private AccountOwner _manager;
-        public static AccountOwner CurrentManager { get; private set; } = new AccountOwner();
+        public static AccountOwner CurrentManager { get; private set; } = ModelsFactory.CreateAccountOwnerInstance();
 
         public ManagerLogger(IUnityOfWork unityOfWork)
         {

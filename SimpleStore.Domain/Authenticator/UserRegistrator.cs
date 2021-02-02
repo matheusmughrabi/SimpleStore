@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using SimpleStore.DataAccess.Data.Repository.IRepository;
 using SimpleStore.Domain.UsersAuthenticator.Authenticator.UserRegistration;
+using SimpleStore.Models.Factories;
 using SimpleStore.Models.Models;
 using System.Collections.Generic;
 
@@ -11,7 +12,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
         private readonly IUnityOfWork _unityOfWork;
         private static IPasswordHasher _passwordHasher = new PasswordHasher();
         private IEnumerable<AccountOwner> _registeredUsers;
-        private AccountOwner _newUser;     
+        private AccountOwner _newAccountOwner;     
 
         public UserRegistrator(IUnityOfWork unityOfWork)
         {
@@ -21,8 +22,8 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
         public bool RegisterUser(AccountOwner newUser)
         {
             _registeredUsers = _unityOfWork.AccountOwner.GetAll();
-            _newUser = newUser;
-            _newUser.RoleId = 4;
+            _newAccountOwner = newUser;
+            _newAccountOwner.RoleId = 4;
 
             bool isLoginUnique = VerifyLogin();
             bool isEmailUnique = VerifyEmail();
@@ -34,12 +35,12 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
                 return false;
             }
 
-            _newUser.Password = _passwordHasher.HashPassword(_newUser.Password);
+            _newAccountOwner.Password = _passwordHasher.HashPassword(_newAccountOwner.Password);
 
-            _unityOfWork.AccountOwner.Add(_newUser);
+            _unityOfWork.AccountOwner.Add(_newAccountOwner);
 
-            Account account = new Account();
-            account.AccountOwner = _newUser;
+            Account account = ModelsFactory.CreateAccountInstance();
+            account.AccountOwner = _newAccountOwner;
             account.Balance = 0;
 
             _unityOfWork.Account.Add(account);
@@ -53,7 +54,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
         {
             foreach (AccountOwner registeredUser in _registeredUsers)
             {
-                if (registeredUser.Username == _newUser.Username)
+                if (registeredUser.Username == _newAccountOwner.Username)
                 {
                     return false;
                 }
@@ -66,7 +67,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
         {
             foreach (AccountOwner registeredUser in _registeredUsers)
             {
-                if (registeredUser.Email == _newUser.Email)
+                if (registeredUser.Email == _newAccountOwner.Email)
                 {
                     return false;
                 }
@@ -77,7 +78,7 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
 
         private bool VerifyPasswordMatch()
         {
-            if (_newUser.Password != _newUser.ConfirmPassword)
+            if (_newAccountOwner.Password != _newAccountOwner.ConfirmPassword)
             {
                 return false;
             }
@@ -87,8 +88,8 @@ namespace SimpleStore.Domain.UsersAuthenticator.Authenticator.UsersRegistration
 
         private bool CheckForNullData()
         {
-            if (string.IsNullOrEmpty(_newUser.FirstName) || string.IsNullOrEmpty(_newUser.LastName) || string.IsNullOrEmpty(_newUser.Username) ||
-                string.IsNullOrEmpty(_newUser.Password))
+            if (string.IsNullOrEmpty(_newAccountOwner.FirstName) || string.IsNullOrEmpty(_newAccountOwner.LastName) || string.IsNullOrEmpty(_newAccountOwner.Username) ||
+                string.IsNullOrEmpty(_newAccountOwner.Password))
             {
                 return false;
             }
